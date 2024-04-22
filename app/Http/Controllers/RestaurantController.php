@@ -42,8 +42,23 @@ class RestaurantController extends Controller
      {
      
 
-        Restaurant::create($request->validated());
-        
+        $validatedData = $request->validated();
+
+        // Caricamento dell'immagine
+        if ($request->hasFile('image')) {
+            // Salva l'immagine nella cartella 'public/restaurant_images' e ottieni il percorso
+            $imagePath = $request->file('image')->store('restaurant_images', 'public');
+
+            // Aggiungi il percorso dell'immagine ai dati validati
+            $validatedData['image'] = $imagePath;
+        }
+
+        // Aggiungi l'id dell'utente autenticato
+
+        // Creazione di una nuova istanza di Restaurant e salvataggio nel database
+        Restaurant::create($validatedData);
+
+        // Reindirizzamento alla pagina degli ristoranti
         return Redirect::route('restaurants.index');
        
      }
