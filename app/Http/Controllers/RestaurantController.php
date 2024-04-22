@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use App\Models\User;
+
 
 class RestaurantController extends Controller
 {
@@ -12,7 +15,9 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        //
+        $restaurants = Restaurant::get(['id','name','address','p_iva','image','description']);
+
+        return Inertia::render('Restaurants/AppRestaurants', compact('restaurants'));
     }
 
     /**

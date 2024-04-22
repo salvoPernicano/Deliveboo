@@ -20,8 +20,12 @@ class RestaurantSeeder extends Seeder
                 'p_iva' => '12345678901',
                 'image' => '#',
                 'description' => 'Ristorante specializzato in cucina tipica napoletana',
+                'user_id' => '1'
             ],
         ];
 
+        foreach ($restaurants as $restaurantData) {
+            Restaurant::create($restaurantData);
+        }
     }
 }
