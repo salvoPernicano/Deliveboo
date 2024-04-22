@@ -22,7 +22,7 @@ class StoreRestaurantRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:5',
+            'name' => 'required|max:250',
             'address' => 'required|max:150',
             'p_iva' => 'required|size:11',
             'image' => 'nullable',
