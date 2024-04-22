@@ -46,6 +46,8 @@ const newRestaurant = useForm({
         </form>
     </div>
 
+    <p>ciao</p>
+
 </template>
 
 
