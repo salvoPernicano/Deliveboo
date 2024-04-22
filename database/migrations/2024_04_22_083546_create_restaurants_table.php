@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('p_iva',11)->unique();
             $table->string('image',10124)->nullable();
             $table->text('description')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

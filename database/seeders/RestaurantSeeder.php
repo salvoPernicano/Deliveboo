@@ -21,19 +21,7 @@ class RestaurantSeeder extends Seeder
                 'image' => '#',
                 'description' => 'Ristorante specializzato in cucina tipica napoletana',
             ],
-            [
-                'name' => 'King Kebab',
-                'address' => 'Via Lungomare 2',
-                'p_iva' => '23456789012',
-                'image' => '#',
-                'description' => 'Chiosco kebab, 100% carne Halal, cucina tipica regionale',
-            ],
-
         ];
 
-
-        foreach ($restaurants as $restaurantData) {
-            Restaurant::create($restaurantData);
-        }
     }
 }
