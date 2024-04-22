@@ -14,8 +14,9 @@ const newRestauant = useForm({
 </script>
 
 <template>
-       
+
   <h1>TEST PUSH AND PULL</h1>
+  <p>TEST PUSH AND PULL 2</p>
 
 </template>
 
