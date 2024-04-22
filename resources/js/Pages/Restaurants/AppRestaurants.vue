@@ -1,6 +1,6 @@
 <template>
-    <!-- <AuthenticatedLayout> -->
-      <div class="text-center">
+<AuthenticatedLayout>
+  <div class="text-center">
     <h1 class="text-white text-3xl font-bold my-4">Ristorante</h1>
   
   
@@ -13,18 +13,19 @@
           <p>Descrizione: {{ restaurant.description }}</p>
         </div>
       </div>
-      
+      <Link class="bg-green-700 p-3 text-white font-bold border rounded-lg" :href="route('restaurants.create')" >
+                                    Crea
+                                </Link>
     </div>
-  
-  
-    <!-- </AuthenticatedLayout> -->
+</AuthenticatedLayout>
+     
   </template>
   
   <script setup>
-//   import { router} from '@inertiajs/vue3';
-//   import { Inertia } from '@inertiajs/inertia';
+
   import { defineProps } from 'vue';
-//   import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+  import { Link } from '@inertiajs/vue3';
+  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
   
   defineProps({
