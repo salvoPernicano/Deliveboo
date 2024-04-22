@@ -37,8 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/restaurant', [RestaurantController::class,'index'])->name('Restaurants.AppRestaurants');
-Route::get('/restaurant/create', [RestaurantController::class,'create'])->name('Restaurants.CreateRestaurant');
-Route::post('/restaurant', [RestaurantController::class,'store'])->name('Restaurants.store');
+Route::get('/restaurant', [RestaurantController::class,'index'])->name('restaurants.index');
+Route::get('/restaurant/create', [RestaurantController::class,'create'])->name('restaurants.create');
+Route::post('/restaurant', [RestaurantController::class,'store'])->name('restaurants.store');
 
 require __DIR__.'/auth.php';

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreRestaurantRequest;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 
 class RestaurantController extends Controller
@@ -39,20 +40,12 @@ class RestaurantController extends Controller
  
      public function store(StoreRestaurantRequest $request)
      {
-         $validatedData = $request->validated(); 
      
-         if ($request->hasFile('image')) {
-             $path = Storage::disk('public')->put('restaurant_images', $request->file('image'));
-     
-             $validatedData['image'] = $path;
-         }
-     
-         $restaurant = new Restaurant($validatedData);
-     
-         $restaurant->save();
-         dd($restaurant);
-     
-         return redirect()->route('Restaurants.AppRestaurants');
+
+        Restaurant::create($request->validated());
+        
+        return Redirect::route('restaurants.index');
+       
      }
 
     /**
