@@ -13,7 +13,8 @@
           <p>Descrizione: {{ restaurant.description }}</p>
           <button class="bg-yellow-300 p-2 rounded-lg m-2 text-black font-bold" @click.prevent="edit(restaurant.id)">Edit</button>
           <button class="bg-red-500 p-2 rounded-lg m-2 text-white font-bold" @click.prevent="destroy(restaurant.id)">Delete</button>
-          <button class="bg-blue-500 p-2 rounded-lg m-2 text-white font-bold" >Visualizza menu</button>
+          <button class="bg-blue-500 p-2 rounded-lg m-2 text-white font-bold" @click.prevent="viewMenu(restaurant.id)">Visualizza menu</button>
+
         </div>
       </div>
       <Link class="bg-green-700 p-3 text-white font-bold border rounded-lg" :href="route('restaurants.create')" >
@@ -44,6 +45,11 @@ function edit(id){
 function destroy(id){
   router.delete('/restaurant/'+id)
 }
+
+function viewMenu(restaurantId){
+  router.get('/restaurant/'+restaurantId+'/dishes');
+}
+
   </script>
   
   <style>
