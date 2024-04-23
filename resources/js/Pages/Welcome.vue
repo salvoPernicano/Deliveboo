@@ -21,7 +21,7 @@ defineProps({
 
 <template>
 
-    <Head title="Welcome" />
+    <Head title="Home" />
 
     <main class="w-full">
         <div v-if="canLogin" class="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
