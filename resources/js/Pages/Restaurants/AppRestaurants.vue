@@ -11,11 +11,14 @@
           <span>ID: {{ restaurant.id }}</span>
           <h2 class="text-black text-3xl font-extrabold mb-3">Titolo: {{ restaurant.name }}</h2>
           <p>Descrizione: {{ restaurant.description }}</p>
+          <button class="bg-yellow-300 p-2 rounded-lg m-2 text-black font-bold" @click.prevent="edit(restaurant.id)">Edit</button>
+          <button class="bg-red-500 p-2 rounded-lg m-2 text-white font-bold" @click.prevent="destroy(restaurant.id)">Delete</button>
         </div>
       </div>
       <Link class="bg-green-700 p-3 text-white font-bold border rounded-lg" :href="route('restaurants.create')" >
                                     Crea
                                 </Link>
+
     </div>
 </AuthenticatedLayout>
      
@@ -24,15 +27,22 @@
   <script setup>
 
   import { defineProps } from 'vue';
-  import { Link } from '@inertiajs/vue3';
+  import { Link, router } from '@inertiajs/vue3';
   import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+
 
   
   defineProps({
     restaurants: Object
   });
   
+function edit(id){
+  router.get('/restaurant/'+id+'/edit')
+}
 
+function destroy(id){
+  router.delete('/restaurant/'+id)
+}
   </script>
   
   <style>

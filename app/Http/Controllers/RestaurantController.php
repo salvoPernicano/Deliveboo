@@ -20,7 +20,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::get(['id','name','address','p_iva','image','description']);
+        $restaurants = Restaurant::get(['id', 'name', 'address', 'p_iva', 'image', 'description']);
 
 
         return Inertia::render('Restaurants/AppRestaurants', ['restaurants' => $restaurants]);
@@ -37,10 +37,10 @@ class RestaurantController extends Controller
     /**
      * Store a newly created resource in storage.
      */
- 
-     public function store(StoreRestaurantRequest $request)
-     {
-     
+
+    public function store(StoreRestaurantRequest $request)
+    {
+
 
         $validatedData = $request->validated();
 
@@ -60,8 +60,7 @@ class RestaurantController extends Controller
 
         // Reindirizzamento alla pagina degli ristoranti
         return Redirect::route('restaurants.index');
-       
-     }
+    }
 
     /**
      * Display the specified resource.
@@ -76,15 +75,29 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        //
+        return Inertia::render('Restaurants/EditRestaurant', [
+            'restaurant' => $restaurant
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Restaurant $restaurant)
+    public function update(StoreRestaurantRequest $request, Restaurant $restaurant)
     {
-        //
+        $validatedData = $request->validated();
+
+
+        if ($request->hasFile('image')) {
+
+            $imagePath = $request->file('image')->store('restaurant_images', 'public');
+
+            $validatedData['image'] = $imagePath;
+        }
+
+        $restaurant->update($validatedData);
+
+        return Redirect::route('restaurants.index');
     }
 
     /**
@@ -92,6 +105,8 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
-        //
+       $restaurant->delete();
+       
+       return Redirect::route('restaurants.index');
     }
 }
