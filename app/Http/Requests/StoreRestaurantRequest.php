@@ -27,7 +27,9 @@ class StoreRestaurantRequest extends FormRequest
             'p_iva' => 'required|size:11',
             'image' => 'nullable',
             'description' => 'nullable|max:1024',
-            'user_id' => 'required'
+            'user_id' => 'required',
+            'selectedTypologies' => 'required|array',
+            'selectedTypologies.*' => 'exists:typologies,id'
         ];
     }
 }

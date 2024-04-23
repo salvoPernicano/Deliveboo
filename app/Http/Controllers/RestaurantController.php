@@ -58,7 +58,11 @@ class RestaurantController extends Controller
         // Aggiungi l'id dell'utente autenticato
 
         // Creazione di una nuova istanza di Restaurant e salvataggio nel database
-        Restaurant::create($validatedData);
+       $restaurant = Restaurant::create($validatedData);
+
+        if($request->has('selectedTypologies')){
+            $restaurant->typology()->attach($request->selectedTypologies);
+        }
 
         // Reindirizzamento alla pagina degli ristoranti
         return Redirect::route('restaurants.index');
