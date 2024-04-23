@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dish;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreDishRequest;
+use App\Http\Requests\UpdateDishRequest;
 
 class DishController extends Controller
 {
@@ -26,7 +27,7 @@ class DishController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreDishRequest $request)
     {
         //
     }
@@ -50,7 +51,7 @@ class DishController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Dish $dish)
+    public function update(UpdateDishRequest $request, Dish $dish)
     {
         //
     }
