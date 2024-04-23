@@ -16,14 +16,14 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 defineProps({
     restaurants: {
         type: Array,
-        default: () => [] // Default to an empty array if not provided
+        default: () => [] 
     }
 });
 
-// Defining a reactive reference for selectedRestaurant
+
 const selectedRestaurant = ref(null);
 
-// Assuming you want to set the first restaurant as the selectedRestaurant by default
+
 if (restaurants && restaurants.length > 0) {
     selectedRestaurant.value = restaurants[0];
 }
