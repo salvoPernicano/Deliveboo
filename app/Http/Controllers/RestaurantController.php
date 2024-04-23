@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreRestaurantRequest;
+use App\Http\Requests\UpdateRestaurantRequest;
 use App\Models\Typology;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
@@ -92,22 +93,24 @@ class RestaurantController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreRestaurantRequest $request, Restaurant $restaurant)
-    {
-        $validatedData = $request->validated();
+    public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
+{
+    $validatedData = $request->validated();
 
-
-        if ($request->hasFile('image')) {
-
-            $imagePath = $request->file('image')->store('restaurant_images', 'public');
-
-            $validatedData['image'] = $imagePath;
-        }
-
-        $restaurant->update($validatedData);
-
-        return Redirect::route('restaurants.index');
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('restaurant_images', 'public');
+        $validatedData['image'] = $imagePath;
     }
+
+    $restaurant->update($validatedData);
+
+   
+    if($request->has('selectedTypologies')){
+        $restaurant->typology()->sync($request->selectedTypologies);
+    }
+
+    return Redirect::route('restaurants.index');
+}
 
     /**
      * Remove the specified resource from storage.
