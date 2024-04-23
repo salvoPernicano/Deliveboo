@@ -6,7 +6,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Inertia } from '@inertiajs/inertia';
 
 
-defineProps({ errors:Object });
+defineProps({ errors: Object, typologies: Array });
 
 const newRestaurant = useForm({
      name: null,
@@ -15,7 +15,7 @@ const newRestaurant = useForm({
      image: null,
      description: null,
      user_id : 1,
-     typologies: ['Japanese', 'Italian', 'Chinese', 'Mexican', 'Indian']
+     selectedTypologies: []
  });
 0
 
@@ -66,12 +66,11 @@ const handleImageChange = (event) => {
                 <div v-if="errors.description"><span class="text-red-700">{{ errors.description }}</span></div>
             </div>
             <div class="flex flex-col">
-                    <label for="">Seleziona tipologia di cucina</label>
-                    <select v-model="newRestaurant.typology">
-                        <option value="" disabled>Seleziona una tipologia</option>
-                        <option v-for="(typology, index) in newRestaurant.typologies" :value="index">{{ typology }}</option>
+                    <label for="">Seleziona tipologie di cucina</label>
+                    <select v-model="newRestaurant.selectedTypologies" multiple>
+                        <option v-for="typology in typologies" :value="typology.id">{{ typology.typology_name }}</option>
                     </select>
-                    <div v-if="errors.typology"><span class="text-red-700">{{ errors.typology }}</span></div>
+                    <div v-if="errors.selectedTypologies"><span class="text-red-700">{{ errors.selectedTypologies }}</span></div>
                 </div>
             
             <button type="submit" class="bg-blue-950 hover:bg-black hover:text-white text-black font-bold py-2 px-4 rounded-full uppercase">Salva post</button>

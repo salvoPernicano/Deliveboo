@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreRestaurantRequest;
+use App\Models\Typology;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,8 +31,9 @@ class RestaurantController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return Inertia::render('Restaurants/CreateRestaurant');
+    {   
+        $typologies = Typology::all();
+        return Inertia::render('Restaurants/CreateRestaurant', ['typologies' => $typologies]);
     }
 
     /**
@@ -74,11 +76,14 @@ class RestaurantController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Restaurant $restaurant)
-    {
+    {   
+        $typologies = Typology::all();
         return Inertia::render('Restaurants/EditRestaurant', [
-            'restaurant' => $restaurant
+            'restaurant' => $restaurant,
+            'typologies' => $typologies
         ]);
     }
+    
 
     /**
      * Update the specified resource in storage.
