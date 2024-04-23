@@ -40,10 +40,11 @@ defineProps({
             </template>
         </div>
 
-        <div class="hero w-full bg-cover bg-center bg-no-repeat flex justify-center items-center">
+        <!-- HERO section -->
+        <section class="hero w-full bg-cover bg-center bg-no-repeat flex justify-center items-center">
             <div class="flex justify-center items-center bg-[#FF6900] w-full bg-opacity-20">
                 <div class="my-60 columns-sm flex flex-col justify-center items-center w-full">
-                    <h1 class="text-5xl font-bold text-white text-center">I tuoi piatti preferiti,<br>
+                    <h1 class="text-white text-center">I tuoi piatti preferiti,<br>
                         direttamente a casa tua.</h1>
                         <form id="search-bar" class="w-1/3 relative">
                             <input type="text" placeholder="Cosa vuoi mangiare?" class="w-full">
@@ -51,22 +52,48 @@ defineProps({
                         </form>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- TYPOLOGIES section -->
+        <section class="flex flex-col items-center my-24">
+            <h2 class="text-center w-fit bg-gradient-to-r from-orange-500 to-amber-500 text-transparent bg-clip-text">Di cosa hai voglia oggi?</h2>
+
+            <!-- typologies component here -->
+            <div class="mt-16 w-96 h-48 bg-black rounded-2xl"></div>
+        </section>
+
+        <!-- STEPS section -->
+
+        <section class="flex flex-col items-center my-24 w-3/4 mx-auto">
+            <h2 class="text-center w-fit bg-gradient-to-r from-orange-500 to-amber-500 text-transparent bg-clip-text">Gli step per farti passare la fame</h2>
+
+            <div id="steps" class="flex flex-nowrap mt-16">
+                <div class="step">
+                    <h4 class="text-center">1 - Scegli il ristorante</h4>
+                    <figure>
+                        <img src="../../../public/img/step-1.png" alt="">
+                    </figure>
+                </div>
+                <div class="step">
+                    <h4 class="text-center">2 - Riempi il carrello</h4>
+                    <figure>
+                        <img src="../../../public/img/step-2.png" alt="">
+                    </figure>
+                </div>
+                <div class="step">
+                    <h4 class="text-center">3 - Paga in modo sicuro</h4>
+                    <figure>
+                        <img src="../../../public/img/step-3.png" alt="">
+                    </figure>
+                </div>
+            </div>
+        </section>
     </main>
 </template>
 
 <style scoped>
-/*.bg-dots-darker {
-    background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(0,0,0,0.07)'/%3E%3C/svg%3E");
-}
-@media (prefers-color-scheme: dark) {
-    .dark\:bg-dots-lighter {
-        background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(255,255,255,0.07)'/%3E%3C/svg%3E");
-    }
-}*/
-
 .hero {
-    background-image: url('/public/img/hero-burger-copia-2.webp');
+    background-image: url('/public/img/hero-burger.webp');
 }
 
 #search-bar {
@@ -81,5 +108,23 @@ defineProps({
     background-color: #FF6900;
     color: white;
     border-radius: 25px;
+}
+
+#steps {
+    gap: 5rem;
+}
+
+.step {
+    flex-basis: calc((100% / 3) - (5rem / 3));
+    aspect-ratio: 1;
+}
+
+.step figure {
+    width: 100%;
+    aspect-ratio: 1;
+}
+
+.step figure img {
+    width: 100%;
 }
 </style>
