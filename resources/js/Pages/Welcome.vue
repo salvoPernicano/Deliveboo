@@ -41,17 +41,21 @@ defineProps({
         </div>
 
         <div class="hero w-full bg-cover bg-center bg-no-repeat flex justify-center items-center">
-            <div class="flex justify-center items-center">
-                <div class="my-60 flex justify-center items-center w-full">
+            <div class="flex justify-center items-center bg-[#FF6900] w-full bg-opacity-20">
+                <div class="my-60 columns-sm flex flex-col justify-center items-center w-full">
                     <h1 class="text-5xl font-bold text-white text-center">I tuoi piatti preferiti,<br>
                         direttamente a casa tua.</h1>
+                        <form id="search-bar" class="w-1/3 relative">
+                            <input type="text" placeholder="Cosa vuoi mangiare?" class="w-full">
+                            <button type="submit" class="btn-search absolute right-0 top-0 h-full px-10">Cerca</button>
+                        </form>
                 </div>
             </div>
         </div>
     </main>
 </template>
 
-<style>
+<style scoped>
 /*.bg-dots-darker {
     background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(0,0,0,0.07)'/%3E%3C/svg%3E");
 }
@@ -63,5 +67,19 @@ defineProps({
 
 .hero {
     background-image: url('/public/img/hero-burger-copia-2.webp');
+}
+
+#search-bar {
+    margin-top: 3rem;
+}
+#search-bar input{
+    border-radius: 50px;
+    border: none;
+}
+
+.btn-search {
+    background-color: #FF6900;
+    color: white;
+    border-radius: 25px;
 }
 </style>
