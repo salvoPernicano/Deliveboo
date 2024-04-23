@@ -1,35 +1,42 @@
 <template>
     <AuthenticatedLayout>
-        <Link class="bg-green-700 p-3 text-white font-bold border rounded-lg"
-            :href="route('dishes.create', { restaurant: selectedRestaurant?.id })">
-            Crea Menu
-        </Link>
+        <div>
+      <h1>Menu dei Ristoranti</h1>
+      <ul>
+      
+            <h2>{{ restaurant.id }}</h2>
+          <h2>{{ restaurant.name }}</h2>
+          <p>{{ restaurant.address }}</p>
+          <!-- Aggiungi qui altre informazioni del ristorante -->
+
+      </ul>
+      <div v-for="dish in dishes">
+        <h2>{{ dish.name }}</h2>
+      </div>
+    </div>
+    <Link
+          class="bg-green-700 p-3 text-white font-bold border rounded-lg"
+          :href="route('dishes.create', { restaurant: restaurant.id })"
+        >
+          Crea piatto per {{ restaurant.name }}
+</Link>
     </AuthenticatedLayout>
-</template>
 
-<script setup>
-import { defineProps } from 'vue';
-import { ref } from 'vue';
-import { Link, router } from '@inertiajs/vue3';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+  </template>
+  
+  <script setup>
 
-defineProps({
-    restaurants: {
-        type: Array,
-        default: () => [] 
-    }
-});
-
-
-const selectedRestaurant = ref(null);
-
-
-if (restaurants && restaurants.length > 0) {
-    selectedRestaurant.value = restaurants[0];
-}
-</script>
-
-<style>
-
-</style>
-
+  import { defineProps } from 'vue';
+  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+  import { Link } from '@inertiajs/vue3';
+  
+  defineProps({
+    restaurant: Object,
+    dishes: Array
+  });
+  </script>
+  
+  <style>
+  /* Stili opzionali */
+  </style>
+  

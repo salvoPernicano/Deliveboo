@@ -31,6 +31,8 @@
   import { defineProps } from 'vue';
   import { Link, router } from '@inertiajs/vue3';
   import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+  import { useRoute } from '@inertiajs/inertia-vue3';
+
 
 
   

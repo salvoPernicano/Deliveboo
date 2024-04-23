@@ -11,7 +11,8 @@ class StoreDishRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // Imposta l'autorizzazione a true se vuoi consentire sempre la creazione del piatto
+        return true;
     }
 
     /**
@@ -22,7 +23,13 @@ class StoreDishRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'restaurant_id' => 'required|exists:restaurants,id',
+            'name' => 'required|max:255',
+            'description' => 'nullable',
+            'price' => 'required|min:1',
+            'visible' => 'required|boolean',
+            'category' => 'required',
+            'image' => 'nullable|image', // Esempio di regola per validare un'immagine
         ];
     }
 }

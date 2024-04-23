@@ -7,19 +7,20 @@ use App\Models\Restaurant;
 use App\Http\Requests\StoreDishRequest;
 use App\Http\Requests\UpdateDishRequest;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Redirect;
 
 class DishController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($restaurantId)
     {
-        $restaurants = Restaurant::get(['id', 'name', 'address', 'p_iva', 'image', 'description']);
-        $dishes = Dish::with('restaurant:id')->get();
-    
+        $restaurant = Restaurant::findOrFail($restaurantId);
+        $dishes = Dish::where('restaurant_id', $restaurantId)->get();
+        
         return Inertia::render('Restaurants/Dishes/ViewMenu', [
-            'restaurants' => $restaurants,
+            'restaurant' => $restaurant,
             'dishes' => $dishes
         ]);
     }
@@ -28,9 +29,10 @@ class DishController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($restaurantId)
     {
-        //
+        $restaurant = Restaurant::findOrFail($restaurantId);
+        return Inertia::render('Restaurants/Dishes/CreateDish', ['restaurant' => $restaurant]);
     }
 
     /**
@@ -38,7 +40,26 @@ class DishController extends Controller
      */
     public function store(StoreDishRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        
+   
+        if ($request->hasFile('image')) {
+        
+            $imagePath = $request->file('image')->store('restaurant_images', 'public');
+    
+          
+            $validatedData['image'] = $imagePath;
+        }
+    
+       
+        Dish::create($validatedData);
+
+    
+        
+        $restaurantId = $validatedData['restaurant_id'];
+    
+        
+        return Redirect::route('dishes.index', ['restaurant' => $restaurantId]);
     }
 
     /**
