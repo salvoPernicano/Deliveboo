@@ -5,6 +5,7 @@ import { router } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Inertia } from '@inertiajs/inertia';
 
+
 defineProps({ errors:Object });
 
 const newRestaurant = useForm({
@@ -13,8 +14,11 @@ const newRestaurant = useForm({
      p_iva: null,
      image: null,
      description: null,
-     user_id : 1
+     user_id : 1,
+     typologies: ['Japanese', 'Italian', 'Chinese', 'Mexican', 'Indian']
  });
+0
+
 
  function submit(){
     router.post('/restaurant',newRestaurant)
@@ -61,6 +65,14 @@ const handleImageChange = (event) => {
                 <textarea class="text-black" name="description" cols="30" rows="10" v-model="newRestaurant.description"></textarea>
                 <div v-if="errors.description"><span class="text-red-700">{{ errors.description }}</span></div>
             </div>
+            <div class="flex flex-col">
+                    <label for="">Seleziona tipologia di cucina</label>
+                    <select v-model="newRestaurant.typology">
+                        <option value="" disabled>Seleziona una tipologia</option>
+                        <option v-for="(typology, index) in newRestaurant.typologies" :value="index">{{ typology }}</option>
+                    </select>
+                    <div v-if="errors.typology"><span class="text-red-700">{{ errors.typology }}</span></div>
+                </div>
             
             <button type="submit" class="bg-blue-950 hover:bg-black hover:text-white text-black font-bold py-2 px-4 rounded-full uppercase">Salva post</button>
         </form>
