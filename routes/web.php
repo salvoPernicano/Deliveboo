@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\DishController;
 use App\Models\Restaurant;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -43,5 +44,13 @@ Route::post('/restaurant', [RestaurantController::class,'store'])->name('restaur
 Route::get('/restaurant/{restaurant}/edit',[RestaurantController::class,'edit']);
 Route::put('/restaurant/{restaurant}',[RestaurantController::class,'update']);
 Route::delete('/restaurant/{restaurant}',[RestaurantController::class,'destroy']);
+
+
+Route::get('/restaurant/{restaurant}/dishes', [DishController::class,'index'])->name('dishes.index');
+Route::get('/restaurant/{restaurant}/dishes/create', [DishController::class,'create'])->name('dishes.create');
+Route::post('/restaurant/{restaurant}/dishes', [DishController::class,'store'])->name('dishes.store');
+Route::get('/restaurant/{restaurant}/dishes/{dish}/edit',[DishController::class,'edit']);
+Route::put('/restaurant/{restaurant}/dishes/{dish}',[DishController::class,'update']);
+Route::delete('/restaurant/{restaurant}/dishes/{dish}',[DishController::class,'destroy']);
 
 require __DIR__.'/auth.php';

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dish;
+use App\Models\Restaurant;
 use App\Http\Requests\StoreDishRequest;
 use App\Http\Requests\UpdateDishRequest;
+use Inertia\Inertia;
 
 class DishController extends Controller
 {
@@ -13,8 +15,15 @@ class DishController extends Controller
      */
     public function index()
     {
-        //
+        $restaurants = Restaurant::get(['id', 'name', 'address', 'p_iva', 'image', 'description']);
+        $dishes = Dish::with('restaurant:id')->get();
+    
+        return Inertia::render('Restaurants/Dishes/ViewMenu', [
+            'restaurants' => $restaurants,
+            'dishes' => $dishes
+        ]);
     }
+    
 
     /**
      * Show the form for creating a new resource.
