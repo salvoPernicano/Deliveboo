@@ -1,5 +1,6 @@
 <template>
   <AuthenticatedLayout>
+    <Head title="Menu" />
     <main class="text-center text-white p-5">
       <h1>Menu del Ristorante {{ restaurant.name }}</h1>
       <div v-if="dishes.length > 0" class="w-full bg-white container mx-auto flex justify-center gap-8 text-center text-white rounded-lg m-5 p-4">
@@ -26,6 +27,7 @@
 import { defineProps } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Link } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 
 defineProps({
   restaurant: Object,
