@@ -25,11 +25,11 @@ class StoreDishRequest extends FormRequest
         return [
             'restaurant_id' => 'required|exists:restaurants,id',
             'name' => 'required|max:255',
-            'description' => 'nullable',
-            'price' => 'required|min:1',
+            'description' => 'required|nullable',
+            'price' => 'required|numeric|min:1',
             'visible' => 'required|boolean',
             'category' => 'required',
-            'image' => 'nullable|image', // Esempio di regola per validare un'immagine
+            'image' => 'required|nullable|image', // Esempio di regola per validare un'immagine
         ];
     }
 }
