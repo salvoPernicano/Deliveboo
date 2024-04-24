@@ -1,10 +1,11 @@
 <template>
       <Head title="Ristorante"></Head>
 <AuthenticatedLayout>
+    <Head title="Resturant" />
   <div class="text-center">
     <h1 class="text-white text-3xl font-bold my-4">Ristorante</h1>
-  
-  
+
+
       <div id="container" class="w-full flex flex-wrap justify-center items-center mx-auto p-5">
 
         <div id="card" class="text-center bg-white flex flex-col justify-center h-96 p-5 rounded-lg" v-for="restaurant in restaurants"
@@ -25,9 +26,9 @@
 
     </div>
 </AuthenticatedLayout>
-     
+
   </template>
-  
+
   <script setup>
 
   import { defineProps } from 'vue';
@@ -38,11 +39,10 @@
 
 
 
-  
   defineProps({
     restaurants: Object
   });
-  
+
 function edit(id){
   router.get('/restaurant/'+id+'/edit')
 }
@@ -56,7 +56,7 @@ function viewMenu(id){
 }
 
   </script>
-  
+
   <style>
 
   </style>
