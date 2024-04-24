@@ -10,33 +10,30 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link } from '@inertiajs/vue3';
 
-defineProps({ errors: Object, typologies: Array });
+defineProps({ errors: Object, typologies: Array, userId: Number });
 
-const newRestaurant = useForm({
-    name: null,
-    address: null,
-    p_iva: null,
-    image: null,
-    description: null,
-    user_id: 1,
-    selectedTypologies: []
-});
+
 
 const registrationForm = useForm({
     name: '',
     email: '',
     password: '',
     password_confirmation: '',
+    restaurant_name: null,
+    address: null,
+    p_iva: null,
+    image: null,
+    description: null,
+    user_id: null,
+    selectedTypologies: []
 });
 
 function handleSubmit() {
     // Invia i dati del nuovo ristorante all'endpoint appropriato
-    router.post('/restaurant', newRestaurant);
-
-    // Invia i dati per la registrazione all'endpoint appropriato
     registrationForm.post(route('register'), {
         onFinish: () => registrationForm.reset('password', 'password_confirmation'),
     });
+
 }
 
 const handleImageChange = (event) => {
@@ -55,37 +52,37 @@ const handleImageChange = (event) => {
                 <!-- Campi per il nuovo ristorante -->
                 <div class="flex flex-col">
                     <label for="restaurantName">Inserisci nome Ristorante</label>
-                    <input id="restaurantName" class="text-black" type="text" name="restaurantName" v-model="newRestaurant.name">
+                    <input id="restaurantName" class="text-black" type="text" name="name" v-model="registrationForm.restaurant_name">
                     <div v-if="errors.name"><span class="text-red-700">{{ errors.name }}</span></div>
                 </div>
 
                 <div class="flex flex-col">
                     <label for="restaurantAddress">Inserisci indirizzo</label>
-                    <input id="restaurantAddress" class="text-black" type="text" name="restaurantAddress" v-model="newRestaurant.address">
+                    <input id="restaurantAddress" class="text-black" type="text" name="address" v-model="registrationForm.address">
                     <div v-if="errors.address"><span class="text-red-700">{{ errors.address }}</span></div>
                 </div>
 
                 <div class="flex flex-col">
                     <label for="restaurantPIVA">Inserisci Partita Iva</label>
-                    <input id="restaurantPIVA" class="text-black" type="text" name="restaurantPIVA" v-model="newRestaurant.p_iva">
+                    <input id="restaurantPIVA" class="text-black" type="text" name="p_iva" v-model="registrationForm.p_iva">
                     <div v-if="errors.p_iva"><span class="text-red-700">{{ errors.p_iva }}</span></div>
                 </div>
 
                 <div class="flex flex-col">
                     <label for="restaurantImage">Carica immagine</label>
-                    <input id="restaurantImage" type="file" name="restaurantImage" accept="image/*" @change="handleImageChange">
+                    <input id="restaurantImage" type="file" name="image" accept="image/*" @change="handleImageChange">
                     <div v-if="errors.image"><span class="text-red-700">{{ errors.image }}</span></div>
                 </div>
 
                 <div class="flex flex-col">
                     <label for="restaurantDescription">Inserisci descrizione</label>
-                    <textarea id="restaurantDescription" class="text-black" name="restaurantDescription" cols="30" rows="10" v-model="newRestaurant.description"></textarea>
+                    <textarea id="restaurantDescription" class="text-black" name="description" cols="30" rows="10" v-model="registrationForm.description"></textarea>
                     <div v-if="errors.description"><span class="text-red-700">{{ errors.description }}</span></div>
                 </div>
 
                 <div class="flex flex-col">
                     <label for="restaurantTypologies">Seleziona tipologie di cucina</label>
-                    <select id="restaurantTypologies" v-model="newRestaurant.selectedTypologies" multiple>
+                    <select id="restaurantTypologies" v-model="registrationForm.selectedTypologies" multiple>
                         <option v-for="typology in typologies" :value="typology.id">{{ typology.typology_name }}</option>
                     </select>
                     <div v-if="errors.selectedTypologies"><span class="text-red-700">{{ errors.selectedTypologies }}</span></div>
@@ -117,10 +114,10 @@ const handleImageChange = (event) => {
                 </div>
 
                 <div class="flex items-center justify-end mt-4">
-                    <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <!-- <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         Already registered?
-                    </Link>
-                    <PrimaryButton class="ms-4" :class="{ 'opacity-25': registrationForm.processing }" :disabled="registrationForm.processing">Register</PrimaryButton>
+                    </Link> -->
+                    <button type="submit" class="bg-blue-950 hover:bg-black hover:text-white text-black font-bold py-2 px-4 rounded-full uppercase">registrti</button>
                 </div>
 
        
