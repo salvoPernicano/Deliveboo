@@ -4,6 +4,7 @@ import { defineProps } from 'vue';
 import { router } from '@inertiajs/vue3'; 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Inertia } from '@inertiajs/inertia';
+import { Head } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({ errors:Object,restaurant:Object,typologies: Array });
 
@@ -27,6 +28,7 @@ const handleImageChange = (event) => {
 </script>
 
 <template>
+  <Head title="Modifica Ristorante"></Head>
     <AuthenticatedLayout>
       <div class="flex flex-col gap-9 justify-center items-center">
         <h1 class="text-black text-5xl font-bold p-3 text-white">Modifica le informazioni del tuo Ristorante</h1>

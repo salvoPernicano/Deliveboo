@@ -4,6 +4,7 @@ import { defineProps } from 'vue';
 import { router } from '@inertiajs/vue3'; 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Inertia } from '@inertiajs/inertia';
+import { Head } from '@inertiajs/inertia-vue3';
 
 
 defineProps({ errors: Object, typologies: Array });
@@ -30,6 +31,7 @@ const handleImageChange = (event) => {
 </script>
 
 <template>
+    <Head title="Crea Ristorante"></Head>
     <AuthenticatedLayout>
         <div class="flex flex-col gap-9 justify-center items-center">
         <h1 class="text-black text-5xl font-bold">Crea un nuovo post</h1>

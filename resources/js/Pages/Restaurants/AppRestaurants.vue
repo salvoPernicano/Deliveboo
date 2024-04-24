@@ -1,4 +1,5 @@
 <template>
+      <Head title="Ristorante"></Head>
 <AuthenticatedLayout>
   <div class="text-center">
     <h1 class="text-white text-3xl font-bold my-4">Ristorante</h1>
@@ -33,6 +34,7 @@
   import { Link, router } from '@inertiajs/vue3';
   import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
   import { useRoute } from '@inertiajs/inertia-vue3';
+  import { Head } from '@inertiajs/inertia-vue3';
 
 
 

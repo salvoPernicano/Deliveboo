@@ -1,4 +1,5 @@
 <template>
+  <Head title="Crea piatto"></Head>
     <AuthenticatedLayout>
       <div class="flex flex-col gap-9 justify-center items-center">
         <h1 class="text-black text-5xl font-bold">Crea un nuovo piatto</h1>
@@ -52,6 +53,7 @@
   import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
   import { useForm } from '@inertiajs/vue3';
   import { router } from '@inertiajs/vue3'; 
+  import { Head } from '@inertiajs/inertia-vue3';
   
   let props = defineProps({
     restaurant: Object,
