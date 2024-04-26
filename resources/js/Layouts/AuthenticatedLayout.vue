@@ -20,39 +20,46 @@ const showingNavigationDropdown = ref(false);
                         <!-- Logo -->
                         <div class="shrink-0 flex items-center">
                             <Link :href="route('dashboard')">
-                                <ApplicationLogo class="block h-9 w-auto fill-current text-gray-800" />
+                            <ApplicationLogo class="block h-9 w-auto fill-current text-gray-800" />
                             </Link>
                             DeliveBoo
                         </div>
 
-                        <div>
+                        <!-- <div>
                             <h4 class="text-white">
                                 {{ $page.props.auth.user.name }}
                             </h4>
-                        </div>
+                        </div> -->
 
                         <!-- Navigation Links -->
-                        <div class="font-bold text-white flex flex-col gap-5">
-                            <Link :href="route('dashboard')" class="flex items-center">
-                                <img src="../../../public/img/receipt.svg" class="h-10 w-10">
+                        <div class="font-bold text-white flex flex-col gap-5 ">
+                            <Link :href="route('dashboard')" class="flex items-center link-hover p-1">
+                            <img src="../../../public/img/receipt.svg" class="h-10 w-10">
                             Ordini Ricevuti
                             </Link>
-                            <Link :href="route('dashboard')" class="flex items-center">
-                                <img src="../../../public/img/dish_plate.svg" class="h-10 w-10">
+                            <Link :href="`/restaurant/${$page.props.auth.user.id}/dishes`"
+                                class="flex items-center link-hover p-1">
+                            <img src="../../../public/img/dish_plate.svg" class="h-10 w-10">
                             I tuoi piatti
                             </Link>
-                            <Link :href="route('dashboard')" class="flex items-center">
-                                <img src="../../../public/img/stats.svg" class="h-10 w-10">
+
+                            <Link :href="route('dashboard')" class="flex items-center link-hover p-1">
+                            <img src="../../../public/img/stats.svg" class="h-10 w-10">
                             Statistiche
+                            </Link>
+
+                            <Link :href="`/restaurant/${$page.props.auth.user.id}/dishes/create`" class="py-5 px-1 rounded-lg bg-white text-[#F98F00] capitalize flex text-sm/[8px] h-8 gap-2 items-center">
+                                Crea nuovo piatto
+                                <img class="h-3 w-3" src="../../../public/img/PiuArancio.svg" width="30" alt="Icona" />
                             </Link>
                         </div>
                     </div>
 
                     <div class="hidden sm:flex sm:items-center font-bold text-white">
-                        <Link :href="route('logout')" class="flex items-center">
-                                <img src="../../../public/img/quit.svg" class="h-10 w-10">
-                            Logout
-                            </Link>
+                        <Link :href="route('logout')" class="flex items-center link-hover p-1">
+                        <img src="../../../public/img/quit.svg" class="h-10 w-10">
+                        Logout
+                        </Link>
                         <!-- Settings Dropdown -->
                         <!-- <div class="ms-3 relative">
                             <Dropdown align="right" width="48">
@@ -72,14 +79,14 @@ const showingNavigationDropdown = ref(false);
                                     </span>
                                 </template>
 
-                                <template #content>
+<template #content>
                                     <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
                                     <DropdownLink :href="route('logout')" method="post" as="button">
                                         Log Out
                                     </DropdownLink>
                                 </template>
-                            </Dropdown>
-                        </div> -->
+</Dropdown>
+</div> -->
                     </div>
 
                     <!-- Hamburger -->
@@ -148,5 +155,10 @@ const showingNavigationDropdown = ref(false);
 <style scoped>
 nav {
     background-color: #F98F00;
+}
+
+.link-hover:hover {
+    background-color: #ffffff30;
+    border-radius: 15px;
 }
 </style>
