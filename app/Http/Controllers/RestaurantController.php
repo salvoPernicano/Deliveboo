@@ -32,7 +32,7 @@ class RestaurantController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {   
+    {
         $typologies = Typology::all();
         return Inertia::render('Restaurants/CreateRestaurant', ['typologies' => $typologies]);
     }
@@ -59,9 +59,9 @@ class RestaurantController extends Controller
         // Aggiungi l'id dell'utente autenticato
 
         // Creazione di una nuova istanza di Restaurant e salvataggio nel database
-       $restaurant = Restaurant::create($validatedData);
+        $restaurant = Restaurant::create($validatedData);
 
-        if($request->has('selectedTypologies')){
+        if ($request->has('selectedTypologies')) {
             $restaurant->typology()->attach($request->selectedTypologies);
         }
 
@@ -81,44 +81,44 @@ class RestaurantController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Restaurant $restaurant)
-    {   
+    {
         $typologies = Typology::all();
         return Inertia::render('Restaurants/EditRestaurant', [
             'restaurant' => $restaurant,
             'typologies' => $typologies
         ]);
     }
-    
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
-{
-    $validatedData = $request->validated();
+    {
+        $validatedData = $request->validated();
 
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('restaurant_images', 'public');
-        $validatedData['image'] = $imagePath;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('restaurant_images', 'public');
+            $validatedData['image'] = $imagePath;
+        }
+
+        $restaurant->update($validatedData);
+
+
+        if ($request->has('selectedTypologies')) {
+            $restaurant->typology()->sync($request->selectedTypologies);
+        }
+
+        return Redirect::route('restaurants.index');
     }
-
-    $restaurant->update($validatedData);
-
-   
-    if($request->has('selectedTypologies')){
-        $restaurant->typology()->sync($request->selectedTypologies);
-    }
-
-    return Redirect::route('restaurants.index');
-}
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Restaurant $restaurant)
     {
-       $restaurant->delete();
-       
-       return Redirect::route('restaurants.index');
+        $restaurant->delete();
+
+        return Redirect::route('restaurants.index');
     }
 }
