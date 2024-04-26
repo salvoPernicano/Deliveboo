@@ -8,23 +8,27 @@ use App\Http\Requests\StoreDishRequest;
 use App\Http\Requests\UpdateDishRequest;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+
 
 class DishController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index($restaurantId)
+    public function index()
     {
-        $restaurant = Restaurant::findOrFail($restaurantId);
-        $dishes = Dish::where('restaurant_id', $restaurantId)->get();
+        $userId = auth()->id();
+        $restaurant = Restaurant::where('user_id', $userId)->first();
+
+        $dishes = Dish::where('restaurant_id', $restaurant->id)->get();;
 
         return Inertia::render('Restaurants/Dishes/ViewMenu', [
             'restaurant' => $restaurant,
             'dishes' => $dishes
         ]);
     }
+    
 
 
     /**
@@ -63,19 +67,6 @@ class DishController extends Controller
         return Redirect::route('dishes.index', ['restaurant' => $restaurantId]);
     }
 
-
-    // metodo di gestione se il piatto è visibile
-    // public function updateVisibility(Request $request, Dish $dish)
-    // {
-    //     dd($request);
-    //     $dish->update([
-    //         'visible' => $request->visible
-    //     ]);
-
-    //     return response()->json(['message' => 'Stato di visibilità aggiornato con successo']);
-    // }
-
-
     /**
      * Display the specified resource.
      */
@@ -87,38 +78,36 @@ class DishController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Dish $dish)
+    public function edit(Restaurant $restaurant, Dish $dish )
     {
 
-        return Inertia::render('Restaurants/Dishes/EditDish', [
-            'dish' => $dish
-        ]);
+  return Inertia::render('Restaurants/Dishes/EditDish', ['restaurant' => $restaurant, 'dish' => $dish]);
     }
+    
+    
+    
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDishRequest $request, Dish $dish)
+    public function update(UpdateDishRequest $request, Restaurant $restaurant, Dish $dish)
     {
         $validatedData = $request->validated();
-
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('restaurant_images', 'public');
-        $validatedData['image'] = $imagePath;
+    
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('restaurant_images', 'public');
+            $validatedData['image'] = $imagePath;
+        }
+    
+        // Aggiorna i dati del piatto con i dati inviati dalla richiesta
+        $dish->update($validatedData);
+    
+        // Reindirizza l'utente alla pagina di indice dei ristoranti
+        return redirect()->route('dishes.index');
     }
-
-    $dish->update($validatedData);
-
-   
-    if($request->has('selectedCategories')){
-        $dish->category()->sync($request->selectedCategories);
-    }
-
-    // $restaurant = Restaurant::findOrFail($restaurantId);
-    // $dishes = Dish::where('restaurant_id', $restaurantId)->get();
-    // return Inertia::render('Restaurants/Dishes/ViewMenu');
-    return Redirect::route('restaurants.index');
-    }
+    
+    
+    
 
     /**
      * Remove the specified resource from storage.
