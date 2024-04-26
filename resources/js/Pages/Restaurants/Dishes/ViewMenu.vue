@@ -1,5 +1,7 @@
 <template>
+  <Head title="Menu"></Head>
   <AuthenticatedLayout>
+    <Head title="Menu" />
     <main class="text-center text-white p-5">
       <h1>Menu del Ristorante {{ restaurant.name }}</h1>
 
@@ -101,6 +103,7 @@
 import { defineProps } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Link } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/inertia-vue3';
 
 
 defineProps({

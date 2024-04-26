@@ -34,7 +34,8 @@ class RestaurantController extends Controller
     public function create()
     {
         $typologies = Typology::all();
-        return Inertia::render('Restaurants/CreateRestaurant', ['typologies' => $typologies]);
+        $userId = Auth::id(); // Ottieni l'id dell'utente autenticato
+        return Inertia::render('Restaurants/CreateRestaurant', ['typologies' => $typologies, 'userId' => $userId]);
     }
 
     /**
