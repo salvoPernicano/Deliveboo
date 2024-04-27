@@ -112,10 +112,12 @@ class DishController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Dish $dish)
+    public function destroy(Dish $dish, Restaurant $restaurant)
     {
+        $restaurant_id = $dish->restaurant_id;
+
         $dish->delete();
 
-        return Redirect::route('dishes.index', ['restaurantId'=> $dish->restaurant_id]);
+        return Redirect::route('dishes.index', ['restaurant' => $restaurant_id]);
     }
 }

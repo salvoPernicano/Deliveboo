@@ -107,7 +107,9 @@ const toggleVisibility = async (dish) => {
 function edit(dishId) {
   router.get('/restaurant/'+props.restaurant.id+'/dishes/'+dishId+'/edit');
 }
-
+function destroy(id) {
+  router.delete('/dishes/' + id)
+}
 
 </script>
 

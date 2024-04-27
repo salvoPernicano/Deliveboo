@@ -54,6 +54,6 @@ Route::get('/restaurant/{restaurant}/dishes/{dish}/edit', [DishController::class
 
 Route::put('/restaurant/{restaurant}/dishes/{dish}', [DishController::class,'update']);
 
-// Route::delete('restaurant/{restaurant}/dishes/{dish}',[DishController::class,'destroy']);
+Route::delete('dishes/{dish}',[DishController::class,'destroy']);
 
 require __DIR__.'/auth.php';
