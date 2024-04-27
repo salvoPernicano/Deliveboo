@@ -144,11 +144,7 @@ const showingNavigationDropdown = ref(false);
             </div>
         </header> -->
 
-            <!-- Page Content -->
-            <main>
-                <slot />
-            </main>
-        </div>
+         
 
         <!-- Page Content -->
         <main class="w-3/4 overflow-scroll">
