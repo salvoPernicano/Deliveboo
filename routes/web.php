@@ -46,11 +46,14 @@ Route::delete('/restaurant/{restaurant}',[RestaurantController::class,'destroy']
 
 
 
-Route::get('/restaurant/{restaurant}/dishes', [DishController::class,'index'])->name('dishes.index');
+Route::get('/dishes', [DishController::class,'index'])->name('dishes.index');
 Route::get('/restaurant/{restaurant}/dishes/create', [DishController::class,'create'])->name('dishes.create');
 Route::post('/restaurant/{restaurant}/dishes', [DishController::class,'store'])->name('dishes.store');
-Route::get('/restaurant/{restaurant}/dishes/{dish}/edit',[DishController::class,'edit']);
-Route::put('/restaurant/{restaurant}/dishes/{dish}',[DishController::class,'update']);
-Route::delete('/restaurant/{restaurant}/dishes/{dish}',[DishController::class,'destroy']);
+
+Route::get('/restaurant/{restaurant}/dishes/{dish}/edit', [DishController::class,'edit'])->name('dishes.edit');
+
+Route::put('/restaurant/{restaurant}/dishes/{dish}', [DishController::class,'update']);
+
+Route::delete('dishes/{dish}',[DishController::class,'destroy']);
 
 require __DIR__.'/auth.php';

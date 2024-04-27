@@ -6,7 +6,7 @@
       <div class="flex flex-col gap-9 justify-center items-center">
         <h1 class="text-black text-5xl font-bold">Crea un nuovo piatto</h1>
 
-        <form class="flex flex-col text-black text-lg text-center gap-7"  @submit.prevent="submit(restaurant.id)" enctype="multipart/form-data">
+        <form class="flex flex-col text-black text-lg text-center gap-7"  @submit.prevent="submit(props.restaurant.id)" enctype="multipart/form-data">
           <div class="flex flex-col">
             <label for="">Inserisci nome</label>
             <input class="text-black" type="text" name="name" v-model="newPlate.name">
