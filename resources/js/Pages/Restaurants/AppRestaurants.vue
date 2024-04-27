@@ -16,7 +16,7 @@
           <h2 class="text-black text-xl font-extrabold mb-3">Indirizzo: {{ restaurant.address }}</h2>
           <button class="bg-yellow-300 p-2 rounded-lg m-2 text-black font-bold" @click.prevent="edit(restaurant.id)">Modifiche</button>
           <button class="bg-red-500 p-2 rounded-lg m-2 text-white font-bold" @click.prevent="destroy(restaurant.id)">Elimina</button>
-          <Link :href="route('dishes.index', { restaurant: restaurant.id })" class="bg-blue-500 p-2 rounded-lg m-2 text-white font-bold">Visualizza menu</Link>
+          <Link :href="route('dishes.index', { restaurant:restaurant.id })" class="bg-blue-500 p-2 rounded-lg m-2 text-white font-bold">Visualizza menu</Link>
 
         </div>
       </div>
@@ -51,9 +51,11 @@ function destroy(id){
   router.delete('/restaurant/'+id)
 }
 
-function viewMenu(id){
-  router.get('/restaurant/'+id+'/dishes');
-}
+// function viewMenu(id) {
+//     // Utilizza il metodo `visit` di Inertia per navigare alla pagina dei piatti
+//     // Passa l'id del ristorante come parametro
+//     visit(route('dishes.index', { restaurant: id }));
+// }
 
   </script>
 

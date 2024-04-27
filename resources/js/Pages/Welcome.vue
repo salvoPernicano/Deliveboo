@@ -1,20 +1,14 @@
 <script setup>
+import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
 
-defineProps({
+
+const props = defineProps({
     canLogin: {
         type: Boolean,
     },
     canRegister: {
         type: Boolean,
-    },
-    laravelVersion: {
-        type: String,
-        required: true,
-    },
-    phpVersion: {
-        type: String,
-        required: true,
     },
 });
 </script>
@@ -22,7 +16,7 @@ defineProps({
 <template>
 
     <Head title="Home" />
-
+    <GuestLayout>
     <main class="w-full">
         <div v-if="canLogin" class="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
             <Link v-if="$page.props.auth.user" :href="route('dashboard')"
@@ -35,7 +29,7 @@ defineProps({
                 Log in</Link>
 
                 <Link v-if="canRegister" :href="route('register')"
-                    class="ms-4 font-semibold text-white hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                    class="ms-4 font-semibold text-white hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 btn-orange py-2 px-2 rounded-2xl">
                 Register</Link>
             </template>
         </div>
@@ -48,7 +42,7 @@ defineProps({
                         direttamente a casa tua.</h1>
                         <form id="search-bar" class="w-1/3 relative">
                             <input type="text" placeholder="Cosa vuoi mangiare?" class="w-full">
-                            <button type="submit" class="btn-search absolute right-0 top-0 h-full px-10">Cerca</button>
+                            <button type="submit" class="btn btn-orange absolute right-0 top-0 h-full">Cerca</button>
                         </form>
                 </div>
             </div>
@@ -89,6 +83,7 @@ defineProps({
             </div>
         </section>
     </main>
+    </GuestLayout>
 </template>
 
 <style scoped>
@@ -102,12 +97,6 @@ defineProps({
 #search-bar input{
     border-radius: 50px;
     border: none;
-}
-
-.btn-search {
-    background-color: #FF6900;
-    color: white;
-    border-radius: 25px;
 }
 
 #steps {

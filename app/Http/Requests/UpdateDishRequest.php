@@ -11,7 +11,8 @@ class UpdateDishRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // Imposta l'autorizzazione a true se vuoi consentire sempre l'aggiornamento del piatto
+        return true;
     }
 
     /**
@@ -22,7 +23,12 @@ class UpdateDishRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|max:255',
+            'description' => 'nullable',
+            'price' => 'required|numeric|min:10',
+            'visible' => 'required|boolean',
+            'category' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,webp,jpg,gif|max:2048'
         ];
     }
 }
