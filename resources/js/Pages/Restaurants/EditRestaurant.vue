@@ -6,7 +6,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Inertia } from '@inertiajs/inertia';
 import { Head } from '@inertiajs/inertia-vue3';
 
-const props = defineProps({ errors:Object,restaurant:Object,typologies: Array });
+const props = defineProps({ errors:Object, restaurant:Object,typologies: Array });
 
 const editRestaurant = useForm({
      name: props.restaurant.name,
