@@ -11,7 +11,7 @@ const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
-    
+
         <div class="min-h-screen bg-gradient-to-r from-yellow-700 via-orange-500 to-yellow-300">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
@@ -154,7 +154,7 @@ const showingNavigationDropdown = ref(false);
                 <slot />
             </main>
         </div>
-    
+
 </template>
 
 <style>
