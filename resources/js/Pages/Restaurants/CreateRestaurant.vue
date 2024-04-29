@@ -31,7 +31,7 @@ const handleImageChange = (event) => {
 </script>
 
 <template>
-    <Head title="Crea Ristorante"></Head>
+
     <AuthenticatedLayout>
         <Head title="Create new Resturant" />
         <div class="flex flex-col gap-9 justify-center items-center">

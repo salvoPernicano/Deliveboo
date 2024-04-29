@@ -1,7 +1,6 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { Link } from '@inertiajs/vue3';
-
 // Change header color on scroll
 function headerColor() {
     const header = document.getElementById("color");
@@ -26,7 +25,7 @@ const footerMenu = [
 </script>
 
 <template>
-    <header class="flex sm:justify-start items-center pt-6 sm:pt-0 fixed top-0 w-full">
+    <header class="flex sm:justify-start items-center pt-6 sm:pt-0 fixed top-0 w-full z-10">
         <div class="mx-auto lg:w-10/12 flex items-center gap-10">
             <Link href="/" class="flex items-center">
             <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" />

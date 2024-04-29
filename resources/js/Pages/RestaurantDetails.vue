@@ -1,43 +1,75 @@
 <template>
+
+    <Head title="Flat Details" />
     <GuestLayout>
-        <h2 class="text-center">Menu</h2>
-        <h1 class="text-center">{{ restaurant.name }}</h1>
-        <main class="w-4/5 mx-auto">
-        <ul class="flex justify-center items-center flex-wrap gap-2">
-          <li v-for="dish in restaurant.dishes" :key="dish.id">
-            <div class="text-center bg-gray-500">
-                <figure class="h-20 w-36">
-                    <img class="h-full w-full object-cover" :src="'/storage/' + dish.image" alt="Dish Image" v-if="dish.image">
+        <div :style="restaurant.imagePath ? { backgroundImage: 'url(' + '/storage/' + restaurant.imagePath + ')' } : { backgroundColor: '#FFA500' }"
+            class="imgBackground flex justify-center gap-4 pt-8 sm:p-0">
+            <h2 class="text-center text-white">Menu</h2>
+            <h2 class="text-center text-white capitalize">{{ restaurant.name }}</h2>
+        </div>
 
-                </figure>
-                <h3>{{ dish.name }}</h3>
-                <p>{{ dish.description }}</p>
-                <p>Price: {{ dish.price }}</p>
+        <!-- Main Resturant/Menu -->
+        <main class="w-4/5 mx-auto mt-3">
 
-            </div>
-          </li>
-        </ul>
-    </main>
+            <ul class="flex justify-center  flex-wrap gap-9 h-screen w-full sm:gap-3">
+
+                <li v-for="dish in restaurant.dishes" :key="dish.id">
+
+                    <div class="text-center bg-white rounded-lg shadow p-2 pb-5">
+                        <div class="relative h-auto ">
+                            <div class="h-full w-full object-cover">
+                                <img class="h-60 w-60 object-cover rounded-lg" :src="'/storage/' + dish.image"
+                                    alt="Dish Image" v-if="dish.image">
+                            </div>
+                            <div class="mt-4 flex flex-col gap-2 ">
+                                <h3 class=" capitalize font-bold">{{ dish.name }}</h3>
+                                <p class=" capitalize">{{ dish.description }}</p>
+                                <p class=" capitalize font-bold">Price: {{ dish.price }}$</p>
+                            </div>
+                            <div class="bg-orange-400 absolute rounded-full w-10 p-3 left-[40%] flex justify-center">
+                              <button type="submit"> <img src="../../../public/img/add_cart.svg" alt=""></button>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </main>
     </GuestLayout>
-  </template>
-  
-  <script setup>
-  import GuestLayout from '@/Layouts/GuestLayout.vue';
-  import { Head } from '@inertiajs/inertia-vue3';
-  
-  const props = defineProps({
-    restaurant: {
-      type: Object,
-      required: true
-    }
-  });
-  
+</template>
 
-  </script>
-  
-  <style>
-    main {
-        min-height: calc(100vh - 100px);
-        overflow: auto;
+<script setup>
+import GuestLayout from '@/Layouts/GuestLayout.vue';
+import { Head } from '@inertiajs/inertia-vue3';
+import { defineProps } from 'vue';
+
+const props = defineProps({
+    restaurant: {
+        type: Object,
+        required: true
     }
+});
+
+
+</script>
+
+<style>
+main {
+    min-height: calc(100vh - 100px);
+    overflow: auto;
+
+}
+
+.imgBackground {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 0px;
+
+}
+
+.shadow {
+    box-shadow: 0px 0px 8.0px rgba(0, 0, 0, 0.25);
+
+}
 </style>
