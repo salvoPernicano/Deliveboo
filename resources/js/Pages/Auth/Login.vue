@@ -38,7 +38,7 @@ const submit = () => {
             {{ status }}
         </div>
 
-        <form @submit.prevent="submit" class="my-56 mb-36 w-1/3 mx-auto h-3/4">
+        <form @submit.prevent="submit" class="w-1/3 mb-60  mx-auto h-3/4 mt-72">
             <div class="">
                 <InputLabel for="email" value="Email" />
 
@@ -70,10 +70,13 @@ const submit = () => {
                 Forgot your password?
                 </Link>
 
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <PrimaryButton class="ms-4 bg-[#FF6900]" :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing">
                     Log in
                 </PrimaryButton>
             </div>
         </form>
     </GuestLayout>
 </template>
+
+<style></style>

@@ -7,11 +7,11 @@ function headerColor() {
     const header = document.getElementById("color");
     const scrolledPixels = window.scrollY;
 
-    if (scrolledPixels >= 400) {
-        header.style.backgroundColor = "#F98F00";
-    } else if (scrolledPixels < 400) {
-        header.style.backgroundColor = "";
-    }
+    // if (scrolledPixels >= 400) {
+    //     header.style.backgroundColor = "#F98F00";
+    // } else if (scrolledPixels < 400) {
+    //     header.style.backgroundColor = "";
+    // }
 }
 // Add event listener for the scroll event
 window.addEventListener("scroll", headerColor);
@@ -26,7 +26,7 @@ const footerMenu = [
 </script>
 
 <template>
-    <header id="color" class="flex sm:justify-start items-center pt-6 sm:pt-0 fixed top-0 w-full">
+    <header class="flex sm:justify-start items-center pt-6 sm:pt-0 fixed top-0 w-full bg-sky-500 mb-10">
         <div class="mx-auto lg:w-10/12 flex items-center gap-10">
             <Link href="/" class="flex items-center">
             <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" />
@@ -36,11 +36,11 @@ const footerMenu = [
             <Link href="/" class="text-white hover:text-black font-bold">Home</Link>
         </div>
     </header>
-    <main class="mt-20"> <!-- Aggiunto margine per evitare sovrapposizioni -->
+    <main class="h-full"> <!-- Aggiunto margine per evitare sovrapposizioni -->
         <slot />
     </main>
 
-    <footer class="w-full mx-auto p-5 text-white">
+    <footer class="w-full mx-auto p-5 text-white d-flex align-items-center bg-[#FF6900] mt-10 fixed-bottom ">
         <div class="lg:w-10/12 ">
             <div class="flex-column md:flex gap-10 justify-between">
                 <figure>
@@ -68,20 +68,4 @@ const footerMenu = [
     </footer>
 </template>
 
-<style scoped>
-header {
-    background-color: aquamarine;
-    height: 80px;
-}
-
-footer {
-    display: flex;
-    align-items: center;
-    height: 200px;
-    background-color: #FF6900;
-}
-
-main {
-    min-height: calc(100vh - 80px);
-}
-</style>
+<style scoped></style>
