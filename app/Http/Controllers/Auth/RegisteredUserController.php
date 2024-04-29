@@ -68,7 +68,12 @@ class RegisteredUserController extends Controller
             'image' => $request->file('image') ? $request->file('image')->store('restaurant_images', 'public') : null,
             'description' => $validatedData['description'],
             'user_id' => $user->id,
+            
         ]);
+
+        if ($request->has('selectedTypologies')) {
+            $restaurant->typology()->attach($request->selectedTypologies);
+        }
         
         // Esegui il login dell'utente appena creato
         Auth::login($user);
