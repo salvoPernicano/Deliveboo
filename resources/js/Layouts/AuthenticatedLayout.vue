@@ -56,7 +56,7 @@ const showingNavigationDropdown = ref(false);
                     </div>
 
                     <div class="hidden sm:flex sm:items-center font-bold text-white">
-                        <Link :href="route('logout')" class="flex items-center link-hover p-1">
+                        <Link :href="route('logout')" class="flex items-center link-hover p-1"  method="post" as="button">
                         <img src="../../../public/img/quit.svg" class="h-10 w-10">
                         Logout
                         </Link>
