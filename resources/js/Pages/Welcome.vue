@@ -34,19 +34,22 @@ const props = defineProps({
                 </template>
             </div>
 
-            <!-- HERO section -->
-            <section class="hero w-full bg-cover bg-center bg-no-repeat flex justify-center items-center">
-                <div class="flex justify-center items-center bg-[#FF6900] w-full bg-opacity-20">
-                    <div class="my-60 columns-sm flex flex-col justify-center items-center w-full">
-                        <h1 class="text-white text-center">I tuoi piatti preferiti,<br>
-                            direttamente a casa tua.</h1>
-                        <form id="search-bar" class="w-1/3 relative">
+        <!-- HERO section -->
+        <section class="hero w-full bg-cover bg-center bg-no-repeat flex justify-center items-center">
+            <div class="flex justify-center items-center bg-[#FF6900] w-full bg-opacity-20">
+                <div class="my-60 columns-sm flex flex-col justify-center items-center w-full">
+                    <h1 class="text-white text-center">I tuoi piatti preferiti,<br>
+                        direttamente a casa tua.</h1>
+                        <!-- <form id="search-bar" class="w-1/3 relative">
                             <input type="text" placeholder="Cosa vuoi mangiare?" class="w-full">
                             <button type="submit" class="btn btn-orange absolute right-0 top-0 h-full">Cerca</button>
-                        </form>
-                    </div>
+                        </form> -->
+                        <div id="search-bar" class="flex items-center">
+                            <a :href="route('home')" class="btn btn-orange py-3">Cerca</a>
+                        </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
             <!-- TYPOLOGIES section -->
             <section class="flex flex-col items-center my-24">
