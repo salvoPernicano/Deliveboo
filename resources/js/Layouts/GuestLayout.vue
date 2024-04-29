@@ -5,7 +5,6 @@ import { Link } from '@inertiajs/vue3';
 // Change header color on scroll
 function headerColor() {
     const header = document.getElementById("color");
-    const logoHeader = document.getElementById("logo-header")
     const scrolledPixels = window.scrollY;
     
     if (scrolledPixels >= 400) {
@@ -47,7 +46,7 @@ const footerMenu = [
                 <figure>
                     <Link href="/" class="flex items-center">
                         <img id="logo-footer" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
-                </Link>
+                    </Link>
                 </figure>
                 <div v-for="(item) in 3">
                     <h6>

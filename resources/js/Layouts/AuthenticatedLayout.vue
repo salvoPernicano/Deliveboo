@@ -20,9 +20,8 @@ const showingNavigationDropdown = ref(false);
                         <!-- Logo -->
                         <div class="shrink-0 flex items-center">
                             <Link :href="route('dashboard')">
-                            <ApplicationLogo class="block h-9 w-auto fill-current text-gray-800" />
+                                <img id="logo-nav" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
                             </Link>
-                            DeliveBoo
                         </div>
 
                         <!-- Navigation Links -->
@@ -142,6 +141,10 @@ const showingNavigationDropdown = ref(false);
 <style scoped>
 nav {
     background-color: #F98F00;
+}
+
+#logo-nav {
+    height: 60px;
 }
 
 .link-hover:hover {
