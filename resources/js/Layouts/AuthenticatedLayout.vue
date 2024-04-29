@@ -37,8 +37,8 @@ const showingNavigationDropdown = ref(false);
                             <img src="../../../public/img/receipt.svg" class="h-10 w-10">
                             Ordini Ricevuti
                             </Link>
-                            <Link :href="`/restaurant/${$page.props.auth.user.id}/dishes`"
-                                class="flex items-center link-hover p-1">
+                            <Link :href="route('dishes.index')"
+                                class="flex items-center link-hover p-1" method="get" as="button">
                             <img src="../../../public/img/dish_plate.svg" class="h-10 w-10">
                             I tuoi piatti
                             </Link>
