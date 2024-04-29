@@ -21,8 +21,8 @@
         </div>
       </div>
       <Link class="bg-green-500 px-8 py-2 text-white text-2xl font-bold border rounded-lg hover:bg-green-700" :href="route('restaurants.create')" >
-                                    Crea
-                                </Link>
+        Crea
+      </Link>
 
     </div>
 </AuthenticatedLayout>

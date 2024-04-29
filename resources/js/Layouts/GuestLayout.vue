@@ -1,15 +1,14 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { Link } from '@inertiajs/vue3';
-
 // Change header color on scroll
 function headerColor() {
     const header = document.getElementById("color");
     const scrolledPixels = window.scrollY;
-    
+
     if (scrolledPixels >= 400) {
         header.style.backgroundColor = "#F98F00";
-        
+
     } else if (scrolledPixels < 400) {
         header.style.backgroundColor = "";
     }
@@ -27,8 +26,8 @@ const footerMenu = [
 </script>
 
 <template>
-    <header id="color" class="flex sm:justify-start items-center pt-6 sm:pt-0 fixed top-0 w-full">
-        <div class="mx-auto lg:w-10/12 flex items-center gap-10 h-3/4">
+    <header class="flex sm:justify-start items-center pt-6 sm:pt-0 fixed top-0 w-full z-10">
+        <div class="mx-auto lg:w-10/12 flex items-center gap-10">
             <Link href="/" class="flex items-center">
                 <img id="logo-header" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
             </Link>
