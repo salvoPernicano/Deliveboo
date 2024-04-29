@@ -6,18 +6,23 @@
             <button class="bg-orange-500 px-3 rounded-lg h-9">Cerca</button>
         </div>
         <div id="piillsContainer" class="p-3 flex justify-center items-center gap-3">
-            <a :class="{'bg-orange-500': filterByType.includes(1)}" class="border border-gray-400 rounded-lg p-2" href="#" @click.prevent="handleSearch(1)">Giapponese</a>
-            <a :class="{'bg-orange-500': filterByType.includes(2)}" class="border border-gray-400 rounded-lg p-2" href="#" @click.prevent="handleSearch(2)">Italiana</a>
-            <a :class="{'bg-orange-500': filterByType.includes(3)}" class="border border-gray-400 rounded-lg p-2" href="#" @click.prevent="handleSearch(3)">Cinese</a>
-            <a :class="{'bg-orange-500': filterByType.includes(4)}" class="border border-gray-400 rounded-lg p-2" href="#" @click.prevent="handleSearch(4)">Messicano</a>
-            <a :class="{'bg-orange-500': filterByType.includes(5)}" class="border border-gray-400 rounded-lg p-2" href="#" @click.prevent="handleSearch(5)">Indiano</a>
+            <a :class="{ 'bg-orange-500': filterByType.includes(1) }" class="border border-gray-400 rounded-lg p-2"
+                href="#" @click.prevent="handleSearch(1)">Giapponese</a>
+            <a :class="{ 'bg-orange-500': filterByType.includes(2) }" class="border border-gray-400 rounded-lg p-2"
+                href="#" @click.prevent="handleSearch(2)">Italiana</a>
+            <a :class="{ 'bg-orange-500': filterByType.includes(3) }" class="border border-gray-400 rounded-lg p-2"
+                href="#" @click.prevent="handleSearch(3)">Cinese</a>
+            <a :class="{ 'bg-orange-500': filterByType.includes(4) }" class="border border-gray-400 rounded-lg p-2"
+                href="#" @click.prevent="handleSearch(4)">Messicano</a>
+            <a :class="{ 'bg-orange-500': filterByType.includes(5) }" class="border border-gray-400 rounded-lg p-2"
+                href="#" @click.prevent="handleSearch(5)">Indiano</a>
             <button class="bg-orange-400 p-2 rounded-lg" @click="searchByCategory">Cerca per tipologia</button>
         </div>
 
         <section class="flex justify-center items-center gap-4 bg-red-200">
             <!-- ristoranti mostrati random -->
-            <div  class="border border-black bg-gray-400 p-2 h-48 w-48"
-                v-for="restaurant in restaurants.data" :key="restaurant.id">
+            <div class="border border-black bg-gray-400 p-2 h-48 w-48" v-for="restaurant in restaurants.data"
+                :key="restaurant.id">
                 <h2>{{ restaurant.name }}</h2>
                 <p>{{ restaurant.description }}</p>
                 <div>
@@ -63,7 +68,7 @@ const handleSearch = (typology) => {
 }
 
 const searchByCategory = () => {
-    Inertia.get('/Deliveboo', { filterByType: filterByType.value}, {
+    Inertia.get('/Deliveboo', { filterByType: filterByType.value }, {
         preserveState: true
     });
 }

@@ -10,10 +10,10 @@ class DelivebooController extends Controller
 {
     public function index(Request $request)
     {
-        
+
         $query = Restaurant::query();
 
-        
+
         if ($request->has('filterByType')) {
             $filterByType = $request->input('filterByType');
             $query->whereHas('typology', function ($typologyQuery) use ($filterByType) {
@@ -21,10 +21,10 @@ class DelivebooController extends Controller
             });
         }
 
-       
+
         $restaurants = $query->with('typology')->paginate(5);
 
-       
+
         return Inertia::render('WebsiteHome', [
             'restaurants' => $restaurants,
         ]);
