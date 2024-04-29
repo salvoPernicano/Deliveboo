@@ -36,10 +36,12 @@ const footerMenu = [
             <Link href="/" class="text-white hover:text-black font-bold">Home</Link>
         </div>
     </header>
-    <slot />
+    <main class="mt-20"> <!-- Aggiunto margine per evitare sovrapposizioni -->
+        <slot />
+    </main>
 
-    <footer class="">
-        <div class="lg:w-10/12 mx-auto py-10 text-white">
+    <footer class="w-full mx-auto p-5 text-white">
+        <div class="lg:w-10/12 ">
             <div class="flex-column md:flex gap-10 justify-between">
                 <figure>
                     <Link href="/" class="flex items-center">
@@ -58,7 +60,7 @@ const footerMenu = [
                     </ul>
                 </div>
             </div>
-            <hr class="my-5">
+            <hr class="my-2">
             <div>
                 © 2024 DeliveBoo - Termini & Condizioni - Cookie & Privacy
             </div>
@@ -67,7 +69,19 @@ const footerMenu = [
 </template>
 
 <style scoped>
+header {
+    background-color: aquamarine;
+    height: 80px;
+}
+
 footer {
+    display: flex;
+    align-items: center;
+    height: 200px;
     background-color: #FF6900;
+}
+
+main {
+    min-height: calc(100vh - 80px);
 }
 </style>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\DelivebooController;
 use App\Http\Controllers\DishController;
 use App\Models\Restaurant;
 use Illuminate\Foundation\Application;
@@ -18,6 +19,9 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/Deliveboo', [DelivebooController::class, 'index'])->name('home');
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
