@@ -3,7 +3,6 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\DelivebooController;
-use App\Http\Controllers\DelivebooController;
 use App\Http\Controllers\DishController;
 use App\Models\Restaurant;
 use Illuminate\Foundation\Application;
