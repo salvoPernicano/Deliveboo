@@ -27,10 +27,9 @@ const footerMenu = [
 
 <template>
     <header id="color" class="flex sm:justify-start items-center pt-6 sm:pt-0 fixed top-0 w-full">
-        <div class="mx-auto lg:w-10/12 flex items-center gap-10">
+        <div class="mx-auto lg:w-10/12 flex items-center gap-10 h-3/4">
             <Link href="/" class="flex items-center">
-                <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" />
-                DeliveBoo
+                <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" id="logo-header"/>
             </Link>
             
             <Link href="/" class="text-white hover:text-black font-bold">Home</Link>
@@ -73,6 +72,12 @@ const footerMenu = [
 header {
     background-color: transparent;
     height: 80px;
+}
+#deliveboo-logo {
+    height: 100%;
+}
+#logo-header {
+    height: 60px;
 }
 footer {
     display: flex;
