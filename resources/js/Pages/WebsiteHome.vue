@@ -30,6 +30,7 @@
                         <li v-for="item in restaurant.typology">{{ item.typology_name }}</li>
                     </ul>
                 </div>
+                <Link :href="route('restaurants.show', { restaurant: restaurant.id })">Dettagli e Menu</Link>
             </div>
 
         </section>
