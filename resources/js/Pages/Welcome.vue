@@ -40,10 +40,13 @@ const props = defineProps({
                 <div class="my-60 columns-sm flex flex-col justify-center items-center w-full">
                     <h1 class="text-white text-center">I tuoi piatti preferiti,<br>
                         direttamente a casa tua.</h1>
-                        <form id="search-bar" class="w-1/3 relative">
+                        <!-- <form id="search-bar" class="w-1/3 relative">
                             <input type="text" placeholder="Cosa vuoi mangiare?" class="w-full">
                             <button type="submit" class="btn btn-orange absolute right-0 top-0 h-full">Cerca</button>
-                        </form>
+                        </form> -->
+                        <div id="search-bar" class="flex items-center">
+                            <a :href="route('home')" class="btn btn-orange py-3">Cerca</a>
+                        </div>
                 </div>
             </div>
         </section>
