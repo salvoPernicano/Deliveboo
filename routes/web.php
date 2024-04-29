@@ -23,6 +23,9 @@ use Inertia\Inertia;
 Route::get('/Deliveboo', [DelivebooController::class, 'index'])->name('home');
 
 
+
+
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),

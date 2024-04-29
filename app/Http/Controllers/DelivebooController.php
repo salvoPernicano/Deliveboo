@@ -1,19 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-
 class DelivebooController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Recupera una lista di 5 ristoranti a caso dal database
-        $restaurants = Restaurant::inRandomOrder()->limit(5)->get();
+        
+        $query = Restaurant::query();
 
-        // Passa i ristoranti alla vista e renderizza la homepage
-        return Inertia::render('WebsiteHome', ['restaurants' => $restaurants]);
+        
+        if ($request->has('filterByType')) {
+            $filterByType = $request->input('filterByType');
+            $query->whereHas('typology', function ($typologyQuery) use ($filterByType) {
+                $typologyQuery->where('typologies.id', $filterByType);
+            });
+        }
+
+       
+        $restaurants = $query->with('typology')->paginate(5);
+
+       
+        return Inertia::render('WebsiteHome', [
+            'restaurants' => $restaurants,
+        ]);
     }
 }
