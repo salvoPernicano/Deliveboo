@@ -5,10 +5,12 @@ import { Link } from '@inertiajs/vue3';
 // Change header color on scroll
 function headerColor() {
     const header = document.getElementById("color");
+    const logoHeader = document.getElementById("logo-header")
     const scrolledPixels = window.scrollY;
     
     if (scrolledPixels >= 400) {
         header.style.backgroundColor = "#F98F00";
+        
     } else if (scrolledPixels < 400) {
         header.style.backgroundColor = "";
     }
@@ -29,7 +31,7 @@ const footerMenu = [
     <header id="color" class="flex sm:justify-start items-center pt-6 sm:pt-0 fixed top-0 w-full">
         <div class="mx-auto lg:w-10/12 flex items-center gap-10 h-3/4">
             <Link href="/" class="flex items-center">
-                <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" id="logo-header"/>
+                <img id="logo-header" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
             </Link>
             
             <Link href="/" class="text-white hover:text-black font-bold">Home</Link>
@@ -44,8 +46,7 @@ const footerMenu = [
             <div class="flex-column md:flex gap-10 justify-between">
                 <figure>
                     <Link href="/" class="flex items-center">
-                    <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" />
-                    DeliveBoo
+                        <img id="logo-footer" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
                 </Link>
                 </figure>
                 <div v-for="(item) in 3">
@@ -73,15 +74,15 @@ header {
     background-color: transparent;
     height: 80px;
 }
-#deliveboo-logo {
-    height: 100%;
-}
 #logo-header {
-    height: 60px;
+    height: 70px;
+}
+#logo-footer {
+    height: 120px;
 }
 footer {
     display: flex;
     align-items: center;
-    background-color: #FF6900;
+    background-color: #F98F00;
 }
 </style>
