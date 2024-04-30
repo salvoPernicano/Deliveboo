@@ -32,9 +32,9 @@
                                     <p class=" capitalize">{{ dish.description }}</p>
                                     <p class=" capitalize font-bold">Price: {{ dish.price }}€</p>
                                 </div>
-                                <div class="bg-orange-light add-to-cart absolute rounded-full w-10 p-3 left-[40%] flex justify-center">
-                                  <button type="submit"> <img src="../../../public/img/add_cart.svg" alt=""></button>
-                                </div>
+                                <Link :href="`/add-to-cart/${dish.id}`" class="bg-orange-light add-to-cart absolute rounded-full w-10 p-3 left-[40%] flex justify-center">
+                                  <img src="../../../public/img/add_cart.svg" alt="">
+                                </Link>
     
                             </div>
                         </div>
@@ -74,6 +74,7 @@
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 import { defineProps } from 'vue';
+import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
     restaurant: {
