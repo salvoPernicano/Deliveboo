@@ -46,7 +46,7 @@ const handleSubmit = () => {
 }
 
 const handleImageChange = (event) => {
-    newRestaurant.image = event.target.files[0];
+    registrationForm.image = event.target.files[0];
 };
 </script>
 
