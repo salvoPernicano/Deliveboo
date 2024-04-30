@@ -28,7 +28,7 @@ class DishController extends Controller
             'dishes' => $dishes
         ]);
     }
-    
+
 
 
     /**
@@ -45,6 +45,7 @@ class DishController extends Controller
      */
     public function store(StoreDishRequest $request)
     {
+
         $validatedData = $request->validated();
 
 
@@ -83,31 +84,34 @@ class DishController extends Controller
 
   return Inertia::render('Restaurants/Dishes/EditDish', ['restaurant' => $restaurant, 'dish' => $dish]);
     }
-    
-    
-    
+
+
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateDishRequest $request, Restaurant $restaurant, Dish $dish)
     {
+
         $validatedData = $request->validated();
-    
+
+        $validatedData['visible'] = $validatedData['visible'] === 'true' ? 1 : 0;
+
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('restaurant_images', 'public');
             $validatedData['image'] = $imagePath;
         }
-    
+
         // Aggiorna i dati del piatto con i dati inviati dalla richiesta
         $dish->update($validatedData);
-    
+         dd($request->all());
         // Reindirizza l'utente alla pagina di indice dei ristoranti
         return redirect()->route('dishes.index');
     }
-    
-    
-    
+
+
+
 
     /**
      * Remove the specified resource from storage.
