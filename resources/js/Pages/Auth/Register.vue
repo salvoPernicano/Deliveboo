@@ -28,17 +28,33 @@ const registrationForm = useForm({
     selectedTypologies: []
 });
 
-function handleSubmit() {
-    // Invia i dati del nuovo ristorante all'endpoint appropriato
+// function handleSubmit() {
+//     // Invia i dati del nuovo ristorante all'endpoint appropriato
+//     registrationForm.post(route('register'), {
+//         onFinish: () => registrationForm.reset('password', 'password_confirmation'),
+//     });
+
+// }
+
+
+let passwordMismatch = false;
+
+
+const handleSubmit = () => {
+    // Controlla se la password e la conferma password coincidono
+    if (registrationForm.password !== registrationForm.password_confirmation) {
+        passwordMismatch = true;
+        return;
+    }
+
+
+    passwordMismatch = false;
+
     registrationForm.post(route('register'), {
         onFinish: () => registrationForm.reset('password', 'password_confirmation'),
     });
-
-}
-
-const handleImageChange = (event) => {
-    newRestaurant.image = event.target.files[0];
 };
+
 </script>
 
 <template>
@@ -74,13 +90,16 @@ const handleImageChange = (event) => {
                     <label class="font-bold" for="password">Password *</label>
                     <input id="password" type="password" class="mt-1 block w-full rounded-lg"
                         v-model="registrationForm.password" required autocomplete="new-password">
+
                     <InputError class="mt-2" :message="registrationForm.errors.password" />
                 </div>
                 <div class="w-full">
                     <label class="font-bold" for="password_confirmation">Conferma Password *</label>
                     <input id="password_confirmation" type="password" class="mt-1 block w-full rounded-lg"
                         v-model="registrationForm.password_confirmation" required autocomplete="new-password">
+                    <div v-if="passwordMismatch" class="text-red-600">Le password non coincidono.</div>
                     <InputError class="mt-2" :message="registrationForm.errors.password_confirmation" />
+
 
                 </div>
             </div>
