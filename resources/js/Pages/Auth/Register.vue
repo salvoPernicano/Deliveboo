@@ -87,21 +87,21 @@ const handleImageChange = (event) => {
 
 
             <div class="flex flex-col w-4/5 mx-auto">
-                <label class="font-bold" for="restaurantName">Inserisci nome Ristorante *</label>
+                <label class="font-bold" for="restaurantName">Nome Ristorante *</label>
                 <input id="restaurantName" class="text-black rounded-md" type="text" name="name"
                     v-model="registrationForm.restaurant_name" required>
                 <div v-if="errors.name"><span class="text-red-700">{{ errors.name }}</span></div>
             </div>
 
             <div class="flex flex-col w-4/5 mx-auto">
-                <label class="font-bold" for="restaurantAddress">Inserisci indirizzo *</label>
+                <label class="font-bold" for="restaurantAddress">Indirizzo *</label>
                 <input id="restaurantAddress" class="text-black rounded-md" type="text" name="address"
                     v-model="registrationForm.address" required>
                 <div v-if="errors.address"><span class="text-red-700">{{ errors.address }}</span></div>
             </div>
 
             <div class="flex flex-col w-4/5 mx-auto">
-                <label class="font-bold" for="restaurantPIVA">Inserisci Partita Iva *</label>
+                <label class="font-bold" for="restaurantPIVA">Partita Iva *</label>
                 <input id="restaurantPIVA" class="text-black rounded-md" type="text" name="p_iva"
                     v-model="registrationForm.p_iva" required>
                 <div v-if="errors.p_iva"><span class="text-red-700">{{ errors.p_iva }}</span></div>
