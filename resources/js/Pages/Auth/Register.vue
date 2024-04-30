@@ -43,12 +43,12 @@ const handleImageChange = (event) => {
 
 <template>
 
-    <div class="flex flex-col  gap-9 justify-center items-center">
-        <h1 class="text-black text-5xl font-bold">Registra il tuo ristorante</h1>
+    <div class="flex home flex-col h-full gap-3 justify-center items-center">
+        <h1 class=" text-orange-400 text-5xl font-bold">Registra il tuo ristorante</h1>
 
         <!-- Unico form per entrambi i form -->
         <form
-            class="bg-orange-400 w-2/3 max-w-3xl p-5 mb-10 rounded-lg flex flex-col  text-black text-lg text-center gap-7"
+            class="bg-orange-400 w-1/3 max-w-3xl p-5 mb-10 rounded-lg flex flex-col  text-black text-lg text-center gap-7"
             @submit.prevent="handleSubmit" enctype="multipart/form-data">
             <span class="italic text-start text-sm">I campi contrassegnati con * sono obbligatori</span>
             <!-- Campi per il nuovo ristorante -->
@@ -145,3 +145,10 @@ const handleImageChange = (event) => {
     </div>
 
 </template>
+<style>
+.home {
+    background-image: url('../../../../public/img/food-login.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+</style>
