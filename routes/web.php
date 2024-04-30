@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\DelivebooController;
@@ -23,19 +24,11 @@ use Inertia\Inertia;
 Route::get('/', [DelivebooController::class, 'index'])->name('home');
 Route::get('/restaurant/{restaurant}', [DelivebooController::class, 'show'])->name('restaurants.show');
 
+Route::get('/cart', [CartController::class, 'cartView'])->name('cartView');
+Route::get('/add-to-cart/{product}', [CartController::class, 'addToCart'])->name('addToCart');
+Route::get('/remove-from-cart/{product}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
+Route::post('/change-cart-quantity', [CartController::class, 'changeQuantity'])->name('changeQuantity');
 
-
-
-
-
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
