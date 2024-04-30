@@ -26,7 +26,7 @@ class StoreDishRequest extends FormRequest
             'restaurant_id' => 'required|exists:restaurants,id',
             'name' => 'required|max:255',
             'description' => 'nullable',
-            'price' => 'required|numeric|min:10',
+            'price' => 'required|numeric|min:1',
             'visible' => 'required|boolean',
             'category' => 'required',
             'image' => 'required|image|mimes:jpeg,png,webp,jpg,gif|max:2048' 
