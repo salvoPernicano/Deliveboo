@@ -43,12 +43,12 @@ const handleImageChange = (event) => {
 
 <template>
 
-    <div class="flex flex-col  gap-9 justify-center items-center">
-        <h1 class="text-black text-5xl font-bold">Registra il tuo ristorante</h1>
+    <div class="flex home flex-col h-full gap-3 justify-center items-center">
+        <h1 class=" text-orange-400 text-5xl font-bold">Registra il tuo ristorante</h1>
 
         <!-- Unico form per entrambi i form -->
         <form
-            class="bg-orange-400 w-2/3 max-w-3xl p-5 mb-10 rounded-lg flex flex-col  text-black text-lg text-center gap-7"
+            class="bg-orange-400 w-1/3 max-w-3xl p-5 mb-10 rounded-lg flex flex-col  text-black text-lg text-center gap-7"
             @submit.prevent="handleSubmit" enctype="multipart/form-data">
             <span class="italic text-start text-sm">I campi contrassegnati con * sono obbligatori</span>
             <!-- Campi per il nuovo ristorante -->
@@ -87,21 +87,21 @@ const handleImageChange = (event) => {
 
 
             <div class="flex flex-col w-4/5 mx-auto">
-                <label class="font-bold" for="restaurantName">Inserisci nome Ristorante *</label>
+                <label class="font-bold" for="restaurantName">Nome Ristorante *</label>
                 <input id="restaurantName" class="text-black rounded-md" type="text" name="name"
                     v-model="registrationForm.restaurant_name" required>
                 <div v-if="errors.name"><span class="text-red-700">{{ errors.name }}</span></div>
             </div>
 
             <div class="flex flex-col w-4/5 mx-auto">
-                <label class="font-bold" for="restaurantAddress">Inserisci indirizzo *</label>
+                <label class="font-bold" for="restaurantAddress">Indirizzo *</label>
                 <input id="restaurantAddress" class="text-black rounded-md" type="text" name="address"
                     v-model="registrationForm.address" required>
                 <div v-if="errors.address"><span class="text-red-700">{{ errors.address }}</span></div>
             </div>
 
             <div class="flex flex-col w-4/5 mx-auto">
-                <label class="font-bold" for="restaurantPIVA">Inserisci Partita Iva *</label>
+                <label class="font-bold" for="restaurantPIVA">Partita Iva *</label>
                 <input id="restaurantPIVA" class="text-black rounded-md" type="text" name="p_iva"
                     v-model="registrationForm.p_iva" required>
                 <div v-if="errors.p_iva"><span class="text-red-700">{{ errors.p_iva }}</span></div>
@@ -145,3 +145,10 @@ const handleImageChange = (event) => {
     </div>
 
 </template>
+<style>
+.home {
+    background-image: url('../../../../public/img/food-login.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+</style>
