@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Typology;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 
 class DelivebooController extends Controller
 {
@@ -24,11 +27,13 @@ class DelivebooController extends Controller
         }
     
         // Eseguiamo la query paginata
-        $restaurants = $query->with('typology')->paginate(5);
+        $restaurants = $query->with('typology')->get();
     
         // Ritorniamo la vista utilizzando Inertia
-        return Inertia::render('WebsiteHome', [
+        return Inertia::render('Welcome', [
             'restaurants' => $restaurants,
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
         ]);
     }
     
@@ -41,6 +46,7 @@ class DelivebooController extends Controller
         // Ritorna la vista dei dettagli del ristorante e del menu
         return Inertia::render('RestaurantDetails', [
             'restaurant' => $restaurant,
+            
         ]);
     }
 }

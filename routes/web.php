@@ -20,7 +20,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/Deliveboo', [DelivebooController::class, 'index'])->name('home');
+Route::get('/', [DelivebooController::class, 'index'])->name('home');
 Route::get('/restaurant/{restaurant}', [DelivebooController::class, 'show'])->name('restaurants.show');
 
 
@@ -28,14 +28,14 @@ Route::get('/restaurant/{restaurant}', [DelivebooController::class, 'show'])->na
 
 
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
