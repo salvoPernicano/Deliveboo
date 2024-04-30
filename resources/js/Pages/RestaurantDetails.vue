@@ -13,9 +13,9 @@
 
             <ul class="flex justify-center  flex-wrap gap-9 h-screen w-full sm:gap-3">
 
-                <li v-for="dish in restaurant.dishes" :key="dish.id">
+                <li v-for="dish in restaurant.dishes"  :key="dish.id">
 
-                    <div class="text-center bg-white rounded-lg shadow p-2 pb-5">
+                    <div v-if="dish.visible !== 0" class="text-center  rounded-lg shadow p-2 pb-5">
                         <div class="relative h-auto ">
                             <div class="h-full w-full object-cover">
                                 <img class="h-60 w-60 object-cover rounded-lg" :src="'/storage/' + dish.image"
