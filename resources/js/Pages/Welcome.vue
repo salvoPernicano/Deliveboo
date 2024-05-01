@@ -106,12 +106,12 @@ const searchByCategory = () => {
                 </div>
 
                 <!-- restaurants cards -->
-                <div class="flex flex-wrap justify-center gap-4 ">
-                    <div class="shadow rounded-xl flex flex-col justify-between" v-for="restaurant in restaurants"
+                <div class="flex flex-wrap justify-center gap-4 w-full">
+                    <div class="shadow rounded-xl flex flex-col justify-between w-full mx-4 sm:w-48 sm:mx-0" v-for="restaurant in restaurants"
                         :key="restaurant.id">
-                        <a :href="route('restaurants.show', { restaurant: restaurant.id })" class="">
+                        <a :href="route('restaurants.show', { restaurant: restaurant.id })">
                             <div :style="restaurant.image ? { backgroundImage: 'url(/storage/' + restaurant.image + ')' } : { backgroundColor: '#FFA500' }" class="h-24 w-full rounded-t-lg bg-cover bg-center"></div>
-                            <div class="w-48 p-2 h-full">
+                            <div class="  sm:w-48 p-2 h-full">
                                 <p class="font-bold">{{ restaurant.name }}</p>
                                 <ul class="flex flex-wrap gap-1 text-sm text-color">
                                     <li v-for="item in restaurant.typology">{{ item.typology_name }}</li>
@@ -133,20 +133,20 @@ const searchByCategory = () => {
                     Gli step
                     per farti passare la fame</h2>
 
-                <div id="steps" class="flex flex-nowrap mt-16">
-                    <div class="step">
+                <div id="steps" class="flex flex-wrap sm:flex-nowrap mt-16 w-full">
+                    <div class="step w-full sm:w-1/3">
                         <h4 class="text-center">1 - Scegli il ristorante</h4>
                         <figure>
                             <img src="../../../public/img/step-1.png" alt="">
                         </figure>
                     </div>
-                    <div class="step">
+                    <div class="step w-full sm:w-1/3">
                         <h4 class="text-center">2 - Riempi il carrello</h4>
                         <figure>
                             <img src="../../../public/img/step-2.png" alt="">
                         </figure>
                     </div>
-                    <div class="step">
+                    <div class="step w-full sm:w-1/3">
                         <h4 class="text-center">3 - Paga in modo sicuro</h4>
                         <figure>
                             <img src="../../../public/img/step-3.png" alt="">
@@ -176,10 +176,10 @@ const searchByCategory = () => {
     gap: 5rem;
 }
 
-.step {
+/* .step {
     flex-basis: calc((100% / 3) - (5rem / 3));
     aspect-ratio: 1;
-}
+} */
 
 .step figure {
     width: 100%;
