@@ -1,7 +1,8 @@
 <template>
   <AuthenticatedLayout>
+
     <Head title="Menu" />
-    <main class="text-center text-white p-5">
+    <main class="text-center text-black p-5">
       <h1>Menu del Ristorante {{ restaurant.name }}</h1>
 
       <div
@@ -63,10 +64,11 @@
                 </td>
                 <td class="px-6 py-4 text-lg">
                   <div classs="flex">
-          
-                    <button class="bg-yellow-300 p-2 rounded-lg m-2 text-black font-bold" @click.prevent="edit(dish.id)">Modifiche</button>
+
+                    <button class="bg-yellow-300 p-2 rounded-lg m-2 text-black font-bold"
+                      @click.prevent="edit(dish.id)">Modifiche</button>
                     <button class="bg-red-500 p-2 rounded-lg m-2 text-white font-bold"
-                      @click.prevent="destroy(dish.id)">Elimina</button>
+                      @click.prevent="showDeleteConfirmation(dish.id)">Elimina</button>
                   </div>
                 </td>
               </tr>
@@ -81,6 +83,18 @@
       Crea piatto per {{ restaurant.name }}
       </Link>
 
+      <div v-if="showConfirmation" class="popup">
+        <div class="popup-content">
+          <p>Sei sicuro di voler eliminare questo piatto?</p>
+          <div class="button-container">
+            <button @click="confirmDeleteAction" class="confirm-btn">Conferma</button>
+            <button @click="cancelDelete" class="cancel-btn">Annulla</button>
+          </div>
+        </div>
+      </div>
+
+
+
     </main>
   </AuthenticatedLayout>
 
@@ -92,6 +106,9 @@ import { defineProps } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Link, router } from '@inertiajs/vue3';
 import { Head } from '@inertiajs/inertia-vue3';
+import { ref } from 'vue';
+
+const confirmDeleteAction = ref(null);
 
 
 const props = defineProps({
@@ -105,14 +122,85 @@ const toggleVisibility = async (dish) => {
 };
 
 function edit(dishId) {
-  router.get('/restaurant/'+props.restaurant.id+'/dishes/'+dishId+'/edit');
+  router.get('/restaurant/' + props.restaurant.id + '/dishes/' + dishId + '/edit');
 }
-function destroy(id) {
-  router.delete('/dishes/' + id)
+// function destroy(id) {
+//   router.delete('/dishes/' + id)
+// }
+// function confirmDelete(id) {
+//   if (window.confirm('Sei sicuro di voler eliminare questo piatto?')) {
+//     router.delete('/dishes/' + id);
+//   }
+// }
+
+
+
+
+
+
+const showConfirmation = ref(false);
+
+function deleteDish(id) {
+  router.delete('/dishes/' + id);
+
+  showConfirmation.value = false;
 }
 
+// Funzione per annullare l'eliminazione
+function cancelDelete() {
+  // Nasconde il popup di conferma
+  showConfirmation.value = false;
+}
+
+
+function showDeleteConfirmation(id) {
+  // Mostra il popup di conferma
+  showConfirmation.value = true;
+
+  // Imposta la funzione di eliminazione del piatto con l'id
+  confirmDeleteAction.value = () => deleteDish(id);
+}
 </script>
 
 <style>
-/* Stili opzionali */
+.popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.button-container {
+  margin-top: 20px;
+}
+
+.confirm-btn,
+.cancel-btn {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.confirm-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+}
 </style>

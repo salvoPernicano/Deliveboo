@@ -26,7 +26,7 @@ const footerMenu = [
 </script>
 
 <template>
-    <header id="color"class="flex sm:justify-start items-center pt-6 sm:pt-0 fixed top-0 w-full z-10">
+    <header id="color" class="flex sm:justify-start items-center pt-6 sm:pt-0 fixed top-0 w-full z-10">
         <div class="mx-auto lg:w-10/12 flex items-center gap-10">
             <Link href="/" class="flex items-center">
                 <img id="logo-header" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
