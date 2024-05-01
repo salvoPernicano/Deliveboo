@@ -28,22 +28,14 @@ const registrationForm = useForm({
     selectedTypologies: []
 });
 
-let passwordMismatch = false;
 
 const handleSubmit = () => {
     if (registrationForm.password !== registrationForm.password_confirmation) {
-        passwordMismatch = true;
+        registrationForm.errors.password_confirmation = 'Le password non corrispondono.';
         return;
     }
-
-
-    passwordMismatch = false;
-
-
-    registrationForm.post(route('register'), {
-        onFinish: () => registrationForm.reset('password', 'password_confirmation'),
-    });
 }
+
 
 const handleImageChange = (event) => {
     newRestaurant.image = event.target.files[0];
@@ -52,12 +44,12 @@ const handleImageChange = (event) => {
 
 <template>
 
-    <div class="flex home flex-col h-full gap-3 justify-center items-center">
-        <h1 class=" text-orange-400 text-5xl font-bold">Registra il tuo ristorante</h1>
+    <div class="flex flex-col  gap-9 justify-center items-center">
+        <h1 class="text-black text-5xl font-bold">Registra il tuo ristorante</h1>
 
         <!-- Unico form per entrambi i form -->
         <form
-            class="bg-orange-400 w-1/3 max-w-3xl p-5 mb-10 rounded-lg flex flex-col  text-black text-lg text-center gap-7"
+            class="bg-orange-400 w-2/3 max-w-3xl p-5 mb-10 rounded-lg flex flex-col  text-black text-lg text-center gap-7"
             @submit.prevent="handleSubmit" enctype="multipart/form-data">
             <span class="italic text-start text-sm">I campi contrassegnati con * sono obbligatori</span>
             <!-- Campi per il nuovo ristorante -->
@@ -89,30 +81,29 @@ const handleImageChange = (event) => {
                     <label class="font-bold" for="password_confirmation">Conferma Password *</label>
                     <input id="password_confirmation" type="password" class="mt-1 block w-full rounded-lg"
                         v-model="registrationForm.password_confirmation" required autocomplete="new-password">
-                    <div v-if="passwordMismatch" class="text-red-500">La password non coincidono.
-                    </div>
-                    <!-- <InputError class="mt-2" :message="registrationForm.errors.password_confirmation" /> -->
+                    <InputError class="mt-2" :message="registrationForm.errors.password_confirmation" />
+                        <!-- <div v-if="passwordMismatch" class="text-red-500">Le password non coincidono.</div> -->
 
                 </div>
             </div>
 
 
             <div class="flex flex-col w-4/5 mx-auto">
-                <label class="font-bold" for="restaurantName">Nome Ristorante *</label>
+                <label class="font-bold" for="restaurantName">Inserisci nome Ristorante *</label>
                 <input id="restaurantName" class="text-black rounded-md" type="text" name="name"
                     v-model="registrationForm.restaurant_name" required>
                 <div v-if="errors.name"><span class="text-red-700">{{ errors.name }}</span></div>
             </div>
 
             <div class="flex flex-col w-4/5 mx-auto">
-                <label class="font-bold" for="restaurantAddress">Indirizzo *</label>
+                <label class="font-bold" for="restaurantAddress">Inserisci indirizzo *</label>
                 <input id="restaurantAddress" class="text-black rounded-md" type="text" name="address"
                     v-model="registrationForm.address" required>
                 <div v-if="errors.address"><span class="text-red-700">{{ errors.address }}</span></div>
             </div>
 
             <div class="flex flex-col w-4/5 mx-auto">
-                <label class="font-bold" for="restaurantPIVA">Partita Iva *</label>
+                <label class="font-bold" for="restaurantPIVA">Inserisci Partita Iva *</label>
                 <input id="restaurantPIVA" class="text-black rounded-md" type="text" name="p_iva"
                     v-model="registrationForm.p_iva" required>
                 <div v-if="errors.p_iva"><span class="text-red-700">{{ errors.p_iva }}</span></div>
@@ -156,10 +147,3 @@ const handleImageChange = (event) => {
     </div>
 
 </template>
-<style>
-.home {
-    background-image: url('../../../../public/img/food-login.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-</style>
