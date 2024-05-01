@@ -6,7 +6,7 @@
     
     <GuestLayout>
 
-        <div :style="restaurant.imagePath ? { backgroundImage: 'url(' + '/storage/' + restaurant.imagePath + ')' } : { backgroundColor: '#FFA500' }"
+        <div :style="restaurant.image ? { backgroundImage: 'url(/storage/' + restaurant.image + ')' } : { backgroundColor: '#FFA500' }"
             class="imgBackground flex justify-center gap-4 pt-8 sm:p-0">
             <h2 class="text-center text-white">Menu</h2>
             <h2 class="text-center text-white capitalize pb-16">{{ restaurant.name }}</h2>
