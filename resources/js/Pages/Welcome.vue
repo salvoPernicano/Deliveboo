@@ -1,8 +1,10 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/inertia-vue3';
 import { ref, watch, computed } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
+import { toRaw } from 'vue';
+import axios from 'axios';
 
 
 const props = defineProps({
@@ -18,7 +20,7 @@ const props = defineProps({
 });
 
 let filterByType = ref([]);
-
+let editableProps = ref(props.restaurants);
 
 const handleSearch = (typology) => {
     const index = filterByType.value.indexOf(typology);
@@ -28,17 +30,25 @@ const handleSearch = (typology) => {
         filterByType.value.splice(index, 1);
     }
 }
-const searchByCategory = () => {
-    Inertia.get('/', { filterByType: filterByType.value }, {
-        preserveState: true,
-        onSuccess: (page) => {
-            // Aggiorna solo i dati dei ristoranti senza ricaricare la pagina
-            restaurants.value = page.props.restaurants;
-
-            // Torna alla parte superiore della pagina
-            window.scrollTo(0, 0);
+const fetchRestaurants = async () => {
+    try {
+        const string = Object.values(filterByType.value).join(',');
+        const filter = 'filterByType=' + string;
+        const response = await fetch('/restaurants?' + filter);
+        if (!response.ok) {
+            throw new Error('Failed to fetch restaurants');
         }
-    });
+        const filteredRestaurants = await response.json();
+        let usableData = toRaw(filteredRestaurants);
+        console.log(usableData);
+        editableProps.value = usableData;
+    } catch (error) {
+        console.error('Error fetching restaurants:', error);
+    }
+}
+
+const searchByCategory = async () => {
+    await fetchRestaurants();
 }
 
 
@@ -107,7 +117,7 @@ const searchByCategory = () => {
 
                 <!-- restaurants cards -->
                 <div class="flex flex-wrap justify-center gap-4 w-full">
-                    <div class="shadow rounded-xl flex flex-col justify-between w-full mx-4 sm:w-48 sm:mx-0" v-for="restaurant in restaurants"
+                    <div class="shadow rounded-xl flex flex-col justify-between w-full mx-4 sm:w-48 sm:mx-0" v-for="restaurant in editableProps"
                         :key="restaurant.id">
                         <a :href="route('restaurants.show', { restaurant: restaurant.id })">
                             <div :style="restaurant.image ? { backgroundImage: 'url(/storage/' + restaurant.image + ')' } : { backgroundColor: '#FFA500' }" class="h-24 w-full rounded-t-lg bg-cover bg-center"></div>

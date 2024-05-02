@@ -13,6 +13,7 @@ use App\Http\Requests\UpdateRestaurantRequest;
 use App\Models\Typology;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 
 class RestaurantController extends Controller
@@ -122,4 +123,23 @@ class RestaurantController extends Controller
 
         return Redirect::route('restaurants.index');
     }
+
+    public function getAll(Request $request){
+        $filters = $request->query('filterByType');
+        $array = explode(',', $filters);
+        $query = Restaurant::query();
+
+
+            // Controlla che il ristorante abbia esattamente il numero di tipologie selezionate
+            $query->whereHas('typology', function ($typologyQuery) use ($array) {
+                $typologyQuery->whereIn('typologies.id', $array);
+            }, '=', count($array));
+   
+    
+        // Eseguiamo la query paginata
+        $restaurants = $query->with('typology')->get();
+       return response()->json($restaurants);
 }
+        
+    }
+
