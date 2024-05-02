@@ -139,9 +139,9 @@
 
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import { Head } from '@inertiajs/inertia-vue3';
+import { Head, Link } from '@inertiajs/inertia-vue3';
 import { defineProps } from 'vue';
-import { Link } from '@inertiajs/vue3';
+
 
 const props = defineProps({
     restaurant: {

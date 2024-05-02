@@ -13,27 +13,14 @@ class DelivebooController extends Controller
 {
     public function index(Request $request)
     {
-        // Creiamo la query base
-        $query = Restaurant::query();
+        // Ottieni 5 ristoranti casuali dal database
+        $restaurants = Restaurant::inRandomOrder()->limit(5)->with('typology')->get();
     
-        // Applichiamo il filtro se presente
-        if ($request->has('filterByType')) {
-            $filterByTypes = $request->input('filterByType');
-    
-            // Controlla che il ristorante abbia esattamente il numero di tipologie selezionate
-            $query->whereHas('typology', function ($typologyQuery) use ($filterByTypes) {
-                $typologyQuery->whereIn('typologies.id', $filterByTypes);
-            }, '=', count($filterByTypes));
-        }
-    
-        // Eseguiamo la query paginata
-        $restaurants = $query->with('typology')->get();
-    
-        // Ritorniamo la vista utilizzando Inertia
+        // Ritorna la vista utilizzando Inertia
         return Inertia::render('Welcome', [
-            'restaurants' => $restaurants,
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
+            'restaurants' => $restaurants,
         ]);
     }
     

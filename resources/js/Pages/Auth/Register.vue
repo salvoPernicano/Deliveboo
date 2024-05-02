@@ -33,12 +33,12 @@ function handleSubmit() {
     const confirmPassword = registrationForm.get('password_confirmation');
 
     if (password === confirmPassword) {
-        
+
         registrationForm.post(route('register'), {
             onFinish: () => registrationForm.reset('password', 'password_confirmation'),
         });
     } else {
-        
+
         alert('Le password non coincidono. Per favore, inserisci password e conferma password uguali.');
     }
 }
@@ -84,16 +84,16 @@ const handleImageChange = (event) => {
                     <label class="font-bold" for="password">Password *</label>
                     <input id="password" type="password" class="mt-1 block w-full rounded-lg"
                         v-model="registrationForm.password" required autocomplete="new-password">
-                    <InputError class="mt-2" :message="registrationForm.errors.password" />
                 </div>
                 <div class="w-full">
                     <label class="font-bold" for="password_confirmation">Conferma Password *</label>
                     <input id="password_confirmation" type="password" class="mt-1 block w-full rounded-lg"
                         v-model="registrationForm.password_confirmation" required autocomplete="new-password">
-                    <InputError class="mt-2" :message="registrationForm.errors.password_confirmation" />
-                        <!-- <div v-if="passwordMismatch" class="text-red-500">Le password non coincidono.</div> -->
-
                 </div>
+            </div>
+            <div v-if="registrationForm.password_confirmation && registrationForm.password !== registrationForm.password_confirmation"
+                class="text-red-500">
+                Le password non coincidono. Per favore, inserisci password e conferma password uguali.
             </div>
 
 
