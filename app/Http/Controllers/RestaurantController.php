@@ -22,7 +22,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::get(['id', 'name', 'address', 'p_iva', 'image', 'description']);
+        $restaurants = Restaurant::get(['id', 'name', 'slug', 'address', 'p_iva', 'image', 'description']);
 
 
         return Inertia::render('Restaurants/AppRestaurants', ['restaurants' => $restaurants]);
