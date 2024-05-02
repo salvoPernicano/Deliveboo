@@ -1,51 +1,53 @@
 <template>
-    <AuthenticatedLayout >
+    <AuthenticatedLayout>
 
         <Head title="Menu" />
-        <main class="text-center text-black p-5">
-            <h1>Menu del Ristorante {{ restaurant.name }}</h1>
+        <div class=" text-black p-5">
+            <div class="flex justify-between">
+                <div>
+                    <h1>{{ restaurant.name }}</h1>
+                </div>
+
+                <div class="hidden sm:flex  ">
+                    <div>
+                        <Link class="bg-[#F98F00] p-3 text-white font-bold border rounded-lg flex items-center gap-2"
+                            :href="route('dishes.create', { restaurant: props.restaurant.id })">
+                        Crea Nuovo Piatto
+                        <div>
+                            <img src="../../../../../public/img/PiuBianco.svg" alt="">
+                        </div>
+                        </Link>
+                    </div>
+                </div>
+            </div>
+
 
             <div
-                class="w-full bg-white container mx-auto flex flex-col justify-center gap-5  text-white rounded-lg m-5 p-4">
-                <div class="sm:text-start">
-                    <div class="sm:flex sm:justify-between">
-                        <div>
+                class="w-full bg-white container mx-auto flex flex-col  gap-5  text-white rounded-lg m-5 p-4 shadow ">
+                <div class="sm:text-start sm:flex sm:justify-between sm:items-center flex flex-col mb-9 sm:flex-row">
+                    <div class=" sm:flex sm:justify-between ">
+                        <div class="flex flex-col ">
                             <h4 class="text-black ">
                                 I tuoi piatti
                             </h4>
-
+                            <span class="text-gray-400">
+                                Qui puoi visualizzare i tuoi piatti, crearne altri e modificarli.
+                            </span>
                         </div>
-                        <div class="hidden sm:flex  ">
-                            <div>
-                                <Link class="bg-[#F98F00] p-3 text-white font-bold border rounded-lg flex items-center gap-2"
-                                    :href="route('dishes.create', { restaurant: props.restaurant.id })">
-                                Crea piatto per {{ restaurant.name }}
-                                <div>
-                                    <img src="../../../../../public/img/PiuBianco.svg" alt="">
-                                </div>
-                                </Link>
-                            </div>
-                        </div>
-
                     </div>
-
-                    <span class="text-gray-400 ">
-                        Qui puoi visualizzare i tuoi piatti, crearne altri e modificarli.
-                    </span>
-
-                    <div class="flex flex-col gap-2 mt-4">
-                        <div class="flex bg-gray-200 p-2 rounded-lg gap-2 ">
-                            <img src="../../../../../public/img/visibile.svg" alt="">
-                            <span>= visibile ai clienti</span>
+                    <div class="flex gap-2 h-16 sm:items-end flex-col  sm:flex sm:flex-row">
+                        <div class="flex gap-2 items-center">
+                            <img class="h-7 w-7" src="../../../../../public/img/visibile.svg" alt="">
+                            <span class="text-black">= visibile ai clienti</span>
                         </div>
-                        <div class="flex p-2 gap-2">
-                            <img src="../../../../../public/img/nonVisibile.svg" alt="">
+                        <div class="flex gap-2 items-center">
+                            <img class="h-7 w-7" src="../../../../../public/img/nonVisibile.svg" alt="">
                             <span class="text-black">= non visibile ai clienti</span>
                         </div>
                         <div class="w-full sm:hidden">
                             <Link class="bg-[#F98F00] py-2 px-1 text-white font-bold border rounded-lg "
                                 :href="route('dishes.create', { restaurant: props.restaurant.id })">
-                            Crea piatto per {{ restaurant.name }}
+                            Crea nuovo Piatto
                             </Link>
                         </div>
                     </div>
@@ -53,7 +55,7 @@
 
                 <!-- Your Dishes cards -->
 
-                <div v-for="dish in dishes" :key="dish.id" class="  p-3 rounded-lg shadow  sm:hidden">
+                <div v-for="dish in dishes" :key="dish.id" class="  p-3 rounded-lg shadow  sm:hidden ">
 
                     <div class="flex justify-between">
                         <div class="flex items-center">
@@ -116,7 +118,7 @@
                 </div>
 
                 <!-- orders laptop -->
-                <div class="relative overflow-x-auto hidden sm:block">
+                <div class="relative sm:overflow-scroll  hidden sm:block">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
                         <thead class="text-xs text-gray-700 uppercase ">
                             <tr>
@@ -141,7 +143,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" v-for="dish in dishes">
+                            <tr class="bg-white border-b " v-for="dish in dishes">
                                 <th class="flex justify-center items- h-36">
                                     <div class="flex items-center">
                                         <img v-if="dish.visible" src="../../../../../public/img/visibile.svg" alt=""
@@ -197,16 +199,14 @@
             <div v-if="showConfirmation" class="popup">
                 <div class="popup-content">
                     <p>Sei sicuro di voler eliminare questo piatto?</p>
-                    <div class="button-container">
+                    <div class="button-container flex justify-center gap-4">
                         <button @click="confirmDeleteAction" class="confirm-btn">Conferma</button>
                         <button @click="cancelDelete" class="cancel-btn">Annulla</button>
                     </div>
                 </div>
             </div>
 
-
-
-        </main>
+        </div>
     </AuthenticatedLayout>
 
 </template>
@@ -271,6 +271,7 @@ function showDeleteConfirmation(id) {
     // Imposta la funzione di eliminazione del piatto con l'id
     confirmDeleteAction.value = () => deleteDish(id);
 }
+
 
 </script>
 
