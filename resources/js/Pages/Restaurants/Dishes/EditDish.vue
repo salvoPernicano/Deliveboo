@@ -7,41 +7,48 @@ import { Head } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia';
 
 let props = defineProps({
-  restaurant: Object,
-  errors: Object,
-  dish: Object
+    restaurant: Object,
+    errors: Object,
+    dish: Object
 });
 
 const editPlate = useForm({
-  id : props.dish.id,
-  restaurant_id: props.restaurant.id,
-  name: props.dish.name,
-  description: props.dish.description,
-  price: props.dish.price,
-  visible: true,
-  category: props.dish.category,
-  image: null
+    id: props.dish.id,
+    restaurant_id: props.restaurant.id,
+    name: props.dish.name,
+    description: props.dish.description,
+    price: props.dish.price,
+    visible: true,
+    category: props.dish.category,
+    image: null
 });
 
 const categories = ['Giapponese', 'Italiana', 'Cinese', 'Messicano', 'Indiana'];
 
 function submit(dishId) {
-  const formData = {
-    _method: 'put', // Utilizza form method spoofing per indicare al server di gestire la richiesta come PUT
-    name: editPlate.name,
-    description: editPlate.description,
-    price: editPlate.price,
-    visible: editPlate.visible,
-    category: editPlate.category,
-    image: editPlate.image
-  };
+    const formData = {
+        _method: 'put', // Utilizza form method spoofing per indicare al server di gestire la richiesta come PUT
+        name: editPlate.name,
+        description: editPlate.description,
+        price: editPlate.price,
+        visible: editPlate.visible,
+        category: editPlate.category,
+        image: editPlate.image
+    };
 
-  router.post(`/restaurant/${props.restaurant.id}/dishes/${dishId}`, formData);
+    router.post(`/restaurant/${props.restaurant.id}/dishes/${dishId}`, formData);
 }
-  
+
 
 function handleImageChange(event) {
-  editPlate.image = event.target.files[0];
+    editPlate.image = event.target.files[0];
+
+}
+
+function handleSubmit(restaurantId) {
+
+newPlate.visible = newPlate.visible === true;
+router.post(`/restaurant/${restaurantId}/dishes`, newPlate);
 
 }
 
@@ -49,63 +56,121 @@ function handleImageChange(event) {
 </script>
 
 <style>
-/* Stili opzionali */
+.shadow {
+    box-shadow: 0px 0px 8.0px rgba(0, 0, 0, 0.25);
+
+}
 </style>
 <template>
-  <Head title="Crea piatto"></Head>
+
+    <Head title="Crea piatto"></Head>
     <AuthenticatedLayout>
-        <!-- <Head title="Create new Plate" /> -->
 
-      <div class="flex flex-col gap-9 justify-center items-center">
-        <h1 class="text-black text-5xl font-bold">Modifica piatto</h1>
+        <div class="  flex gap-9 justify-center w-full">
+            <div class="shadow flex flex-col p-6 m-6 rounded-xl w-80 sm:w-2/3 ">
 
-        <form class="flex flex-col text-black text-lg text-center gap-7 m-10"  @submit.prevent="submit(dish.id)" enctype="multipart/form-data">
-          <div class="flex flex-col">
-            <label for="">Inserisci nome</label>
-            <input class="text-black" type="text" name="name" v-model="editPlate.name">
-            <div v-if="errors.name"><span class="text-red-700">{{ errors.name }}</span></div>
-          </div>
+                <h2 class=" font-bold text-xl">Modifica piatto</h2>
+                <span class="mt-2">Compila tutti i campi e vedi in anteprima cosa vedranno i tuoi clienti</span>
 
-          <div class="flex flex-col">
-            <label for="">Inserisci descrizione</label>
-            <textarea class="text-black" name="description" cols="30" rows="5" v-model="editPlate.description"></textarea>
-            <div v-if="errors.description"><span class="text-red-700">{{ errors.description }}</span></div>
-          </div>
+                <div class="h-full ">
+                    <form class="flex flex-col text-black text-lg gap-4 mt-4" @submit.prevent="submit(dish.id)"
+                        enctype="multipart/form-data">
 
-          <div class="flex flex-col">
-            <label for="">Prezzo</label>
-            <input class="text-black" type="number" step="0.01" name="price" v-model="editPlate.price">
-            <div v-if="errors.price"><span class="text-red-700">{{ errors.price }}</span></div>
-          </div>
+                        <div class="flex flex-col gap-1">
+                            <label for="" class="font-bold">Immagine</label>
+                            <input type="file" name="image" accept="image/*" @change="handleImageChange"
+                                class="border rounded-e-lg text-gray-400 ">
 
-          <div class="flex flex-col">
-            <label for="">Visibilità</label>
-            <input class="text-black" type="checkbox" name="visible" v-model="editPlate.visible">
-          </div>
+                        </div>
+                        <div class="flex gap-20">
+                            <div class=" text-center flex items-center">
+                                <span class="font-bold">Vecchia Foto:</span>
 
-          <div class="flex flex-col">
-            <label for="">Categoria</label>
-            <select class="text-black" name="category" v-model="editPlate.category">
-              <option v-for="category in categories" :value="category">{{ category }}</option>
-            </select>
-            <div v-if="errors.category"><span class="text-red-700">{{ errors.category }}</span></div>
-          </div>
+                            </div>
+                            <div class=" shadow rounded-lg ">
+                                <img class="w-40 mx-auto m-4 rounded-lg" :src="`/storage/${dish.image}`" alt="img">
+                            </div>
+                            <div v-if="errors.name"><span class="text-white bg-red-400 rounded-lg p-1">{{ errors.image
+                                    }}</span>
+                            </div>
+                        </div>
 
-          <div class="flex flex-col">
-            <label for="">Selezionare un'immagine</label>
-            <input type="file" name="image" accept="image/*" @change="handleImageChange">
-            <div class="mx-auto text-center">
-              <span>Vecchia Foto:</span>
-              <img class="w-40 mx-auto m-4" :src="`/storage/${dish.image}`" alt="img">
+                        <div class="flex flex-col gap-1">
+                            <label for="" class="font-bold">Inserisci Nome del Piatto</label>
+                            <input class=" border rounded-lg border-gray-200" type="text" name="name"
+                                v-model="editPlate.name">
+                            <div v-if="errors.name"><span class="text-white bg-red-400 rounded-lg p-1">{{ errors.name
+                                    }}</span></div>
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <label for="" class="font-bold">Inserisci descrizione</label>
+                            <textarea class="text-black rounded-lg border-gray-200" name="description" cols="30"
+                                rows="10" v-model="editPlate.description"></textarea>
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <label for="" class="font-bold">Categoria</label>
+                            <select class="text-black rounded-lg border-gray-200" name="category"
+                                v-model="editPlate.category">
+                                <option v-for="category in categories" :value="category">{{ category }}</option>
+                            </select>
+                            <div v-if="errors.name"><span class="text-white bg-red-400 rounded-lg p-1">{{
+                                errors.category }}</span></div>
+                        </div>
+
+                        <div class="flex flex-col gap-1">
+                            <label for="" class="font-bold">Prezzo</label>
+                            <input class="text-black rounded-lg  border-gray-200 " type="number" step="0.01"
+                                name="price" v-model="editPlate.price">
+                            <div v-if="errors.name"><span class="text-white bg-red-400 rounded-lg p-1">{{ errors.price
+                                    }}</span></div>
+                        </div>
+
+                        <!-- <div class="flex flex-col sm:flex-row gap-3 items-center">
+                            <label for="" class="font-bold">Visibilità</label>
+
+                            <div class="flex gap-2 items-center">
+                                <div class="flex ">
+                                    <input type="radio" name="visible" id="visibility" value="true"
+                                        v-model="newPlate.visible" class="border border-orange-500">
+                                </div>
+
+                                <div class="flex gap-2 rounded-lg border border-orange-500 shadow p-4">
+                                    <img src="../../../../../public/img/visibile.svg" alt="">
+                                    <span>= visibile dai clienti </span>
+                                </div>
+                            </div>
+                            <div class="flex gap-2 items-center">
+                                <div class="flex ">
+                                    <input type="radio" name="visible" id="notVisible" class="" value="false"
+                                        v-model="newPlate.visible">
+                                </div>
+
+                                <div class="flex gap-2 rounded-lg border shadow p-4">
+                                    <img src="../../../../../public/img/nonVisibile.svg" alt="">
+                                    <span>= Non visibile dai clienti </span>
+                                </div>
+                            </div>
+
+                        </div> -->
+
+                        <h3 class="font-bold text-center text-xl">{{ restaurant.name }}</h3>
+                        <div class="flex justify-center gap-3">
+                            <button @click.prevent="handleSubmit(props.restaurant.id)"
+                                class="bg-orange-500 text-white font-bold py-1 px-3 rounded-lg">Salva
+                                piatto
+                            </button>
+                            <button
+                                class="bg-white border-orange-500 border text-orange-500 font-bold py-1 px-3 rounded-lg ">Annulla
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
 
             </div>
-            <div v-if="errors.image"><span class="text-red-700">{{ errors.image }}</span></div>
-          </div>
-          <h2>{{ restaurant.name }}</h2>
-          <button type="submit" class="bg-white hover:bg-black hover:text-white text-black font-bold py-2 px-4 rounded-full uppercase">Salva piatto</button>
-        </form>
-      </div>
-    </AuthenticatedLayout>
-  </template>
+        </div>
 
- 
+    </AuthenticatedLayout>
+</template>

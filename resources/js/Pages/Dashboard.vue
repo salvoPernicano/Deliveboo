@@ -5,15 +5,12 @@ import { Head } from '@inertiajs/vue3';
 import { Inertia } from '@inertiajs/inertia';
 import { Link } from '@inertiajs/vue3';
 
-defineProps({
-  restaurant: Object,
-  dishes: Array
-});
 
 const showCardOrderTable = ref(false);
 const toggleCardOrderTable = () => {
     showCardOrderTable.value = !showCardOrderTable.value;
 };
+
 
 </script>
 
@@ -21,7 +18,7 @@ const toggleCardOrderTable = () => {
 
     <Head title="Dashboard" />
 
-    <AuthenticatedLayout>
+    <AuthenticatedLayout :auth="authData">
         <!-- main dashboard  -->
         <div class="bg-gray-100 overflow-hidden shadow-sm w-full">
 

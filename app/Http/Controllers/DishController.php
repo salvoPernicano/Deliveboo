@@ -82,6 +82,7 @@ class DishController extends Controller
     public function edit(Restaurant $restaurant, Dish $dish )
     {
 
+
   return Inertia::render('Restaurants/Dishes/EditDish', ['restaurant' => $restaurant, 'dish' => $dish]);
     }
 
