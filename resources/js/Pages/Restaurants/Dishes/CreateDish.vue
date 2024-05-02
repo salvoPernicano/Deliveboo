@@ -24,7 +24,7 @@
                         </div>
 
                         <div class="flex flex-col gap-1">
-                            <label for="" class="font-bold">Inserisci Descrizione</label>
+                            <label for="" class="font-bold">Inserisci Nome del Piatto</label>
                             <input class=" border rounded-lg border-gray-200" type="text" name="name"
                                 v-model="newPlate.name" placeholder="Lasagna">
                             <div v-if="errors.name"><span class="text-white bg-red-400 rounded-lg p-1">{{ errors.name
@@ -95,9 +95,6 @@
                 </div>
 
             </div>
-
-
-
         </div>
     </AuthenticatedLayout>
 </template>
