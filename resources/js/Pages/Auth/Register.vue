@@ -29,12 +29,19 @@ const registrationForm = useForm({
 });
 
 
-const handleSubmit = () => {
-    if (registrationForm.password !== registrationForm.password_confirmation) {
-        registrationForm.errors.password_confirmation = 'Le password non corrispondono.';
-        return;
-    }
+function handleSubmit() {
+    // Invia i dati del nuovo ristorante all'endpoint appropriato
+    registrationForm.post(route('register'), {
+        onFinish: () => registrationForm.reset('password', 'password_confirmation'),
+    });
+
 }
+//  const handleSubmit = () => {
+//      if (registrationForm.password !== registrationForm.password_confirmation) {
+//          registrationForm.errors.password_confirmation = 'Le password non corrispondono.';
+//          return;
+//      }
+//  }
 
 
 const handleImageChange = (event) => {
