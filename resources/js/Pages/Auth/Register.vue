@@ -28,13 +28,22 @@ const registrationForm = useForm({
     selectedTypologies: []
 });
 
+function handleSubmit() {
+    const password = registrationForm.get('password');
+    const confirmPassword = registrationForm.get('password_confirmation');
 
-const handleSubmit = () => {
-    if (registrationForm.password !== registrationForm.password_confirmation) {
-        registrationForm.errors.password_confirmation = 'Le password non corrispondono.';
-        return;
+    if (password === confirmPassword) {
+        
+        registrationForm.post(route('register'), {
+            onFinish: () => registrationForm.reset('password', 'password_confirmation'),
+        });
+    } else {
+        
+        alert('Le password non coincidono. Per favore, inserisci password e conferma password uguali.');
     }
 }
+
+
 
 
 const handleImageChange = (event) => {
