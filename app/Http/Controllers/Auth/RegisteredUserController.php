@@ -40,7 +40,7 @@ class RegisteredUserController extends Controller
         // Validazione dei dati dell'utente
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string',
+            'slug' => 'nullable|string',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'restaurant_name' => 'required|string|max:255',
@@ -64,7 +64,7 @@ class RegisteredUserController extends Controller
         // Creazione del ristorante associato all'utente
         $restaurant = Restaurant::create([
             'name' => $validatedData['restaurant_name'],
-            'slug' => $validatedData['slug'],
+            'slug' => Restaurant::generaterSlug($request->restaurant_name),
             'address' => $validatedData['address'],
             'p_iva' => $validatedData['p_iva'],
             'image' => $request->file('image') ? $request->file('image')->store('restaurant_images', 'public') : null,

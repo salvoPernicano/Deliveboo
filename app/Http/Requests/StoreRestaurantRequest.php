@@ -23,6 +23,7 @@ class StoreRestaurantRequest extends FormRequest
     {
         return [
             'name' => 'required|max:250',
+            'slug' => 'nullable|max:250',
             'address' => 'required|max:150',
             'p_iva' => 'required|size:11',
             'image' => 'nullable',

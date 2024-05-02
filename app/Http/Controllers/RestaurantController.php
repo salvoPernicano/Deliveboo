@@ -57,6 +57,12 @@ class RestaurantController extends Controller
             $validatedData['image'] = $imagePath;
         }
 
+        // Creazione slug
+
+        $slug = Restaurant::generaterSlug($request->name);
+
+        $validatedData['slug'] = $slug;
+
         // Aggiungi l'id dell'utente autenticato
 
         // Creazione di una nuova istanza di Restaurant e salvataggio nel database
