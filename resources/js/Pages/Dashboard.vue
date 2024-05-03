@@ -3,8 +3,11 @@ import { ref } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia';
+import { defineProps } from 'vue';
 
-
+const props = defineProps({
+    restaurants: Object
+  });
 
 const showCardOrderTable = ref(false);
 const toggleCardOrderTable = () => {
@@ -24,7 +27,7 @@ const toggleCardOrderTable = () => {
 
             <div class="p-3 flex justify-between">
                 <div>
-                    <h4 class="">Bentornato, NomeAccount</h4>
+                    <h4 class="">Bentornato {{ restaurants[0].name }}, </h4>
                 </div>
 
                 <div class=" gap-3 flex w-80 justify-end ">
