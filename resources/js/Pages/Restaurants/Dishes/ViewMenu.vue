@@ -11,7 +11,7 @@
                 <div class="hidden sm:flex  ">
                     <div>
                         <Link class="bg-[#F98F00] p-3 text-white font-bold border rounded-lg flex items-center gap-2"
-                            :href="route('dishes.create', { restaurant: props.restaurant.id })">
+                            :href="route('dishes.create', { restaurant: props.restaurant.slug })">
                         Crea Nuovo Piatto
                         <div>
                             <img src="../../../../../public/img/PiuBianco.svg" alt="">
