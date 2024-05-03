@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3';
 
 const showingNavigationDropdown = ref(false);
 
