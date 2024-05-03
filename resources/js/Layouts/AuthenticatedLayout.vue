@@ -11,7 +11,7 @@ const showingNavigationDropdown = ref(false);
     <div class="sm:flex h-screen w-full ">
         <nav class="bg-white border-b border-gray-100  sm:w-64">
             <!-- Primary Navigation Menu -->
-            <div class="lg:px-8 h-full py-10 items-start">
+            <div class="lg:px-8 h-full py-2 items-start">
                 <div class="flex sm:flex-col  max-sm:flex  w-full sm:h-full sm:justify-between">
                     <div class="flex flex-col items-center sm:items-start w-full gap-5 ">
                         <!-- Logo -->
@@ -119,7 +119,7 @@ const showingNavigationDropdown = ref(false);
         </nav>
 
         <!-- Page Content -->
-        <main class="w-full overflow-scroll">
+        <main class="w-full overflow-scroll bg-gray-100">
             <slot />
         </main>
     </div>
