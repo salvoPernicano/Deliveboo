@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 use Braintree\Gateway;
-
+use Inertia\Inertia;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Braintree;
 
 class CheckoutController extends Controller
@@ -23,7 +26,7 @@ class CheckoutController extends Controller
 
         // Crea una transazione di vendita con Braintree
         $result = $gateway->transaction()->sale([
-            'amount' => '10.00',
+            'amount' => $request->amount,
             'paymentMethodNonce' => $nonceFromTheClient,
             'options' => [
                 'submitForSettlement' => true
@@ -31,7 +34,7 @@ class CheckoutController extends Controller
         ]);
 
         if ($result->success) {
-            return response()->json(['message' => 'Pagamento effettuato con successo!']);
+            return Redirect::route('checkout.success');
         } else {
             return response()->json(['error' => 'Transazione di pagamento fallita'], 400);
         }

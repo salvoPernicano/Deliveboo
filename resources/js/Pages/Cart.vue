@@ -34,10 +34,7 @@
                                 quantity</button>
                         </li>
                     </ul>
-                    <div class="flex justify-between px-20 font-bold">
-                        <span>Totale:</span>
-                        <span>€{{ total }}</span>
-                    </div>
+                   
                 </div>
                 <div class="w-4/5 mx-auto mt-8 flex justify-between">
                     <button @click="checkout" class="btn btn-orange text-white px-4 py-2 rounded-md">Ordina e
@@ -45,6 +42,10 @@
                 </div>
             </div>
             <div class="w-4/5 mx-auto bg-pink-300 p-2 text-center" id="dropin-wrapper">
+                <div class="flex justify-center p-2 gap-2 font-bold text-xl">
+                        <span>Totale:</span>
+                        <span>€{{ total }}</span>
+                    </div>
                 <div id="checkout-message"></div>
                 <div id="dropin-container"></div>
                 <button @click="submitPayment" class="bg-red-500 rounded-lg p-2" id="submit-button">Submit payment</button>
@@ -134,23 +135,7 @@ const submitPayment = () => {
             console.error('Error requesting payment method:', requestPaymentMethodErr);
             return;
         }
-        Inertia.post('/process_payment', { 'paymentMethodNonce': payload.nonce }).then((result) => {
-            instance.teardown((teardownErr) => {
-                if (teardownErr) {
-                    console.error('Unable to teardown Drop-in UI:', teardownErr);
-                    return;
-                }
-                console.info('Drop-in UI successfully torn down!');
-                $('#submit-button').remove();
-            });
-
-            if (result.success) {
-                $('#checkout-message').html('<h1>Success</h1><p>Your Drop-in UI is working properly! Check your <a href="https://sandbox.braintreegateway.com/login">sandbox Control Panel</a> for your test transactions.</p><p>Refresh to try another transaction.</p>');
-            } else {
-                console.log(result);
-                $('#checkout-message').html('<h1>Error</h1><p>Check your console.</p>');
-            }
-        });
+        Inertia.post('/process_payment', { 'paymentMethodNonce': payload.nonce, 'amount' : total })
     });
 };
 </script>
