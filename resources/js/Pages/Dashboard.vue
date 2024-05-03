@@ -34,7 +34,7 @@ const toggleCardOrderTable = () => {
                 <div class="gap-3 flex w-80 justify-end ">
                     <div class="content-center items-center flex gap-2">
                         <Link :href="`/restaurant/${$page.props.restaurants[0].slug}/dishes/create`"
-                        class="w-fit py-5 px-1 rounded-lg text-white bg-[#F98F00] capitalize flex text-sm/[8px] h-8 gap-2 items-center">
+                        class="w-fit py-5 px-1 rounded-lg text-white bg-[#F98F00] capitalize font-semibold flex text-sm/[8px] h-8 gap-2 items-center">
                     Crea nuovo piatto
                     <img class="h-3 w-3" src="../../../public/img/PiuBianco.svg" width="30" alt="Icona" />
                     </Link>
@@ -246,7 +246,7 @@ const toggleCardOrderTable = () => {
                         </table>
                     </div>
                     <Link :href="`/restaurant/${$page.props.restaurants[0].slug}/dishes/create`"
-                        class="w-fit py-5 px-1 rounded-lg text-white bg-[#F98F00] capitalize flex text-sm/[8px] h-8 gap-2 items-center">
+                        class="w-fit py-5 px-2 rounded-lg text-white bg-[#F98F00] capitalize font-semibold flex text-sm/[8px] h-8 gap-2 items-center">
                     Crea nuovo piatto
                     <img class="h-3 w-3" src="../../../public/img/PiuBianco.svg" width="30" alt="Icona" />
                     </Link>
