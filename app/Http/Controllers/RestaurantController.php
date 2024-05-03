@@ -23,10 +23,13 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::get(['id', 'name', 'slug', 'address', 'p_iva', 'image', 'description']);
-
-
-        return Inertia::render('Restaurants/AppRestaurants', ['restaurants' => $restaurants]);
+        // Ottieni l'id dell'utente autenticato
+        $userId = Auth::id();
+    
+        // Recupera i ristoranti associati all'utente autenticato
+        $restaurants = Restaurant::where('user_id', $userId)->get();
+    
+        return Inertia::render('Dashboard', ['restaurants' => $restaurants]);
     }
 
     /**
