@@ -9,7 +9,7 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div class="sm:flex h-screen w-full ">
-        <nav class="bg-white border-b border-gray-100  sm:w-64">
+        <nav class="bg-white border-b border-gray-100 max-sm:h-[80px] sm:w-64">
             <!-- Primary Navigation Menu -->
             <div class="lg:px-8 h-full py-2 items-start">
                 <div class="flex sm:flex-col  max-sm:flex  w-full sm:h-full sm:justify-between">
@@ -25,17 +25,17 @@ const showingNavigationDropdown = ref(false);
                             <!-- Hamburger -->
                             <div class="flex items-center sm:hidden rounded-xl ">
                                 <button @click="showingNavigationDropdown = !showingNavigationDropdown"
-                                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                                    class="inline-flex items-center justify-center p-2 rounded-md active:bg-white active:bg-opacity-40 focus:outline-none transition duration-150 ease-in-out">
                                     <svg class="h-6 w-6" stroke="white" viewBox="0 0 24 24">
                                         <path :class="{
-                                            hidden: showingNavigationDropdown,
-                                            'inline-flex': !showingNavigationDropdown,
-                                        }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    hidden: showingNavigationDropdown,
+                                    'inline-flex': !showingNavigationDropdown,
+                                }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M4 6h16M4 12h16M4 18h16" />
                                         <path :class="{
-                                            hidden: !showingNavigationDropdown,
-                                            'inline-flex': showingNavigationDropdown,
-                                        }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    hidden: !showingNavigationDropdown,
+                                    'inline-flex': showingNavigationDropdown,
+                                }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </button>
@@ -43,27 +43,25 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <!-- Navigation Links -->
-                        <div class="font-bold text-white flex flex-col gap-5 sm:gap-2 ">
+                        <div class="font-bold text-white flex flex-col sm:gap-2 ">
 
-                            <div class="flex gap-2 justify-start sm:flex-col">
+                            <div class="sm:flex gap-2 justify-start sm:flex-col hidden">
                                 <Link :href="route('dashboard')" class="flex items-center link-hover ">
                                 <img src="../../../public/img/receipt.svg" class="h-10 w-10">
                                 Ordini Ricevuti
                                 </Link>
+
                                 <Link :href="route('dishes.index')" class="flex items-center link-hover " method="get"
                                     as="button">
                                 <img src="../../../public/img/dish_plate.svg" class="h-10 w-10">
                                 I tuoi piatti
                                 </Link>
 
-                            </div>
-
-
-                            <div class="flex gap-2 justify-start sm:flex-col">
                                 <Link :href="route('dashboard')" class="flex items-center link-hover p-1 sm:p-0">
                                 <img src="../../../public/img/stats.svg" class="h-10 w-10">
                                 Statistiche
                                 </Link>
+
                                 <div class="flex p-1">
                                     <Link :href="`/restaurant/${$page.props.auth.user.id}/dishes/create`"
                                         class="py-5 px-1 rounded-lg bg-white text-[#F98F00] capitalize flex text-sm/[8px] h-8 gap-2 items-center">
@@ -71,10 +69,7 @@ const showingNavigationDropdown = ref(false);
                                     <img class="h-3 w-3" src="../../../public/img/PiuArancio.svg" width="30"
                                         alt="Icona" />
                                     </Link>
-
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -95,10 +90,30 @@ const showingNavigationDropdown = ref(false);
                 <!-- Responsive Settings Options -->
                 <div class="pt-4 pb-1 border-t border-gray-200">
                     <div class="mt-3 space-y-1">
-                        <ResponsiveNavLink :href="route('profile.edit')"> Profile </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('logout')" method="post" as="button"
-                            class="text-white capitalize">
-                            Log Out
+                        <ResponsiveNavLink :href="route('dashboard')" class="flex items-center link-hover ">
+                            <img src="../../../public/img/receipt.svg" class="h-10 w-10">
+                            Ordini Ricevuti
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink :href="route('dishes.index')" class="flex items-center link-hover "
+                            method="get" as="button">
+                            <img src="../../../public/img/dish_plate.svg" class="h-10 w-10">
+                            I tuoi piatti
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink :href="route('dashboard')" class="flex items-center link-hover p-1 sm:p-0">
+                            <img src="../../../public/img/stats.svg" class="h-10 w-10">
+                            Statistiche
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="`/restaurant/${$page.props.auth.user.id}/dishes/create`"
+                            class="py-5 px-1 rounded-lg bg-white text-[#F98F00] capitalize flex text-sm/[8px] h-8 gap-2 items-center mx-4 w-10/12">
+                            Crea nuovo piatto
+                            <img class="h-3 w-3" src="../../../public/img/PiuArancio.svg" width="30" alt="Icona" />
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('logout')" class="flex items-center link-hover p-1 "
+                            method="post" as="button">
+                            <img src="../../../public/img/quit.svg" class="h-10 w-10">
+                            Logout
                         </ResponsiveNavLink>
                     </div>
                 </div>
