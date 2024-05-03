@@ -9,7 +9,7 @@
 
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import { Link } from '@inertiajs/inertia/vue3';
+import { Link } from '@inertiajs/vue3';
 import { Inertia } from '@inertiajs/inertia';
 </script>
 

@@ -57,7 +57,7 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { defineProps, toRaw, onMounted } from 'vue';
-import { Link } from '@inertiajs/inertia/vue3';
+import { Link } from '@inertiajs/vue3';
 import { Inertia } from '@inertiajs/inertia';
 import * as DropIn from 'braintree-web-drop-in';
 
