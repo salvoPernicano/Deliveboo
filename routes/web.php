@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\DelivebooController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DishController;
 use App\Models\Restaurant;
 use Illuminate\Foundation\Application;
@@ -20,9 +21,11 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('/process_payment', [CheckoutController::class, 'processPayment']);
 
 Route::get('/', [DelivebooController::class, 'index'])->name('home');
 Route::get('/restaurant/{restaurant:slug}', [DelivebooController::class, 'show'])->name('restaurants.show');
+
 
 Route::get('/restaurants', [RestaurantController::class, 'getAll']);
 
@@ -31,7 +34,9 @@ Route::get('/add-to-cart/{product}', [CartController::class, 'addToCart'])->name
 Route::get('/remove-from-cart/{product}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
 Route::post('/change-cart-quantity', [CartController::class, 'changeQuantity'])->name('changeQuantity');
 
-
+Route::get('/checkout/success', function () {
+    return Inertia::render('Checkout');
+})->name('checkout.success');
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
