@@ -30,15 +30,13 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <Head title="Log in" />
 
-        <Head title="Log in" />
+    <GuestLayout>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
-
-
 
         <div class="bg-foto">
 
@@ -85,7 +83,7 @@ const submit = () => {
     </GuestLayout>
 </template>
 
-<style>
+<style scoped>
 .bg-foto {
     padding-block: 300px;
     background-image: url(../../../../public/img/food-login.jpg);
