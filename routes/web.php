@@ -22,7 +22,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [DelivebooController::class, 'index'])->name('home');
-Route::get('/restaurant/{restaurant}', [DelivebooController::class, 'show'])->name('restaurants.show');
+Route::get('/restaurant/{restaurant:slug}', [DelivebooController::class, 'show'])->name('restaurants.show');
 
 Route::get('/restaurants', [RestaurantController::class, 'getAll']);
 

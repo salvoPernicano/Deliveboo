@@ -36,4 +36,9 @@ class Restaurant extends Model
     public static function generaterSlug($name){
         return Str::slug($name, '-');
     }
+
+    // Per mostrare lo slug da tutorial, non sembra servire
+    // public function getRouteKey(){
+    //     return 'slug';
+    // }
 }

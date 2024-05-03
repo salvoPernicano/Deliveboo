@@ -119,7 +119,7 @@ const searchByCategory = async () => {
                 <div class="flex flex-wrap justify-center gap-4 w-full">
                     <div class="shadow rounded-xl flex flex-col justify-between w-full mx-4 sm:w-48 sm:mx-0" v-for="restaurant in editableProps"
                         :key="restaurant.id">
-                        <a :href="route('restaurants.show', { restaurant: restaurant.id })">
+                        <a :href="route('restaurants.show', { restaurant: restaurant.slug })">
                             <div :style="restaurant.image ? { backgroundImage: 'url(/storage/' + restaurant.image + ')' } : { backgroundColor: '#FFA500' }" class="h-24 w-full rounded-t-lg bg-cover bg-center"></div>
                             <div class="  sm:w-48 p-2 h-full">
                                 <p class="font-bold">{{ restaurant.name }}</p>
