@@ -117,7 +117,7 @@ const handleImageChange = (event) => {
                         <div v-if="errors.p_iva"><span class="text-red-500">{{ errors.p_iva }}</span></div>
                     </div>
                     <!-- Validazione client partita IVA -->
-                    <div v-if="registrationForm.p_iva.length  !== 11"
+                    <div v-if="registrationForm.p_iva && registrationForm.p_iva.length !== 11"
                         class="text-red-500 text-sm">
                         Codice non valido: servono 11 caratteri.
                     </div>
