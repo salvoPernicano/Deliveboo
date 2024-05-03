@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import { Head } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3';
 import { Inertia } from '@inertiajs/inertia';
 import { defineProps } from 'vue';
 
@@ -23,44 +24,44 @@ const toggleCardOrderTable = () => {
 
     <AuthenticatedLayout :auth="authData">
         <!-- main dashboard  -->
-        <div class="bg-gray-100 overflow-hidden shadow-sm w-full">
+        <div class="overflow-hidden w-full">
 
-            <div class="p-3 flex justify-between">
+            <div class="px-3 py-4 flex justify-between ">
                 <div>
                     <h4 class="">Bentornato {{ restaurants[0].name }}, </h4>
                 </div>
 
-                <div class=" gap-3 flex w-80 justify-end ">
+                <div class="gap-3 flex w-80 justify-end ">
                     <div class="content-center items-center flex gap-2">
                         <Link :href="`/restaurant/${$page.props.restaurants[0].slug}/dishes/create`"
-                        class="w-fit py-5 px-1 rounded-lg text-white bg-[#F98F00] capitalize flex text-sm/[8px] h-8 gap-2 items-center">
+                        class="w-fit py-5 px-1 rounded-lg text-white bg-[#F98F00] capitalize font-semibold flex text-sm/[8px] h-8 gap-2 items-center">
                     Crea nuovo piatto
                     <img class="h-3 w-3" src="../../../public/img/PiuBianco.svg" width="30" alt="Icona" />
                     </Link>
 
-                        <div class="hidden content-center sm:block">
+                        <!-- <div class="hidden content-center sm:block">
                             <img class="h-5 w-5" src="../../../public/img/Bell.svg" alt="Icona" />
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
             <!-- order -->
             <div class="p-3">
-                <div class="p-3 rounded-lg  shadow">
+                <div class="p-3 rounded-lg bg-white shadow max-h-2/3 overflow-scroll">
                     <div>
-                        <h3 class="font-bold">Orders</h3>
+                        <h4 class="font-bold pb-3">Orders</h4>
                     </div>
                     <!-- order card -->
-                    <div class="  p-3 rounded-lg mt-3 sm:hidden">
+                    <div class="p-3 rounded-lg mt-3 sm:hidden">
 
                         <h5 class="rounded-lg  px-2">Order #1234</h5>
 
                         <div class="flex flex-col gap-2">
-                            <div class="flex gap-2 bg-gray-200 rounded-lg px-2 mt-2">
+                            <div class="flex gap-2 bg-gray-100 rounded-lg px-2 mt-2">
                                 <span>Name: Federico</span>
                                 <span>Phone: 4633394763</span>
                             </div>
-                            <span class="rounded-lg  px-2">Andress: Via le mani dal
+                            <span class="rounded-lg px-2">Andress: Via le mani dal
                                 Naso</span>
                         </div>
 
@@ -88,15 +89,14 @@ const toggleCardOrderTable = () => {
                             </div>
                         </div>
                     </div>
-                    <hr class="border-1">
 
                     <!-- secondo ordine di prova -->
-                    <div class=" p-3 rounded-lg  mt-5 sm:hidden">
+                    <div class="p-3 rounded-lg mt-5 sm:hidden">
 
                         <h5 class="rounded-lg  px-2">Order #1234</h5>
 
                         <div class="flex flex-col gap-1">
-                            <div class="flex gap-2 bg-gray-200 rounded-lg px-2 mt-2">
+                            <div class="flex gap-2 bg-gray-100 rounded-lg px-2 mt-2">
                                 <span>Name: Federico</span>
                                 <span>Phone: 4633394763</span>
                             </div>
@@ -137,7 +137,7 @@ const toggleCardOrderTable = () => {
 
                             </thead>
                             <tbody>
-                                <tr class="bg-gray-200 rounded-lg flex mt-2 px-1">
+                                <tr class="bg-gray-100 rounded-lg flex mt-2 px-1">
                                     <td class="flex flex-1 gap-2 text-[12px] text-start relative"
                                         @click="toggleCardOrderTable">
                                         <img v-if="!showCardOrderTable" height="10" width="10" class=""
@@ -173,7 +173,7 @@ const toggleCardOrderTable = () => {
                                                             </div>
                                                         </div>
 
-                                                        <div class="flex bg-gray-200 rounded-lg px-1">
+                                                        <div class="flex bg-gray-100 rounded-lg px-1">
                                                             <div class="flex  w-full justify-between">
                                                                 <span class="text-[13px]">Qty:17</span>
                                                                 <h6 class="w-[230px] text-[13px]">Pizza</h6>
@@ -188,7 +188,7 @@ const toggleCardOrderTable = () => {
 
                                     </td>
                                 </tr>
-                                <tr class=" bg-gray-200 rounded-lg flex mt-2 px-1">
+                                <tr class=" bg-gray-100 rounded-lg flex mt-2 px-1">
                                     <td class="flex flex-1 gap-2 text-[12px] text-start ">
                                         <img height="10" width="10" class="" src="../../../public/img/Arrow2.svg"
                                             alt=""> 002
@@ -209,19 +209,19 @@ const toggleCardOrderTable = () => {
 
             <!-- best selling dishes -->
 
-            <div class="p-3 flex sm:gap-3 w-full">
-                <div class="p-3 rounded-lg shadow w-full">
+            <div class="p-3 flex sm:gap-3 w-full rounded-lg">
+                <div class="p-3 rounded-lg shadow w-full bg-white">
                     <div>
-                        <h3 class="font-bold capitalize">best selling dishes</h3>
-                        <span class="capitalize">this month</span>
+                        <h4 class="font-bold capitalize">i piatti più venduti</h4>
+                        <span class="capitalize">questo mese</span>
                     </div>
                     <div class="flex">
                         <table class="flex flex-col w-96 mt-5">
                             <thead class="w-full">
                                 <tr class="flex justify-between px-1">
-                                    <th class="capitalize w-1/3 flex">dishes</th>
-                                    <th class="w-1/3 flex">N. Sold</th>
-                                    <th class="capitalize w-1/3 flex">total profit</th>
+                                    <th class="capitalize w-1/3 flex">piatti</th>
+                                    <th class="w-1/3 flex">N. Venduti</th>
+                                    <th class="capitalize w-1/3 flex">totale</th>
                                 </tr>
                             </thead>
                             <tbody class="w-full">
@@ -230,7 +230,7 @@ const toggleCardOrderTable = () => {
                                     <td class="w-1/3">10</td>
                                     <td class="w-1/3">$100</td>
                                 </tr>
-                                <div class=" bg-gray-200 rounded-lg px-1">
+                                <div class=" bg-gray-100 rounded-lg px-1">
                                     <tr class="flex justify-between">
                                         <td class="capitalize w-1/3">sushi</td>
                                         <td class="w-1/3">20</td>
@@ -246,18 +246,18 @@ const toggleCardOrderTable = () => {
                         </table>
                     </div>
                     <Link :href="`/restaurant/${$page.props.restaurants[0].slug}/dishes/create`"
-                        class="w-fit py-5 px-1 rounded-lg text-white bg-[#F98F00] capitalize flex text-sm/[8px] h-8 gap-2 items-center">
+                        class="w-fit py-5 px-2 rounded-lg text-white bg-[#F98F00] capitalize font-semibold flex text-sm/[8px] h-8 gap-2 items-center">
                     Crea nuovo piatto
                     <img class="h-3 w-3" src="../../../public/img/PiuBianco.svg" width="30" alt="Icona" />
                     </Link>
 
 
                 </div>
-                <!-- statics 2 -->
-                <div class=" hidden sm:flex  w-full ">
-                    <div class="p-3 border-gray-300 border-2 rounded-lg shadow w-full">
+                <!-- statistics 2 -->
+                <div class=" hidden sm:flex w-full bg-white">
+                    <div class="p-3 rounded-lg shadow w-full">
                         <div class="pb-3">
-                            <h3 class="font-bold capitalize">Statistics</h3>
+                            <h4 class="font-bold capitalize">Statistics</h4>
                         </div>
                         <div class="flex gap-2">
                             <div class=" flex flex-col border-gray-300 border-2 rounded-lg w-full">
@@ -298,10 +298,10 @@ const toggleCardOrderTable = () => {
             </div>
 
             <!-- statistics  -->
-            <div class="p-3  sm:hidden">
-                <div class="p-3  rounded-lg shadow sm:w-2/4">
+            <div class="p-3 sm:hidden">
+                <div class="p-3 bg-white rounded-lg shadow sm:w-2/4">
                     <div class="pb-3">
-                        <h3 class="font-bold capitalize">Statistics</h3>
+                        <h4 class="font-bold capitalize">Statistics</h4>
                     </div>
                     <div class=" flex flex-col  rounded-lg shadow">
                         <h6 class="p-2">This month</h6>
@@ -341,11 +341,3 @@ const toggleCardOrderTable = () => {
 </template>
 
 
-
-
-<style>
-.shadow {
-    box-shadow: 0px 0px 8.0px rgba(0, 0, 0, 0.25);
-
-}
-</style>

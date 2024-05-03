@@ -1,12 +1,11 @@
 <template>
 
     <Head title="Crea piatto"></Head>
+
     <AuthenticatedLayout>
 
-        <Head title="Create new Plate" />
-
-        <div class="  flex gap-9 justify-center w-full">
-            <div class="shadow flex flex-col p-6 m-6 rounded-xl w-80 sm:w-2/3 ">
+        <div class="flex gap-9 justify-center w-full">
+            <div class="shadow flex flex-col p-6 m-6 rounded-xl w-80 sm:w-2/3 bg-white">
 
                 <h2 class=" font-bold text-xl">Crea un nuovo piatto </h2>
                 <span class="mt-2">Compila tutti i campi e vedi in anteprima cosa vedranno i tuoi clienti</span>
@@ -81,8 +80,8 @@
 
                         </div>
 
-                        <h3 class="font-bold text-center text-xl">{{ restaurant.name }}</h3>
-                        <div class="flex justify-center gap-3">
+                        
+                        <div class="flex justify-center gap-5 mt-10">
                             <button @click.prevent="handleSubmit(props.restaurant.id)" class="bg-orange-500 text-white font-bold py-1 px-3 rounded-lg">Salva
                                 piatto
                             </button>
