@@ -32,13 +32,7 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    public function messages(): array
-{
-    return [
-        'password.required' => 'Il campo password è obbligatorio.',
-        'password.string' => 'Le password non coincidono.'
-    ];
-}
+
 
     /**
      * Attempt to authenticate the request's credentials.
