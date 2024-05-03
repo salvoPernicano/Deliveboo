@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\DelivebooController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DishController;
 use App\Models\Restaurant;
 use Illuminate\Foundation\Application;
@@ -21,8 +22,11 @@ use Inertia\Inertia;
 |
 */
 
+Route::post('/process_payment', [CheckoutController::class, 'processPayment']);
+
 Route::get('/', [DelivebooController::class, 'index'])->name('home');
 Route::get('/restaurant/{restaurant:slug}', [DelivebooController::class, 'show'])->name('restaurants.show');
+
 
 Route::get('/restaurants', [RestaurantController::class, 'getAll']);
 
@@ -31,10 +35,10 @@ Route::get('/add-to-cart/{product}', [CartController::class, 'addToCart'])->name
 Route::get('/remove-from-cart/{product}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
 Route::post('/change-cart-quantity', [CartController::class, 'changeQuantity'])->name('changeQuantity');
 
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/checkout/success', function () {
+    return Inertia::render('Checkout');
+})->name('checkout.success');
+Route::get('/dashboard',  [RestaurantController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 
@@ -42,7 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('/restaurant', [RestaurantController::class, 'index'])->name('restaurants.index');
+// Route::get('/restaurant', [RestaurantController::class, 'index'])->name('restaurants.index');
 Route::get('/restaurant/create', [RestaurantController::class, 'create'])->name('restaurants.create');
 Route::post('/restaurant', [RestaurantController::class, 'store'])->name('restaurants.store');
 Route::get('/restaurant/{restaurant}/edit', [RestaurantController::class, 'edit']);

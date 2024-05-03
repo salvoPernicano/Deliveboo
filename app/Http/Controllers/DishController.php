@@ -36,13 +36,13 @@ class DishController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($restaurantId)
+    public function create($restaurantSlug)
     {
-        $restaurant = Restaurant::findOrFail($restaurantId);
+        $restaurant = Restaurant::where('slug', $restaurantSlug)->firstOrFail();
         return Inertia::render('Restaurants/Dishes/CreateDish', [
             'restaurant' => $restaurant,
             'colorFull' => false,
-    ]);
+        ]);
     }
 
     /**
