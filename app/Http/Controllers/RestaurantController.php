@@ -23,7 +23,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::get(['id', 'name', 'address', 'p_iva', 'image', 'description']);
+        $restaurants = Restaurant::get(['id', 'name', 'slug', 'address', 'p_iva', 'image', 'description']);
 
 
         return Inertia::render('Restaurants/AppRestaurants', ['restaurants' => $restaurants]);
@@ -57,6 +57,12 @@ class RestaurantController extends Controller
             // Aggiungi il percorso dell'immagine ai dati validati
             $validatedData['image'] = $imagePath;
         }
+
+        // Creazione slug
+
+        $slug = Restaurant::generaterSlug($request->name);
+
+        $validatedData['slug'] = $slug;
 
         // Aggiungi l'id dell'utente autenticato
 

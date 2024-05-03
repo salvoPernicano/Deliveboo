@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Restaurant extends Model
 {
@@ -11,6 +12,7 @@ class Restaurant extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'address',
         'p_iva',
         'image',
@@ -30,4 +32,13 @@ class Restaurant extends Model
     {
         return $this->hasMany(Dish::class);
     }
+
+    public static function generaterSlug($name){
+        return Str::slug($name, '-');
+    }
+
+    // Per mostrare lo slug da tutorial, non sembra servire
+    // public function getRouteKey(){
+    //     return 'slug';
+    // }
 }
