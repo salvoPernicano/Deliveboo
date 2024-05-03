@@ -46,10 +46,10 @@ const toggleCardOrderTable = () => {
             <div class="p-3">
                 <div class="p-3 rounded-lg bg-white shadow max-h-2/3 overflow-scroll">
                     <div>
-                        <h4 class="font-bold">Orders</h4>
+                        <h4 class="font-bold pb-3">Orders</h4>
                     </div>
                     <!-- order card -->
-                    <div class="  p-3 rounded-lg mt-3 sm:hidden">
+                    <div class="p-3 rounded-lg mt-3 sm:hidden">
 
                         <h5 class="rounded-lg  px-2">Order #1234</h5>
 
@@ -58,7 +58,7 @@ const toggleCardOrderTable = () => {
                                 <span>Name: Federico</span>
                                 <span>Phone: 4633394763</span>
                             </div>
-                            <span class="rounded-lg  px-2">Andress: Via le mani dal
+                            <span class="rounded-lg px-2">Andress: Via le mani dal
                                 Naso</span>
                         </div>
 
@@ -88,7 +88,7 @@ const toggleCardOrderTable = () => {
                     </div>
 
                     <!-- secondo ordine di prova -->
-                    <div class=" p-3 rounded-lg  mt-5 sm:hidden">
+                    <div class="p-3 rounded-lg mt-5 sm:hidden">
 
                         <h5 class="rounded-lg  px-2">Order #1234</h5>
 
@@ -295,8 +295,8 @@ const toggleCardOrderTable = () => {
             </div>
 
             <!-- statistics  -->
-            <div class="p-3 sm:hidden bg-white">
-                <div class="p-3  rounded-lg shadow sm:w-2/4">
+            <div class="p-3 sm:hidden">
+                <div class="p-3 bg-white rounded-lg shadow sm:w-2/4">
                     <div class="pb-3">
                         <h4 class="font-bold capitalize">Statistics</h4>
                     </div>
