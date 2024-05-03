@@ -21,11 +21,13 @@ class DishController extends Controller
         $userId = auth()->id();
         $restaurant = Restaurant::where('user_id', $userId)->first();
 
-        $dishes = Dish::where('restaurant_id', $restaurant->id)->get();;
+        $dishes = Dish::where('restaurant_id', $restaurant->id)->latest()->get();
 
         return Inertia::render('Restaurants/Dishes/ViewMenu', [
             'restaurant' => $restaurant,
-            'dishes' => $dishes
+            'dishes' => $dishes,
+
+
         ]);
     }
 
@@ -37,7 +39,10 @@ class DishController extends Controller
     public function create($restaurantId)
     {
         $restaurant = Restaurant::findOrFail($restaurantId);
-        return Inertia::render('Restaurants/Dishes/CreateDish', ['restaurant' => $restaurant]);
+        return Inertia::render('Restaurants/Dishes/CreateDish', [
+            'restaurant' => $restaurant,
+            'colorFull' => false,
+    ]);
     }
 
     /**
@@ -56,14 +61,13 @@ class DishController extends Controller
 
             $validatedData['image'] = $imagePath;
         }
-
-
-        Dish::create($validatedData);
-
-
+        $newDish = Dish::create($validatedData);
 
         $restaurantId = $validatedData['restaurant_id'];
 
+       $dishes = Dish::where('restaurant_id', $restaurantId)->get();
+
+        $dishes->prepend($newDish);
 
         return Redirect::route('dishes.index', ['restaurant' => $restaurantId]);
     }

@@ -55,27 +55,27 @@
                                     }}</span></div>
                         </div>
 
-                        <div class="flex flex-col sm:flex-row gap-3 items-center">
+                        <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
                             <label for="" class="font-bold">Visibilità</label>
 
-                            <div class="flex gap-2 items-center">
+                            <div class="flex gap-2 items-center w-72 ">
                                 <div class="flex ">
-                                    <input type="radio" name="visible" id="visibility" value="true" v-model="newPlate.visible" class="border border-orange-500">
+                                    <input type="radio" name="visible" id="visibility" value="true" v-model="newPlate.visible" class="" @click="colorFull=!colorFull">
                                 </div>
 
-                                <div class="flex gap-2 rounded-lg border border-orange-500 shadow p-4">
+                                <div class="flex gap-2 rounded-lg border shadow p-4 " :class="{ 'border-orange-500': !colorFull, 'border-gray-400': colorFull}">
                                     <img src="../../../../../public/img/visibile.svg" alt="">
-                                    <span>= visibile dai clienti </span>
+                                    <span class="text-[18px]" >= Visibile dai clienti </span>
                                 </div>
                             </div>
-                            <div class="flex gap-2 items-center">
+                            <div class="flex gap-2 items-center w-72 ">
                                 <div class="flex ">
-                                    <input type="radio" name="visible" id="notVisible" class="" value="false" v-model="newPlate.visible" >
+                                    <input type="radio" name="visible" id="notVisible" class="" value="false" v-model="newPlate.visible" @click="colorFull">
                                 </div>
 
-                                <div class="flex gap-2 rounded-lg border shadow p-4">
+                                <div class="flex gap-2 rounded-lg border shadow p-4 " :class="{ 'border-orange-500': colorFull, 'border-gray-400': !colorFull}">
                                     <img src="../../../../../public/img/nonVisibile.svg" alt="">
-                                    <span>= Non visibile dai clienti </span>
+                                    <span class="text-[14px]">= Non visibile dai clienti</span>
                                 </div>
                             </div>
 
@@ -144,11 +144,20 @@ function handleSubmit(restaurantId) {
 
 }
 
+
+
 </script>
 
 <style>
 .shadow {
     box-shadow: 0px 0px 8.0px rgba(0, 0, 0, 0.25);
 
+}
+.borderOrange{
+
+    border-color: #F98F00;
+}
+.errBorder{
+    border-color: gray;
 }
 </style>

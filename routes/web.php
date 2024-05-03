@@ -24,6 +24,8 @@ use Inertia\Inertia;
 Route::get('/', [DelivebooController::class, 'index'])->name('home');
 Route::get('/restaurant/{restaurant}', [DelivebooController::class, 'show'])->name('restaurants.show');
 
+Route::get('/restaurants', [RestaurantController::class, 'getAll']);
+
 Route::get('/cart', [CartController::class, 'cartView'])->name('cartView');
 Route::get('/add-to-cart/{product}', [CartController::class, 'addToCart'])->name('addToCart');
 Route::get('/remove-from-cart/{product}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
