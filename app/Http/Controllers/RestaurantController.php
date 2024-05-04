@@ -140,12 +140,12 @@ class RestaurantController extends Controller
             $query->whereHas('typology', function ($typologyQuery) use ($array) {
                 $typologyQuery->whereIn('typologies.id', $array);
             }, '=', count($array));
-   
-    
+
+
         // Eseguiamo la query paginata
         $restaurants = $query->with('typology')->get();
        return response()->json($restaurants);
 }
-        
+
     }
 

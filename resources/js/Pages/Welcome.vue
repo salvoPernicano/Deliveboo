@@ -1,8 +1,11 @@
 <script setup>
+import { onMounted } from 'vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import { Head} from '@inertiajs/inertia-vue3';
+import { Head } from '@inertiajs/inertia-vue3';
 import { Link } from '@inertiajs/vue3';
-import { ref, watch, computed } from 'vue';
+import { defineProps } from 'vue';
+import { watch, computed } from 'vue';
+import { ref } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 import { toRaw } from 'vue';
 import axios from 'axios';
@@ -17,20 +20,15 @@ const props = defineProps({
     },
     restaurants: {
         type: Object,
+
+
     }
 });
 
 let filterByType = ref([]);
 let editableProps = ref(props.restaurants);
 
-const handleSearch = (typology) => {
-    const index = filterByType.value.indexOf(typology);
-    if (index === -1) {
-        filterByType.value.push(typology);
-    } else {
-        filterByType.value.splice(index, 1);
-    }
-}
+
 const fetchRestaurants = async () => {
     try {
         const string = Object.values(filterByType.value).join(',');
@@ -48,10 +46,17 @@ const fetchRestaurants = async () => {
     }
 }
 
+const handleSearch = (typology) => {
+    const index = filterByType.value.indexOf(typology);
+    if (index === -1) {
+        filterByType.value.push(typology);
+    } else {
+        filterByType.value.splice(index, 1);
+    }
+}
 const searchByCategory = async () => {
     await fetchRestaurants();
 }
-
 
 </script>
 
@@ -113,25 +118,42 @@ const searchByCategory = async () => {
                     <a :class="{ 'bg-gradient text-white': filterByType.includes(5) }"
                         class="border border-gray-200 rounded-lg px-3 py-2" href="#"
                         @click.prevent="handleSearch(5)">Indiano</a>
-                    <button class="bg-orange-dark px-3 py-2 rounded-lg text-white" @click="searchByCategory">Applica filtri</button>
+                    <button class="bg-orange-dark px-3 py-2 rounded-lg text-white" @click="searchByCategory">Applica
+                        filtri</button>
                 </div>
 
+
                 <!-- restaurants cards -->
-                <div class="flex flex-wrap justify-center gap-4 w-full">
-                    <div class="shadow rounded-xl flex flex-col justify-between w-full mx-4 sm:w-48 sm:mx-0" v-for="restaurant in editableProps"
-                        :key="restaurant.id">
-                        <a :href="route('restaurants.show', { restaurant: restaurant.slug })">
-                            <div :style="restaurant.image ? { backgroundImage: 'url(/storage/' + restaurant.image + ')' } : { backgroundColor: '#FFA500' }" class="h-24 w-full rounded-t-lg bg-cover bg-center"></div>
-                            <div class="  sm:w-48 p-2 h-full">
-                                <p class="font-bold">{{ restaurant.name }}</p>
+                <div class="flex flex-wrap justify-center gap-10 mt-10  w-full">
+
+                    <div class="shadow rounded-xl  w-full mx-4 sm:w-64 sm:mx-0 "
+                        v-for="restaurant in editableProps" :key="restaurant.id">
+
+                        <a :href="route('restaurants.show', { restaurant: restaurant.slug })" class="flex flex-col justify-between h-full">
+                            <!-- Immagine dell'header -->
+
+                            <div class=" w-full h-full rounded-t-lg bg-cover bg-center">
+
+                                <img v-if="restaurant.image"
+                                    :src="'/storage/public/restaurant_images/' + restaurant.image"
+                                    :alt="restaurant.name" class="w-full h-full object-cover rounded-t-lg">
+                                <div v-else class="bg-orange-500"></div>
+                            </div>
+
+                            <div class=" p-4 h-full flex flex-col justify-end ">
+                                <p class="font-bold">{{ restaurant.description }}</p>
+
                                 <ul class="flex flex-wrap gap-1 text-sm text-color">
                                     <li v-for="item in restaurant.typology">{{ item.typology_name }}</li>
                                 </ul>
+
                                 <p class="text-sm">{{ restaurant.address }}</p>
                             </div>
+
                         </a>
                     </div>
                 </div>
+
             </section>
 
 

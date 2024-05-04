@@ -29,22 +29,22 @@ const footerMenu = [
     <header id="color" class="flex sm:justify-start items-center pt-6 sm:pt-0 fixed top-0 w-full z-10">
         <div class="mx-auto lg:w-10/12 flex items-center gap-10">
             <Link href="/" class="flex items-center">
-                <img id="logo-header" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
+            <img id="logo-header" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
             </Link>
 
             <Link href="/" class="text-white hover:text-black font-bold">Home</Link>
         </div>
     </header>
-    <main>
-            <slot />
-        </main>
+    <main >
+        <slot />
+    </main>
 
     <footer class="w-full text-white">
         <div class="lg:w-10/12 mx-auto py-10">
             <div class="flex-column md:flex gap-10 justify-between">
                 <figure>
                     <Link href="/" class="flex items-center">
-                        <img id="logo-footer" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
+                    <img id="logo-footer" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
                     </Link>
                 </figure>
                 <div v-for="(item) in 3">
@@ -71,12 +71,15 @@ header {
     background-color: transparent;
     height: 80px;
 }
+
 #logo-header {
     height: 70px;
 }
+
 #logo-footer {
     height: 120px;
 }
+
 footer {
     display: flex;
     align-items: center;
