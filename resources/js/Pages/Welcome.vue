@@ -1,8 +1,11 @@
 <script setup>
+import { onMounted } from 'vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import { Head} from '@inertiajs/inertia-vue3';
+import { Head } from '@inertiajs/inertia-vue3';
 import { Link } from '@inertiajs/vue3';
-import { ref, watch, computed } from 'vue';
+import { defineProps } from 'vue';
+import { watch, computed } from 'vue';
+import { ref } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 import { toRaw } from 'vue';
 import axios from 'axios';
@@ -17,20 +20,15 @@ const props = defineProps({
     },
     restaurants: {
         type: Object,
+
+
     }
 });
 
 let filterByType = ref([]);
 let editableProps = ref(props.restaurants);
 
-const handleSearch = (typology) => {
-    const index = filterByType.value.indexOf(typology);
-    if (index === -1) {
-        filterByType.value.push(typology);
-    } else {
-        filterByType.value.splice(index, 1);
-    }
-}
+
 const fetchRestaurants = async () => {
     try {
         const string = Object.values(filterByType.value).join(',');
@@ -48,10 +46,17 @@ const fetchRestaurants = async () => {
     }
 }
 
+const handleSearch = (typology) => {
+    const index = filterByType.value.indexOf(typology);
+    if (index === -1) {
+        filterByType.value.push(typology);
+    } else {
+        filterByType.value.splice(index, 1);
+    }
+}
 const searchByCategory = async () => {
     await fetchRestaurants();
 }
-
 
 </script>
 
@@ -114,8 +119,10 @@ const searchByCategory = async () => {
                     <a :class="{ 'bg-gradient text-white': filterByType.includes(5) }"
                         class="border border-gray-200 rounded-lg px-3 py-2" href="#"
                         @click.prevent="handleSearch(5)">Indiano</a>
-                    <button class="bg-orange-dark px-3 py-2 rounded-lg text-white" @click="searchByCategory">Applica filtri</button>
+                    <button class="bg-orange-dark px-3 py-2 rounded-lg text-white" @click="searchByCategory">Applica
+                        filtri</button>
                 </div>
+
 
                 <!-- restaurants cards -->
                 <div class="flex flex-wrap justify-center gap-4 w-full p-10">
@@ -128,14 +135,17 @@ const searchByCategory = async () => {
                                 <ul class="flex flex-wrap gap-1 text-sm text-color">
                                     <li v-for="item in restaurant.typology">{{ item.typology_name }}</li>
                                 </ul>
+
                                 <p class="text-sm">{{ restaurant.address }}</p>
                             </div>
+
                         </a>
                     </div>
                     <div class="text-center bg-gradient-to-r from-orange-500 to-amber-500 text-transparent bg-clip-text mt-10" v-if="editableProps.length < 1">
                         <h1>Nessun ristorante trovato, prova ancora!</h1>
                     </div>
                 </div>
+
             </section>
 
 

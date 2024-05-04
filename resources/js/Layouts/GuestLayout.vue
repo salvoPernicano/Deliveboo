@@ -35,15 +35,15 @@ const footerMenu = [
             <Link href="/" class="text-white hover:text-black font-bold hidden sm:block">Home</Link>
         </div>
     </header>
-    <main>
-            <slot />
-        </main>
+    <main >
+        <slot />
+    </main>
 
     <footer class="w-full text-white">
         <div class="w-10/12 mx-auto py-4 md:py-10">
             <div class="md:flex-column flex flex-wrap md:gap-10 justify-between">
                 <figure>
-                    <Link href="/">
+                    <Link href="/" class="flex items-center">
                         <img id="logo-footer" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
                     </Link>
                 </figure>
@@ -71,12 +71,15 @@ header {
     background-color: transparent;
     height: 80px;
 }
+
 #logo-header {
     height: 70px;
 }
+
 #logo-footer {
     height: 120px;
 }
+
 footer {
     display: flex;
     align-items: center;
