@@ -135,20 +135,24 @@ class RestaurantController extends Controller
 
     public function getAll(Request $request){
         $filters = $request->query('filterByType');
-        $array = explode(',', $filters);
+        //filterByType viene passato come stringa
         $query = Restaurant::query();
-
-
-            // Controlla che il ristorante abbia esattamente il numero di tipologie selezionate
+    
+        if ($filters) {
+            // Se filterByType contiene elementi, applica il filtro delle tipologie
+            //trasformiamo $filters in un array
+            $array = explode(',', $filters);
             $query->whereHas('typology', function ($typologyQuery) use ($array) {
                 $typologyQuery->whereIn('typologies.id', $array);
             }, '=', count($array));
-   
+        } else {
+            // Se filterByType è vuoto, restituisci 5 ristoranti random
+            $query->inRandomOrder()->take(5);
+        }
     
         // Eseguiamo la query paginata
         $restaurants = $query->with('typology')->get();
-       return response()->json($restaurants);
-}
-        
+        return response()->json($restaurants);
     }
 
+}

@@ -117,7 +117,7 @@ const searchByCategory = async () => {
                 </div>
 
                 <!-- restaurants cards -->
-                <div class="flex flex-wrap justify-center gap-4 w-full">
+                <div class="flex flex-wrap justify-center gap-4 w-full p-10">
                     <div class="shadow rounded-xl flex flex-col justify-between w-full mx-4 sm:w-48 sm:mx-0" v-for="restaurant in editableProps"
                         :key="restaurant.id">
                         <a :href="route('restaurants.show', { restaurant: restaurant.slug })">
@@ -130,6 +130,9 @@ const searchByCategory = async () => {
                                 <p class="text-sm">{{ restaurant.address }}</p>
                             </div>
                         </a>
+                    </div>
+                    <div class="text-center bg-gradient-to-r from-orange-500 to-amber-500 text-transparent bg-clip-text mt-10" v-if="editableProps.length < 1">
+                        <h1>Nessun ristorante trovato, prova ancora!</h1>
                     </div>
                 </div>
             </section>

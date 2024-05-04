@@ -16,7 +16,7 @@
         <section class="p-2 mt-3 flex flex-wrap sm:pt-4 pb-32 sm:w-full sm:p-5 sm:flex sm:flex-nowrap sm:gap-5 sm:justify-center">
 
             <!-- card piatto resposive -->
-            <div class="w-full sm:w-2/3 xl:w-2/3 sm:overflow-y-scroll sm:overflow-x-hidden">
+            <div class="h-screen w-full sm:w-2/3 xl:w-2/3 sm:overflow-y-scroll sm:overflow-x-hidden">
                 <h4 class="mb-6">Menu</h4>
                 <ul class="flex justify-start flex-wrap gap-4 w-full sm:gap-3 sm:justify-center">
 
