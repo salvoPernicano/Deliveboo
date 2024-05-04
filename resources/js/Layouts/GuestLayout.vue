@@ -41,7 +41,7 @@ const footerMenu = [
 
     <footer class="w-full text-white">
         <div class="w-10/12 mx-auto py-4 md:py-10">
-            <div class="md:flex-column flex md:gap-10 justify-between">
+            <div class="md:flex-column flex flex-wrap md:gap-10 justify-between">
                 <figure>
                     <Link href="/" class="flex items-center">
                         <img id="logo-footer" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
