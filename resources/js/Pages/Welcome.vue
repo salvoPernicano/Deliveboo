@@ -126,22 +126,31 @@ const searchByCategory = async () => {
 
                 <!-- restaurants cards -->
                 <div class="flex flex-wrap justify-center gap-4 w-full p-10">
-                    <div class="shadow rounded-xl flex flex-col justify-between w-full mx-4 sm:w-48 sm:mx-0" v-for="restaurant in editableProps"
-                        :key="restaurant.id">
-                        <a :href="route('restaurants.show', { restaurant: restaurant.slug })">
-                            <div :style="restaurant.image ? { backgroundImage: 'url(/storage/' + restaurant.image + ')' } : { backgroundColor: '#FFA500' }" class="h-24 w-full rounded-t-lg bg-cover bg-center"></div>
-                            <div class="  sm:w-48 p-2 h-full">
-                                <p class="font-bold">{{ restaurant.name }}</p>
+
+                    <div class="shadow rounded-xl flex flex-col  w-full sm:h-80 sm:w-64   "
+                        v-for="restaurant in editableProps" :key="restaurant.id">
+
+                        <a :href="route('restaurants.show', { restaurant: restaurant.slug })" class="h-full">
+
+
+                            <div :style="restaurant.image ? { backgroundImage: 'url(/storage/public/restaurant_images/' + restaurant.image + ')' } : { backgroundColor: '#FFA500' }"
+                                class="h-36 w-full rounded-t-lg bg-cover bg-center">
+
+                            </div>
+                            <div class="  w-full p-2 flex flex-col">
+                                <h4 class="font-bold text-lg">{{ restaurant.name }}</h4>
+                                <p>{{ restaurant.description }}</p>
                                 <ul class="flex flex-wrap gap-1 text-sm text-color">
                                     <li v-for="item in restaurant.typology">{{ item.typology_name }}</li>
                                 </ul>
 
-                                <p class="text-sm">{{ restaurant.address }}</p>
+                                <p class="text-sm font-bold">{{ restaurant.address }}</p>
                             </div>
 
                         </a>
                     </div>
-                    <div class="text-center bg-gradient-to-r from-orange-500 to-amber-500 text-transparent bg-clip-text mt-10" v-if="editableProps.length < 1">
+                    <div class="text-center bg-gradient-to-r from-orange-500 to-amber-500 text-transparent bg-clip-text mt-10"
+                        v-if="editableProps.length < 1">
                         <h1>Nessun ristorante trovato, prova ancora!</h1>
                     </div>
                 </div>
