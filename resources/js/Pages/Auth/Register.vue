@@ -58,7 +58,7 @@ const handleImageChange = (event) => {
         <div class="bg-foto">
 
             <!-- Unico form per entrambi i form -->
-            <form class="w-3/5 p-5 mx-auto rounded-lg bg-white"
+            <form class="mx-5 sm:w-3/5 p-5 sm:mx-auto rounded-lg bg-white"
                 @submit.prevent="handleSubmit" enctype="multipart/form-data">
                 <p class="italic text-center text-xs text-red-500 pb-4">I campi contrassegnati con * sono obbligatori</p>
                 <!-- Campi utente -->
