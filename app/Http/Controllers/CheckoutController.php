@@ -5,20 +5,12 @@ use App\Models\Order ;
 use Braintree\Gateway;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 
 class CheckoutController extends Controller
 {
     public function processPayment(Request $request)
     {
-        $validatedData = $request->validate([
-            'orderDetails.name' => 'required|string|max:255',
-            'orderDetails.email' => 'required|string|email|max:255',
-            'orderDetails.phone' => 'required|string|max:10',
-            'orderDetails.address' => 'required|string|max:255',
-            'orderDetails.name_doorbell' => 'required|string|max:255',
-        ]);
         // Retrieve cart from session
         $cart = session('cart');
         // dd($request,$cart);
@@ -44,11 +36,11 @@ class CheckoutController extends Controller
         if ($result->success) {
             $order = new Order();
         $order->cart_total_price = $request->amount;
-        $order->name = $validatedData['orderDetails']['name'];
-        $order->email = $validatedData['orderDetails']['email'];
-        $order->phone = $validatedData['orderDetails']['phone'];
-        $order->address = $validatedData['orderDetails']['address'];
-        $order->name_doorbell = $validatedData['orderDetails']['name_doorbell'];
+        $order->name = $request->orderDetails['name'];
+        $order->email = $request->orderDetails['email'];
+        $order->phone = $request->orderDetails['phone'];
+        $order->address = $request->orderDetails['address'];
+        $order->name_doorbell = $request->orderDetails['name_doorbell'];
         $order->save();
 
 
@@ -74,5 +66,3 @@ class CheckoutController extends Controller
         return Inertia::render('Checkout', ['orderDetails' => $orderDetails,'cart' => $cart, 'orderTotal' => $orderTotal]);
     }
 }
-
-
