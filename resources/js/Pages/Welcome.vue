@@ -151,7 +151,7 @@ const searchByCategory = async () => {
                     </div>
                     <div class="text-center bg-gradient-to-r from-orange-500 to-amber-500 text-transparent bg-clip-text mt-10"
                         v-if="editableProps.length < 1">
-                        <h1>Nessun ristorante trovato, prova ancora!</h1>
+                        <h3>Nessun ristorante trovato, prova ancora!</h3>
                     </div>
                 </div>
 
