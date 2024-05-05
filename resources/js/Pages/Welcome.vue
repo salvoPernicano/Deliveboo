@@ -1,11 +1,8 @@
 <script setup>
-import { onMounted } from 'vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import { Head } from '@inertiajs/inertia-vue3';
+import { Head} from '@inertiajs/inertia-vue3';
 import { Link } from '@inertiajs/vue3';
-import { defineProps } from 'vue';
-import { watch, computed } from 'vue';
-import { ref } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 import { toRaw } from 'vue';
 import axios from 'axios';
@@ -20,15 +17,20 @@ const props = defineProps({
     },
     restaurants: {
         type: Object,
-
-
     }
 });
 
 let filterByType = ref([]);
 let editableProps = ref(props.restaurants);
 
-
+const handleSearch = (typology) => {
+    const index = filterByType.value.indexOf(typology);
+    if (index === -1) {
+        filterByType.value.push(typology);
+    } else {
+        filterByType.value.splice(index, 1);
+    }
+}
 const fetchRestaurants = async () => {
     try {
         const string = Object.values(filterByType.value).join(',');
@@ -46,27 +48,19 @@ const fetchRestaurants = async () => {
     }
 }
 
-const handleSearch = (typology) => {
-    const index = filterByType.value.indexOf(typology);
-    if (index === -1) {
-        filterByType.value.push(typology);
-    } else {
-        filterByType.value.splice(index, 1);
-    }
-}
 const searchByCategory = async () => {
     await fetchRestaurants();
 }
+
 
 </script>
 
 <template>
 
     <Head title="Home" />
-
     <GuestLayout>
         <main class="w-full">
-            <div v-if="canLogin" class="fixed top-1 right-0 p-6 text-end z-30">
+            <div v-if="canLogin" class="sm:fixed sm:top-0 sm:right-0 p-6 text-end z-30">
                 <Link v-if="$page.props.auth.user" :href="route('dashboard')"
                     class="font-semibold text-white hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
                 Dashboard</Link>
@@ -119,42 +113,28 @@ const searchByCategory = async () => {
                     <a :class="{ 'bg-gradient text-white': filterByType.includes(5) }"
                         class="border border-gray-200 rounded-lg px-3 py-2" href="#"
                         @click.prevent="handleSearch(5)">Indiano</a>
-                    <button class="bg-orange-dark px-3 py-2 rounded-lg text-white" @click="searchByCategory">Applica
-                        filtri</button>
+                    <button class="bg-orange-dark px-3 py-2 rounded-lg text-white" @click="searchByCategory">Applica filtri</button>
                 </div>
-
 
                 <!-- restaurants cards -->
                 <div class="flex flex-wrap justify-center gap-4 w-full p-10">
-
-                    <div class="shadow rounded-xl flex flex-col  w-full sm:h-80 sm:w-64   "
-                        v-for="restaurant in editableProps" :key="restaurant.id">
-
-                        <a :href="route('restaurants.show', { restaurant: restaurant.slug })" class="h-full">
-
-
-                            <div :style="restaurant.image ? { backgroundImage: 'url(/storage/public/restaurant_images/' + restaurant.image + ')' } : { backgroundColor: '#FFA500' }"
-                                class="h-36 w-full rounded-t-lg bg-cover bg-center">
-
-                            </div>
-                            <div class="  w-full p-2 flex flex-col">
-                                <h4 class="font-bold text-lg">{{ restaurant.name }}</h4>
-                                <p>{{ restaurant.description }}</p>
+                    <div class="shadow rounded-xl flex flex-col justify-between w-full mx-4 sm:w-48 sm:mx-0" v-for="restaurant in editableProps"
+                        :key="restaurant.id">
+                        <a :href="route('restaurants.show', { restaurant: restaurant.slug })">
+                            <div :style="restaurant.image ? { backgroundImage: 'url(/storage/' + restaurant.image + ')' } : { backgroundColor: '#FFA500' }" class="h-24 w-full rounded-t-lg bg-cover bg-center"></div>
+                            <div class="  sm:w-48 p-2 h-full">
+                                <p class="font-bold">{{ restaurant.name }}</p>
                                 <ul class="flex flex-wrap gap-1 text-sm text-color">
                                     <li v-for="item in restaurant.typology">{{ item.typology_name }}</li>
                                 </ul>
-
-                                <p class="text-sm font-bold">{{ restaurant.address }}</p>
+                                <p class="text-sm">{{ restaurant.address }}</p>
                             </div>
-
                         </a>
                     </div>
-                    <div class="text-center bg-gradient-to-r from-orange-500 to-amber-500 text-transparent bg-clip-text mt-10"
-                        v-if="editableProps.length < 1">
-                        <h3>Nessun ristorante trovato, prova ancora!</h3>
+                    <div class="text-center bg-gradient-to-r from-orange-500 to-amber-500 text-transparent bg-clip-text mt-10" v-if="editableProps.length < 1">
+                        <h1>Nessun ristorante trovato, prova ancora!</h1>
                     </div>
                 </div>
-
             </section>
 
 

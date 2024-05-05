@@ -42,7 +42,7 @@ class RestaurantController extends Controller
                         ->where('user_id', $userId);
                 });
         })
-        ->orderByDesc('orders.created_at') // Ordina gli ordini per data di creazione, più recenti per primi
+        ->orderByDesc('orders.created_at')->groupBy('orders.id') // Ordina gli ordini per data di creazione, più recenti per primi
         ->get();
 
         
@@ -151,25 +151,24 @@ class RestaurantController extends Controller
         return Redirect::route('restaurants.index');
     }
 
-    public function getAll(Request $request)
-    {
+    public function getAll(Request $request){
         $filters = $request->query('filterByType');
-        //filterByType viene passato come stringa
+       
         $query = Restaurant::query();
-
+    
         if ($filters) {
-            // Se filterByType contiene elementi, applica il filtro delle tipologie
-            //trasformiamo $filters in un array
+       
             $array = explode(',', $filters);
             $query->whereHas('typology', function ($typologyQuery) use ($array) {
                 $typologyQuery->whereIn('typologies.id', $array);
             }, '=', count($array));
-
-
-            // Eseguiamo la query paginata
-            $restaurants = $query->with('typology')->get();
-            return response()->json($restaurants);
+        } else {
+            
+            $query->inRandomOrder()->take(5);
         }
-
+    
+        
+        $restaurants = $query->with('typology')->get();
+        return response()->json($restaurants);
     }
 }
