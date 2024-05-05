@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -29,7 +29,25 @@ class RestaurantController extends Controller
         // Recupera i ristoranti associati all'utente autenticato
         $restaurants = Restaurant::where('user_id', $userId)->get();
 
-        return Inertia::render('Dashboard', ['restaurants' => $restaurants]);
+        // Recupera gli ordini associati ai ristoranti dell'utente autenticato
+        $orders = DB::table('dish_order')
+        ->select('orders.*') // Seleziona tutti i campi dalla tabella orders
+        ->join('orders', 'dish_order.order_id', '=', 'orders.id') // Esegui il join con la tabella orders
+        ->whereIn('dish_order.dish_id', function ($query) use ($userId) {
+            $query->select('id')
+                ->from('dishes')
+                ->whereIn('restaurant_id', function ($innerQuery) use ($userId) {
+                    $innerQuery->select('id')
+                        ->from('restaurants')
+                        ->where('user_id', $userId);
+                });
+        })
+        ->orderByDesc('orders.created_at')->groupBy('orders.id') // Ordina gli ordini per data di creazione, più recenti per primi
+        ->get();
+
+        
+        return Inertia::render('Dashboard', ['restaurants' => $restaurants,
+        'orders' => $orders]);
     }
 
     /**
@@ -133,25 +151,24 @@ class RestaurantController extends Controller
         return Redirect::route('restaurants.index');
     }
 
-    public function getAll(Request $request)
-    {
+    public function getAll(Request $request){
         $filters = $request->query('filterByType');
-        //filterByType viene passato come stringa
+       
         $query = Restaurant::query();
-
+    
         if ($filters) {
-            // Se filterByType contiene elementi, applica il filtro delle tipologie
-            //trasformiamo $filters in un array
+       
             $array = explode(',', $filters);
             $query->whereHas('typology', function ($typologyQuery) use ($array) {
                 $typologyQuery->whereIn('typologies.id', $array);
             }, '=', count($array));
-
-
-            // Eseguiamo la query paginata
-            $restaurants = $query->with('typology')->get();
-            return response()->json($restaurants);
+        } else {
+            
+            $query->inRandomOrder()->take(5);
         }
-
+    
+        
+        $restaurants = $query->with('typology')->get();
+        return response()->json($restaurants);
     }
 }
