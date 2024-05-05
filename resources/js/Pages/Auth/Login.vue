@@ -38,9 +38,9 @@ const submit = () => {
             {{ status }}
         </div>
 
-        <div class="bg-foto">
+        <div class="bg-foto py-32">
 
-            <form @submit.prevent="submit" class="w-1/3  mx-auto h-3/4  bg-white p-5 rounded-lg">
+            <form @submit.prevent="submit" class="mx-5 sm:w-1/3  sm:mx-auto h-3/4  bg-white p-5 rounded-lg">
                 <div class="">
                     <InputLabel for="email" value="Email" />
 
@@ -85,7 +85,7 @@ const submit = () => {
 
 <style scoped>
 .bg-foto {
-    padding-block: 300px;
+    /* padding-block: 300px; */
     background-image: url(../../../../public/img/food-login.jpg);
     background-size: cover;
     background-repeat: no-repeat

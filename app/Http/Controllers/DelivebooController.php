@@ -15,7 +15,7 @@ class DelivebooController extends Controller
     {
         // Ottieni 5 ristoranti casuali dal database
         $restaurants = Restaurant::inRandomOrder()->with('typology')->get();
-    
+
         // Ritorna la vista utilizzando Inertia
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
@@ -23,7 +23,7 @@ class DelivebooController extends Controller
             'restaurants' => $restaurants,
         ]);
     }
-    
+
 
     public function show(Restaurant $restaurant)
     {
@@ -33,7 +33,7 @@ class DelivebooController extends Controller
         // Ritorna la vista dei dettagli del ristorante e del menu
         return Inertia::render('RestaurantDetails', [
             'restaurant' => $restaurant,
-            
+
         ]);
     }
 }

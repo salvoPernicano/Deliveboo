@@ -6,47 +6,47 @@
 
     <GuestLayout>
 
-        <div :style="restaurant.image ? { backgroundImage: 'url(/storage/' + restaurant.image + ')' } : { backgroundColor: '#FFA500' }"
-            class="imgBackground flex justify-center gap-4 pt-8 sm:p-0">
-            <h2 class="text-center text-white">Menu</h2>
-            <h2 class="text-center text-white capitalize pb-3">{{ restaurant.name }}</h2>
+        <div :style="restaurant.image ? { backgroundImage: 'url(/storage/public/restaurant_images/' + restaurant.image + ')' } : { backgroundColor: '#FFA500' }"
+            class="imgBackground flex flex-col justify-center pt-8 sm:p-0 h-64">
+            <h2 class="text-center text-white capitalize">{{ restaurant.name }}</h2>
+            <p class="text-center text-white">{{ restaurant.description }}</p>
+            <p class="text-center text-sm text-white mb-3">{{ restaurant.address }}</p>
         </div>
 
         <!-- Section Resturant/Menu -->
-        <section class="p-2 mt-3 flex flex-wrap sm:pt-4 pb-32 sm:w-full sm:p-5 sm:flex sm:flex-nowrap sm:gap-5 sm:justify-center">
+        <section class="p-2 mt-3 flex flex-wrap sm:pt-4 pb-32 lg:w-10/12 lg:mx-auto sm:p-5 sm:flex sm:flex-nowrap sm:gap-5 sm:justify-center sm:h-screen ">
 
             <!-- card piatto resposive -->
-            <div class="h-screen w-full sm:w-2/3 xl:w-2/3 sm:overflow-y-scroll sm:overflow-x-hidden">
+            <div class="h-screen w-full sm:w-2/3 xl:w-2/3 sm:overflow-y-scroll">
                 <h4 class="mb-6">Menu</h4>
-                <ul class="flex justify-start flex-wrap gap-4 w-full sm:gap-3 sm:justify-center">
+                <ul class="flex justify-start flex-wrap gap-4 w-full sm:gap-3 ps-2">
 
-                    <li v-for="dish in restaurant.dishes" :key="dish.id" class="w-full sm:w-60  ">
+                    <li v-for="dish in restaurant.dishes" :key="dish.id" class="w-full sm:w-60">
 
-                        <div class="bg-white rounded-lg shadow pe-2 relative sm:pe-0 sm:mt-4">
+                        <div class="bg-white rounded-lg shadow relative sm:pe-0 sm:mb-4">
 
                             <div class=" h-auto w-full flex justify-between sm:flex sm:flex-col sm:text-center">
                                 <div class="flex gap-2 w-4/5 sm:flex sm:flex-col sm:w-full">
-                                    <img class="h-20 w-20 sm:h-60 sm:w-60 object-cover rounded-s-lg sm:rounded-t-lg sm:rounded-b-none"
+                                    <img class="h-20 w-20 sm:h-40 sm:w-60 object-cover rounded-s-lg sm:rounded-t-lg sm:rounded-b-none"
                                         :src="'/storage/' + dish.image" alt="Dish Image" v-if="dish.image">
 
-                                    <div class="flex flex-col">
-                                        <h3 class=" capitalize font-bold pt-1">{{ dish.name }}</h3>
-                                        <div class="">
-                                            <p class=" capitalize pt-1 text-xs">{{ dish.description }}</p>
+                                    <div class="flex flex-col overflow-hidden">
+                                        <h3 class="capitalize font-bold pt-1">{{ dish.name }}</h3>
+                                        <div class="overflow-hidden text-ellipsis w-full sm:w-5/6 sm:mx-auto">
+                                            <p class="capitalize pt-1 text-xs">{{ dish.description }}</p>
                                         </div>
-
                                     </div>
 
                                 </div>
                                 <div class="flex flex-col gap-2 relative w-1/5 sm:w-full pb-6">
-                                    <p class=" capitalize font-bold ">{{ dish.price }}€</p>
+                                    <p class="capitalize font-bold">{{ dish.price }}€</p>
                                 </div>
                             </div>
 
-                            <div class="bottom-0 pb-2  absolute left-[80%]  sm:bottom-[-8%] sm:left-[41%]">
+                            <div class="bottom-0 absolute left-[82%] sm:translate-x-[50%] sm:left-[33%] sm:bottom-[-8%]">
                                 <Link :href="`/add-to-cart/${dish.id}`"
-                                    class="bg-orange-light add-to-cart rounded-full w-10 p-3  flex justify-center">
-                                <img src="../../../public/img/add_cart.svg" alt="">
+                                    class="bg-orange-dark rounded-full w-10 p-3 flex justify-center">
+                                <img src="../../../public/img/add_cart.svg" alt="add to cart icon">
                                 </Link>
                             </div>
 
@@ -57,7 +57,7 @@
 
 
             <!-- card piatto lapTop -->
-            <div class="hidden  w-full lg:w-1/2 xl:w-2/3">
+            <!-- <div class="hidden  w-full lg:w-1/2 xl:w-2/3">
                 <h4 class="mb-6">Menu</h4>
                 <ul class="flex justify-start flex-wrap gap-9 w-full sm:gap-3">
 
@@ -75,7 +75,7 @@
                                     <p class=" capitalize font-bold">Price: {{ dish.price }}€</p>
                                 </div>
                                 <Link :href="`/add-to-cart/${dish.id}`"
-                                    class="bg-orange-light add-to-cart absolute rounded-full w-10 p-3 left-[40%] flex justify-center">
+                                    class="bg-orange-dark add-to-cart absolute rounded-full w-10 p-3 left-[40%] flex justify-center">
                                 <img src="../../../public/img/add_cart.svg" alt="">
                                 </Link>
 
@@ -83,7 +83,7 @@
                         </div>
                     </li>
                 </ul>
-            </div>
+            </div> -->
 
             <!-- Cart -->
             <div id="cart" class="w-full xl:w-1/3 sm:w-96 mt-5 sm:mt-0">
@@ -128,7 +128,7 @@
                         </div>
 
                         <div class="flex justify-center mt-5">
-                            <button class="bg-orange-500 text-white p-2 rounded-lg">Procedi con l'ordine</button>
+                            <button class="bg-orange-dark text-white p-2 rounded-lg">Procedi con l'ordine</button>
                         </div>
                     </div>
                 </div>
@@ -155,10 +155,14 @@ const props = defineProps({
 
 <style scoped>
 .imgBackground {
+
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     margin-top: 0px;
     padding-top: 80px;
+    height: 60%;
+    max-width: 100%;
+
 }
 </style>

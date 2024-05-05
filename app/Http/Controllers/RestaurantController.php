@@ -25,7 +25,7 @@ class RestaurantController extends Controller
     {
         // Ottieni l'id dell'utente autenticato
         $userId = Auth::id();
-    
+
         // Recupera i ristoranti associati all'utente autenticato
         $restaurants = Restaurant::where('user_id', $userId)->get();
 
@@ -151,11 +151,12 @@ class RestaurantController extends Controller
         return Redirect::route('restaurants.index');
     }
 
-    public function getAll(Request $request){
+    public function getAll(Request $request)
+    {
         $filters = $request->query('filterByType');
         //filterByType viene passato come stringa
         $query = Restaurant::query();
-    
+
         if ($filters) {
             // Se filterByType contiene elementi, applica il filtro delle tipologie
             //trasformiamo $filters in un array
@@ -163,14 +164,12 @@ class RestaurantController extends Controller
             $query->whereHas('typology', function ($typologyQuery) use ($array) {
                 $typologyQuery->whereIn('typologies.id', $array);
             }, '=', count($array));
-        } else {
-            // Se filterByType è vuoto, restituisci 5 ristoranti random
-            $query->inRandomOrder()->take(5);
-        }
-    
-        // Eseguiamo la query paginata
-        $restaurants = $query->with('typology')->get();
-        return response()->json($restaurants);
-    }
 
+
+            // Eseguiamo la query paginata
+            $restaurants = $query->with('typology')->get();
+            return response()->json($restaurants);
+        }
+
+    }
 }
