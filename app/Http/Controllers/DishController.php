@@ -110,7 +110,6 @@ class DishController extends Controller
 
         // Aggiorna i dati del piatto con i dati inviati dalla richiesta
         $dish->update($validatedData);
-         dd($request->all());
         // Reindirizza l'utente alla pagina di indice dei ristoranti
         return redirect()->route('dishes.index');
     }

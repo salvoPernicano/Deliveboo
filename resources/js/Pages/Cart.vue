@@ -36,19 +36,28 @@
                     </ul>
                    
                 </div>
-                <div class="w-4/5 mx-auto mt-8 flex justify-between">
-                    <button @click="checkout" class="btn btn-orange text-white px-4 py-2 rounded-md">Ordina e
-                        paga</button>
-                </div>
+           
             </div>
-            <div class="w-4/5 mx-auto bg-pink-300 p-2 text-center" id="dropin-wrapper">
+            <div class="shadow border rounded-lg w-4/5 mx-auto text-center p-4 mt-6" id="dropin-wrapper">
                 <div class="flex justify-center p-2 gap-2 font-bold text-xl">
                         <span>Totale:</span>
                         <span>€{{ total }}</span>
                     </div>
+                    <div class="mb-4">
+                    <label for="name" class="block text-lg font-semibold mb-1">Nome:</label>
+                    <input type="text" id="name" v-model="order.name" class="w-full px-3 py-2 border rounded-lg">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-lg font-semibold mb-1">Indirizzo email:</label>
+                    <input type="email" id="email" v-model="order.email" class="w-full px-3 py-2 border rounded-lg">
+                </div>
+                <div class="mb-4">
+                    <label for="phone" class="block text-lg font-semibold mb-1">Numero di telefono:</label>
+                    <input type="tel" id="phone" v-model="order.phone" class="w-full px-3 py-2 border rounded-lg">
+                </div>
                 <div id="checkout-message"></div>
                 <div id="dropin-container"></div>
-                <button @click="submitPayment" class="bg-red-500 rounded-lg p-2" id="submit-button">Submit payment</button>
+                <button @click="submitPayment" class="btn btn-orange text-white px-4 py-2 rounded-md" id="submit-button">Conferma ordine</button>
             </div>
         </section>
     </GuestLayout>
@@ -56,16 +65,26 @@
 
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import { defineProps, toRaw, onMounted } from 'vue';
+// import { defineProps, toRaw, onMounted } from 'vue';
 import { Link } from '@inertiajs/vue3';
 import { Inertia } from '@inertiajs/inertia';
 import * as DropIn from 'braintree-web-drop-in';
+import { ref } from 'vue';
+import { defineProps, toRaw, onMounted, resolveComponent } from 'vue';
+
 
 const props = defineProps({
     cartList: {
         type: Object,
         required: false
     }
+});
+
+const order = ref({
+    name: '',
+    email: '',
+    phone: '',
+    cartList: props.cartList
 });
 
 let total = 0;
@@ -134,8 +153,14 @@ const submitPayment = () => {
         if (requestPaymentMethodErr) {
             console.error('Error requesting payment method:', requestPaymentMethodErr);
             return;
-        }
-        Inertia.post('/process_payment', { 'paymentMethodNonce': payload.nonce, 'amount' : total })
+        };
+        const orderDetails = {
+            name: order.value.name,
+            email: order.value.email,
+            phone: order.value.phone,
+        };
+
+        Inertia.post('/process_payment', { 'paymentMethodNonce': payload.nonce, 'amount' : total, 'orderDetails': orderDetails })
     });
 };
 </script>
