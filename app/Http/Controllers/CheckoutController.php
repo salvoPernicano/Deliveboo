@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Order ;
 use Braintree\Gateway;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -34,12 +34,23 @@ class CheckoutController extends Controller
         ]);
 
         if ($result->success) {
-            // $orderDetails = $request->json("orderDetails");
-            // return Inertia::render('Pages/Checkout', ['orderDetails' => $orderDetails, 'cart' => $cart]);
+            $order = new Order();
+        $order->cart_total_price = $request->amount;
+        $order->name = $request->orderDetails['name'];
+        $order->email = $request->orderDetails['email'];
+        $order->phone = $request->orderDetails['phone'];
+        $order->address = $request->orderDetails['address'];
+        $order->name_doorbell = $request->orderDetails['name_doorbell'];
+        $order->save();
+
+
+        $cartIds = collect($cart)->pluck('id')->toArray();
+
+        // Esegui l'attach degli ID alla relazione many-to-many
+        $order->dishes()->attach($cartIds);
             
             $orderDetails = $request->orderDetails;
             $orderTotal = $request->amount;
-            // dd($orderDetails);
             return Redirect::route('checkout.success',['orderDetails' => $orderDetails, 'cart' => $cart, 'total' => $orderTotal]);
         } else {
             return response()->json(['error' => 'Payment transaction failed'], 400);

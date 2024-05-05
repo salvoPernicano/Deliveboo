@@ -3,7 +3,7 @@
         <div class="bg-[#FFA500] flex justify-center gap-4 pt-20 pb-10">
             <h2 class="text-center text-white">Carrello</h2>
         </div>
-        <section class="h-screen">
+        <section>
             <div id="cart" class="w-full mt-10">
                 <div class="shadow border rounded-lg w-4/5 mx-auto text-center py-4">
                     <ul class="w-full flex flex-col items-center justify-center py-6">
@@ -55,6 +55,14 @@
                     <label for="phone" class="block text-lg font-semibold mb-1">Numero di telefono:</label>
                     <input type="tel" id="phone" v-model="order.phone" class="w-full px-3 py-2 border rounded-lg">
                 </div>
+                <div class="mb-4">
+                    <label for="phone" class="block text-lg font-semibold mb-1">Indirizzo consegna:</label>
+                    <input type="tel" id="address" v-model="order.address" class="w-full px-3 py-2 border rounded-lg">
+                </div>
+                <div class="mb-4">
+                    <label for="phone" class="block text-lg font-semibold mb-1">Nome citofono:</label>
+                    <input type="tel" id="name_doorbell" v-model="order.name_doorbell" class="w-full px-3 py-2 border rounded-lg">
+                </div>
                 <div id="checkout-message"></div>
                 <div id="dropin-container"></div>
                 <button @click="submitPayment" class="btn btn-orange text-white px-4 py-2 rounded-md" id="submit-button">Conferma ordine</button>
@@ -84,6 +92,8 @@ const order = ref({
     name: '',
     email: '',
     phone: '',
+    address: '',
+    name_doorbell: '',
     cartList: props.cartList
 });
 
@@ -158,6 +168,8 @@ const submitPayment = () => {
             name: order.value.name,
             email: order.value.email,
             phone: order.value.phone,
+            address: order.value.address,
+            name_doorbell: order.value.name_doorbell
         };
 
         Inertia.post('/process_payment', { 'paymentMethodNonce': payload.nonce, 'amount' : total, 'orderDetails': orderDetails })

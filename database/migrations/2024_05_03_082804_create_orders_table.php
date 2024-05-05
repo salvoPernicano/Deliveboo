@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->decimal('cart_total_price', 4, 2);
             $table->string('name', 250);
-            $table->string('email')->unique();
-            $table->string('phone')->unique();
-            $table->string('address',250)->unique();
-            $table->string('name_doorbell')->unique();
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address',250);
+            $table->string('name_doorbell');
             $table->timestamps();
         });
     }
