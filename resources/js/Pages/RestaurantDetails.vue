@@ -18,6 +18,7 @@
 
             <!-- card piatto resposive -->
             <div class="h-screen w-full sm:w-2/3 xl:w-2/3 sm:overflow-y-scroll">
+                <div class="h-50 w-80 bg-white text-red-500 text-3xl mx-auto text-center font-bold" v-if="cartError">Non puoi aggiungere al carrello piatti di ristoranti diversi, svuota il carrello per continuare</div>
                 <h4 class="mb-6">Menu</h4>
                 <ul class="flex justify-start flex-wrap gap-4 w-full sm:gap-3 ps-2">
 
@@ -88,6 +89,9 @@
             <div id="cart" class=" w-full xl:w-1/3 sm:w-96 mt-5 sm:mt-0">
                 <h4 class="mb-6 text-center">Carrello</h4>
                 <div class="shadow border rounded-lg  mx-auto text-center py-2">
+                    <button @click="clearCart" class="btn btn-red bg-red-600 text-white px-4 py-2 rounded-md mt-4">
+      Svuota carrello
+    </button>
                     <ul class="w-full flex flex-col items-center justify-center py-2">
                         <li v-for="item in localCartList" :key="item.id" class="p-4 flex items-center justify-center w-full">
                             <button @click="removeFromCart(item.id)" class="rounded-lg bg-green-500">
@@ -150,21 +154,39 @@ const props = defineProps({
     cartList : {
         type: Object,
         required: false
+    },
+    isValidForCart: {
+        type: Boolean,
     }
 });
 
+let cartError = ref(false);
 const localCartList = ref(props.cartList);
+
+const clearCart = () => {
+  // Effettua una richiesta al backend per svuotare il carrello
+  Inertia.post('/clear-cart').then(() => {
+    // Aggiorna la visualizzazione del carrello dopo aver svuotato la sessione
+    // Ad esempio, potresti ricaricare la pagina o eseguire un'altra azione necessaria
+  }).catch(error => {
+    console.error('Errore durante lo svuotamento del carrello:', error);
+  });
+};
 
 // Definisci la funzione `addToCart` per aggiungere un elemento al carrello
 const addToCart = (productId) => {
-    axios.get("/add-to-cart/"+productId)
-         .then(response => {
-             // Aggiorna dinamicamente il carrello sulla pagina con i nuovi dati
-             localCartList.value = response.data.cart;
-         })
-         .catch(error => {
-             console.error('Errore durante l\'aggiunta al carrello:', error);
-         });
+    if(props.isValidForCart){
+        axios.get("/add-to-cart/"+productId)
+             .then(response => {
+                 // Aggiorna dinamicamente il carrello sulla pagina con i nuovi dati
+                 localCartList.value = response.data.cart;
+             })
+             .catch(error => {
+                 console.error('Errore durante l\'aggiunta al carrello:', error);
+             });     
+    } else {
+        cartError.value = true
+    }
 }
 
 const removeFromCart = (productId) => {

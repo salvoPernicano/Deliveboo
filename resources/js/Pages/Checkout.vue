@@ -2,14 +2,15 @@
     <GuestLayout>
         <div class="bg-[#FFA500] h-screen gap-4 pt-20 pb-10">
             <h1 class="text-center text-green-500">Ordine effettuato con successo!</h1>
-            <div>
-                <h1>{{ props.orderDetails.name }}</h1>
-                <h4>{{props.orderDetails.email  }}</h4>
-                <h4>{{ props.orderDetails.phone }}</h4>
-                <span>Totale ordine €{{ props.orderTotal }}</span>
+            <div class="shadow w-80 mx-auto text-center p-5 mt-5 text-black bg-white rounded-lg">
+                <h3>Riepilogo ordine: </h3>
+                <h3 class="text-lg">{{ props.orderDetails.name }}</h3>
+                <h3>{{props.orderDetails.email  }}</h3>
+                <h3 class="text-lg">{{ props.orderDetails.phone }}</h3>
+                <span class="text-xl font-semibold">Totale ordine €{{ props.orderTotal }}</span>
                 <ul>
                     <li v-for="item in cart">
-                        <h3>{{ item.name }} x {{ item.quantity }}</h3>
+                        <h3 class="text-lg font-semibold">{{ item.name }} x {{ item.quantity }}</h3>
                     </li>
                 </ul>
             </div>

@@ -68,10 +68,11 @@ class CheckoutController extends Controller
     }
 
     public function index(Request $request) {
+        
         $orderDetails = $request->orderDetails;
         $orderTotal = $request->total;
         $cart = $request->cart;
-
+        Session::forget('cart');
 
         return Inertia::render('Checkout', ['orderDetails' => $orderDetails,'cart' => $cart, 'orderTotal' => $orderTotal]);
     }

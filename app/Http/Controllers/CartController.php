@@ -13,21 +13,11 @@ class CartController extends Controller
 {
     public function addToCart($product_id) {
         $product = Dish::findOrFail($product_id);
-    
+
         $cart = session()->get('cart');
-    
-        if (!$cart) {
-            $cart = [
-                $product->id => [
-                    'id' => $product->id,
-                    'name' => $product->name,
-                    'image' => $product->image,
-                    'price' => $product->price,
-                    'quantity' => 1,
-                ]
-            ];
-            session()->put('cart', $cart);
-        } else {
+
+        $isValidRestaurant = !$cart ? true : $this->isValidRestaurantForCart($product->restaurant_id, $cart);
+        if ($isValidRestaurant){
             if (isset($cart[$product->id])) {
                 $cart[$product->id]['quantity']++;
             } else {
@@ -37,14 +27,31 @@ class CartController extends Controller
                     'image' => $product->image,
                     'price' => $product->price,
                     'quantity' => 1,
+                    'restaurantId' => $product->restaurant_id,
                 ];
             }
-            
             session()->put('cart', $cart);
-        }
-        
-        return response()->json(['cart' => $cart]);
+            return response()->json(['cart' => $cart]);
+        } else return response()->json("Ciao");
     }
+
+    public function isValidRestaurantForCart($restaurantId, $cart) {
+        foreach ($cart as $item) {
+            if ($item['restaurantId'] !== $restaurantId) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function clearCart()
+{
+    // Rimuovi il carrello dalla sessione
+    Session::forget('cart');
+    
+    // Restituisci una risposta JSON per indicare che il carrello è stato svuotato con successo
+   
+}
 
     public function removeFromCart($product_id) {
         $cart = Session::get('cart');

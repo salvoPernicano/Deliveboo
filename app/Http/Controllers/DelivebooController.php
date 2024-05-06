@@ -31,11 +31,22 @@ class DelivebooController extends Controller
         $cart = session()->get('cart');
         $restaurant = $restaurant->load('typology', 'dishes');
 
+        $isValidRestaurant = !$cart ? true : $this->isValidRestaurantForCart($restaurant->id, $cart);
+
         // Ritorna la vista dei dettagli del ristorante e del menu
         return Inertia::render('RestaurantDetails', [
             'restaurant' => $restaurant,
             'cartList' => $cart,
-
+            'isValidForCart' => $isValidRestaurant,
         ]);
+    }
+
+    public function isValidRestaurantForCart($restaurantId, $cart) {
+        foreach ($cart as $item) {
+            if ($item['restaurantId'] !== $restaurantId) {
+                return false;
+            }
+        }
+        return true;
     }
 }
