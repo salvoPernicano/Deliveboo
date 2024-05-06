@@ -44,9 +44,9 @@
                                 </div>
                             </div>
 
-                            <div class="bottom-0 absolute left-[82%] sm:translate-x-[50%] sm:left-[33%] sm:bottom-[-8%]">
-                                <button @click="addToCart(dish.id)" class="rounded-lg bg-green-500">
-    Add to Cart
+                            <div class="text-center">
+                                <button @click="addToCart(dish.id)" class="rounded-md bg-orange-500 p-2 m-2 text-white font-semibold">
+    Aggiungi al carrello
 </button>
                             </div>
 
