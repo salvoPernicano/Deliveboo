@@ -16,26 +16,18 @@ class OrderController extends Controller
      */
     public function index()
     {
+        // Ottieni l'ID dell'utente autenticato
         $userId = Auth::id();
 
-        // Recupera i ristoranti associati all'utente autenticato
-        $restaurants = Restaurant::where('user_id', $userId)->get();
-
-        // Recupera gli ordini associati ai ristoranti dell'utente autenticato
-        $orders = DB::table('dish_order')
-            ->select('orders.*') // Seleziona tutti i campi dalla tabella orders
-            ->join('orders', 'dish_order.order_id', '=', 'orders.id') // Esegui il join con la tabella orders
-            ->whereIn('dish_order.dish_id', function ($query) use ($userId) {
-                $query->select('id')
-                    ->from('dishes')
-                    ->whereIn('restaurant_id', function ($innerQuery) use ($userId) {
-                        $innerQuery->select('id')
-                            ->from('restaurants')
-                            ->where('user_id', $userId);
-                    });
+        // Recupera gli ordini associati ai ristoranti dell'utente autenticato, inclusi i piatti
+        $orders = Order::with('dishes')
+            ->whereHas('dishes.restaurant', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
             })
-            ->orderByDesc('orders.created_at')->groupBy('orders.id') // Ordina gli ordini per data di creazione, più recenti per primi
+            ->orderByDesc('created_at')
             ->get();
+
+        // Restituisci la vista con gli ordini e i piatti associati
         return Inertia::render('Orders', ['orders' => $orders]);
     }
 

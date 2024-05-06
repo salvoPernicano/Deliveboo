@@ -21,40 +21,36 @@ const props = defineProps({
     <AuthenticatedLayout>
 
         <div class="p-3">
-            <div class="p-3 rounded-lg  shadow max-h-2/3 overflow-scroll">
+            <div class="p-3 rounded-lg shadow max-h-2/3 overflow-scroll">
                 <h4 class="font-bold pb-3">Ordini</h4>
-                <!-- table lapTop orders -->
-                <div class="flex ">
-                    <table class="w-full">
-                        <thead>
-                            <tr class="flex px-1">
-                                <th class="flex-1 text-[14px] text-start">Numero Ordine</th>
-                                <th class="flex-1 text-[14px] text-start">Nome cliente</th>
-                                <th class="flex-1 text-[14px] text-start">Indirizzo</th>
-                                <th class="flex-1 text-[14px] text-start">Campanello</th>
-                                <th class="flex-1 text-[14px] text-start">Mail</th>
-                                <th class="flex-1 text-[14px] text-end">Telefono</th>
-
-                            </tr>
-
-
-                        </thead>
-                        <tbody>
-                            <tr v-for="order in props.orders" class="bg-gray-100 rounded-lg flex mt-2 px-1">
-                                <td class="flex flex-1 gap-2 text-[12px] text-start relative">
-                                    {{ order.id }}
-                                </td>
-                                <td class="flex-1 text-[14px] text-start">{{ order.name }}</td>
-                                <td class="flex-1 text-[14px] text-start">{{ order.address }}</td>
-                                <td class="flex-1 text-[14px] text-start">{{ order.name_doorbell }}</td>
-                                <td class="flex-1 text-[14px] text-start">{{ order.email }}</td>
-                                <td class="flex-1 text-[14px] text-end">{{ order.phone }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <!-- Lista degli ordini -->
+                <ul class="divide-y divide-gray-200">
+                    <li v-for="order in props.orders" :key="order.id" class="py-4">
+                        <div class="flex justify-between items-center">
+                            <div class="text-sm font-medium text-gray-900">
+                                Ordine #{{ order.id }}
+                            </div>
+                            <!-- Aggiungi qui eventuali azioni per l'ordine -->
+                        </div>
+                        <div class="mt-2">
+                            <div class="text-sm text-gray-500">{{ order.name }}</div>
+                            <div class="text-sm text-gray-500">{{ order.address }}</div>
+                            <div class="text-sm text-gray-500">{{ order.name_doorbell }}</div>
+                            <div class="text-sm text-gray-500">{{ order.email }}</div>
+                            <div class="text-sm text-gray-500">{{ order.phone }}</div>
+                            <!-- Lista dei piatti ordinati -->
+                            <ul class="mt-2">
+                                <li v-for="dish in order.dishes" :key="dish.id" class="text-sm text-gray-500">
+                                    - {{ dish.name }} ({{ dish.price }}€)
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
+
+
 
     </AuthenticatedLayout>
 </template>
