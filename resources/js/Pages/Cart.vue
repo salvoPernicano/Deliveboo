@@ -3,69 +3,95 @@
         <div class="bg-[#FFA500] flex justify-center gap-4 pt-20 pb-10">
             <h2 class="text-center text-white">Carrello</h2>
         </div>
-        <section>
-            <div id="cart" class="w-full mt-10">
-                <div class="shadow border rounded-lg w-4/5 mx-auto text-center py-4">
+        <section
+            class="p-2 mt-3 flex flex-wrap sm:pt-4 pb-32 lg:w-10/12 lg:mx-auto sm:p-5 sm:flex sm:flex-nowrap sm:gap-5 sm:justify-center sm:h-screen">
+
+            <div class="flex flex-col w-full">
+                <h4 class="mb-6">Carrello</h4>
+
+                <div id="cart" class="shadow w-full border rounded-lg text-center py-4">
                     <ul class="w-full flex flex-col items-center justify-center py-6">
-                        <li v-for="item in cartList" :key="item.id" class="p-4 flex items-center justify-center w-full">
-                            <Link :href="`/remove-from-cart/${item.id}`" class="rounded-lg bg-yellow-500">
-                                Remove Dish
-                            </Link>
-                            <button @click="decreaseQuantity(item.id)" class="mx-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                                    <path d="M200-440v-80h560v80H200Z" />
-                                </svg>
-                            </button>
-                            <div class="flex items-center w-full">
-                                <img :src="'storage/' + item.image" alt="product_image" class="w-18 h-20">
-                                <p class="w-3/5">{{ item.name }}</p>
-                                <div>
-                                    <span class="w-1/5">€{{ item.price }}</span>
-                                    <input type="number" :name="`quantity-${item.id}`" :id="`quantity-${item.id}`"
-                                        :value="item.quantity" @input="updateQuantity(item.id, $event.target.value)" class="text-black">
+                        <li v-for="item in cartList" :key="item.id"
+                            class="p-4 flex flex-col items-center justify-center w-full">
+                            <div class="flex">
+                                <button @click="decreaseQuantity(item.id)" class="mx-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+                                        width="24">
+                                        <path d="M200-440v-80h560v80H200Z" />
+                                    </svg>
+                                </button>
+                                <div class="flex justify-start items-center gap-5">
+                                    <img :src="'storage/' + item.image" alt="product_image" class="h-20">
+                                    <div class="flex flex-col items-start">
+                                        <p>{{ item.name }}</p>
+                                        <span>€{{ item.price }}</span>
+                                        <input type="number" :name="`quantity-${item.id}`" :id="`quantity-${item.id}`"
+                                            :value="item.quantity" @input="updateQuantity(item.id, $event.target.value)"
+                                            class="text-black border-0 bg-transparent text-center w-20">
+                                    </div>
                                 </div>
+                                <button @click="increaseQuantity(item.id)" class="mx-4 ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+                                        width="24">
+                                        <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+                                    </svg>
+                                </button>
                             </div>
-                            <button @click="increaseQuantity(item.id)" class="mx-4 ">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                                    <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-                                </svg>
-                            </button>
-                            <button @click="updateQty(item.id)" class="bg-green-600 rounded-lg mx-4">Confirm
-                                quantity</button>
+
+                            <div class="flex justify-between gap-6">
+                                <Link :href="`/remove-from-cart/${item.id}`"
+                                    class="text-white bg-red-500 rounded-lg p-2">
+                                Rimuovi piatto
+                                </Link>
+
+                                <button @click="updateQty(item.id)"
+                                    class="text-white bg-green-600 rounded-lg p-2">Conferma
+                                    quantità
+                                </button>
+                            </div>
                         </li>
                     </ul>
-                   
-                </div>
-           
-            </div>
-            <div class="shadow border rounded-lg w-4/5 mx-auto text-center p-4 mt-6" id="dropin-wrapper">
-                <div class="flex justify-center p-2 gap-2 font-bold text-xl">
+
+                    <div class="flex justify-between mx-16 font-bold text-xl">
                         <span>Totale:</span>
                         <span>€{{ total }}</span>
                     </div>
-                    <div class="mb-4">
-    <label for="name" class="block text-lg font-semibold mb-1">Nome<span class="text-red-500">*</span>:</label>
-    <input type="text" id="name" v-model="order.name" class="w-full px-3 py-2 border rounded-lg" required>
-</div>
-<div class="mb-4">
-    <label for="email" class="block text-lg font-semibold mb-1">Indirizzo email<span class="text-red-500">*</span>:</label>
-    <input type="email" id="email" v-model="order.email" class="w-full px-3 py-2 border rounded-lg" required>
-</div>
-<div class="mb-4">
-    <label for="phone" class="block text-lg font-semibold mb-1">Numero di telefono<span class="text-red-500">*</span>:</label>
-    <input type="tel" id="phone" v-model="order.phone" class="w-full px-3 py-2 border rounded-lg" required>
-</div>
-<div class="mb-4">
-    <label for="phone" class="block text-lg font-semibold mb-1">Indirizzo consegna<span class="text-red-500">*</span>:</label>
-    <input type="text" id="address" v-model="order.address" class="w-full px-3 py-2 border rounded-lg" required>
-</div>
-<div class="mb-4">
-    <label for="phone" class="block text-lg font-semibold mb-1">Nome citofono<span class="text-red-500">*</span>:</label>
-    <input type="text" id="name_doorbell" v-model="order.name_doorbell" class="w-full px-3 py-2 border rounded-lg" required>
-</div>
-                <div id="checkout-message"></div>
-                <div id="dropin-container"></div>
-                <button @click="submitPayment" class="btn btn-orange text-white px-4 py-2 rounded-md" id="submit-button">Conferma ordine</button>
+                </div>
+                <div class="shadow border rounded-lg w-full text-center p-4 mt-6 bg-white" id="dropin-wrapper">
+                    <p class="italic text-center text-xs text-red-500 pb-4">I campi contrassegnati con * sono
+                        obbligatori</p>
+                    <div>
+                        <div class="mb-4">
+                            <input type="text" id="name" v-model="order.name" placeholder="Name*"
+                                class="w-full border-gray-300 focus:border-[#FFA500] focus:ring-[#FFA500] rounded-md shadow-sm"
+                                required>
+                        </div>
+                        <div class="mb-4">
+                            <input type="email" id="email" v-model="order.email" placeholder="Email*"
+                                class="w-full border-gray-300 focus:border-[#FFA500] focus:ring-[#FFA500] rounded-md shadow-sm"
+                                required>
+                        </div>
+                        <div class="mb-4">
+                            <input type="tel" id="phone" v-model="order.phone" placeholder="Telefono*"
+                                class="w-full border-gray-300 focus:border-[#FFA500] focus:ring-[#FFA500] rounded-md shadow-sm"
+                                required>
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" id="address" v-model="order.address" placeholder="Indirizzo di consegna*"
+                                class="w-full border-gray-300 focus:border-[#FFA500] focus:ring-[#FFA500] rounded-md shadow-sm"
+                                required>
+                        </div>
+                        <div class="mb-4">
+                            <input type="text" id="name_doorbell" v-model="order.name_doorbell" placeholder="Citofono"
+                                class="w-full border-gray-300 focus:border-[#FFA500] focus:ring-[#FFA500] rounded-md shadow-sm"
+                                required>
+                        </div>
+                    </div>
+                    <div id="checkout-message"></div>
+                    <div id="dropin-container"></div>
+                    <button @click="submitPayment" class="btn btn-orange text-white px-4 py-2 rounded-md z-50"
+                        id="submit-button">Conferma ordine</button>
+                </div>
             </div>
         </section>
     </GuestLayout>
@@ -75,7 +101,7 @@
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 // import { defineProps, toRaw, onMounted } from 'vue';
 import { Link } from '@inertiajs/vue3';
-import { Inertia } from '@inertiajs/inertia';
+import { Inertia } from '@inertiajs/inertia-vue3';
 import * as DropIn from 'braintree-web-drop-in';
 import { ref } from 'vue';
 import { defineProps, toRaw, onMounted, resolveComponent } from 'vue';
@@ -174,7 +200,7 @@ const submitPayment = () => {
             name_doorbell: order.value.name_doorbell
         };
 
-        Inertia.post('/process_payment', { 'paymentMethodNonce': payload.nonce, 'amount' : total, 'orderDetails': orderDetails })
+        Inertia.post('/process_payment', { 'paymentMethodNonce': payload.nonce, 'amount': total, 'orderDetails': orderDetails })
     });
 };
 </script>
