@@ -4,15 +4,14 @@
             <h2 class="text-center text-white">Carrello</h2>
         </div>
         <section>
-            <div id="cart" class="w-full mt-10">
+            <div id="cart" class="w-full flex justify-center mt-10">
                 <div id="cart" class=" w-full xl:w-1/3 sm:w-96 mt-5 sm:mt-0">
-                    <h4 class="mb-6 text-center">Carrello</h4>
                     <div class="shadow border rounded-lg  mx-auto text-center py-2">
                         <ul class="w-full flex flex-col items-center justify-center py-2">
                             <li v-for="item in localCartList" :key="item.id"
                                 class="p-4 flex items-center justify-center w-full">
-                                <button @click="removeFromCart(item.id)" class="rounded-lg bg-green-500">
-                                    Remove
+                                <button @click="removeFromCart(item.id)" class="rounded-lg bg-red-500 text-white p-2">
+                                    Rimuovi
                                 </button>
                                 <button @click="decreaseQuantity(item.id)" class="mx-4">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
@@ -21,13 +20,13 @@
                                     </svg>
                                 </button>
                                 <div class="flex items-center w-full">
-                                    <p class="w-3/5">{{ item.name }}</p>
-                                    <div>
-                                        <span class="w-1/5">€{{ item.price }}</span>
+                                    <p class="w-3/5 font-bold">{{ item.name }}</p>
+                                    
+                                        <span class="w-1/5 mx-2">€{{ item.price }}</span>
                                         <input type="number" :name="`quantity-${item.id}`" :id="`quantity-${item.id}`"
                                             :value="item.quantity" @input="updateQuantity(item.id, $event.target.value)"
                                             class="text-black w-20">
-                                    </div>
+                                    
                                 </div>
                                 <button @click="increaseQuantity(item.id)" class="mx-4 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
@@ -128,7 +127,7 @@ const total = computed(() => {
         const cartItem = localCartList.value[productId];
         calculatedTotal += parseFloat(cartItem.price) * cartItem.quantity;
     }
-    return calculatedTotal;
+    return calculatedTotal.toFixed(2);
 });
 
 const removeFromCart = (productId) => {

@@ -94,8 +94,8 @@
     </button>
                     <ul class="w-full flex flex-col items-center justify-center py-2">
                         <li v-for="item in localCartList" :key="item.id" class="p-4 flex items-center justify-center w-full">
-                            <button @click="removeFromCart(item.id)" class="rounded-lg bg-green-500">
-    Remove
+                            <button @click="removeFromCart(item.id)" class="rounded-lg bg-red-500 text-white p-2">
+    Rimuovi
 </button>
                             <button @click="decreaseQuantity(item.id)" class="mx-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
@@ -104,11 +104,11 @@
                             </button>
                             <div class="flex items-center w-full">
                                 <p class="w-3/5">{{ item.name }}</p>
-                                <div>
+                                
                                     <span class="w-1/5">€{{ item.price }}</span>
                                     <input  type="number" :name="`quantity-${item.id}`" :id="`quantity-${item.id}`"
                                         :value="item.quantity" @input="updateQuantity(item.id, $event.target.value)" class="text-black w-20">
-                                </div>
+                                
                             </div>
                             <button @click="increaseQuantity(item.id)" class="mx-4 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
@@ -119,10 +119,7 @@
                     </ul>
 
                     <div class="flex flex-col p-4">
-                        <div class="flex justify-between items-center">
-                            <h4>Totale</h4>
-                            <span>13.50€</span>
-                        </div>
+           
 
                         <div class="flex justify-center mt-5">
                             <button @click="proceedToCart(localCartList)" class="bg-orange-dark text-white p-2 rounded-lg">Procedi con l'ordine</button>
