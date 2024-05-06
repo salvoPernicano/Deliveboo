@@ -127,19 +127,19 @@ const searchByCategory = async () => {
                 <!-- restaurants cards -->
                 <div class="flex flex-wrap justify-center gap-4 w-full p-10">
 
-                    <div class="shadow rounded-xl flex flex-col  w-full sm:h-80 sm:w-64   "
+                    <div class="shadow rounded-xl flex flex-col h-64 w-full sm:w-64 transition-transform duration-300 transform hover:scale-105"
                         v-for="restaurant in editableProps" :key="restaurant.id">
 
-                        <a :href="route('restaurants.show', { restaurant: restaurant.slug })" class="h-full">
+                        <a :href="route('restaurants.show', { restaurant: restaurant.slug })" class="h-full flex flex-col justify-between ">
 
 
-                            <div :style="restaurant.image ? { backgroundImage: 'url(/storage/public/restaurant_images/' + restaurant.image + ')' } : { backgroundColor: '#FFA500' }"
-                                class="h-36 w-full rounded-t-lg bg-cover bg-center">
+                            <div :style="restaurant.image ? { backgroundImage: 'url(/storage/' + restaurant.image + ')' } : { backgroundColor: '#FFA500' }"
+                                class="h-36 w-full rounded-t-lg bg-cover bg-center ">
 
                             </div>
-                            <div class="  w-full p-2 flex flex-col">
-                                <h4 class="font-bold text-lg">{{ restaurant.name }}</h4>
-                                <p>{{ restaurant.description }}</p>
+                            <h4 class="font-bold text-lg p-2">{{ restaurant.name }}</h4>
+                            <div class="  w-full p-2 flex flex-col gap-4">
+
                                 <ul class="flex flex-wrap gap-1 text-sm text-color">
                                     <li v-for="item in restaurant.typology">{{ item.typology_name }}</li>
                                 </ul>
@@ -223,4 +223,5 @@ const searchByCategory = async () => {
 .step figure img {
     width: 100%;
 }
+
 </style>

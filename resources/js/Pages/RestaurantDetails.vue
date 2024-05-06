@@ -6,7 +6,7 @@
 
     <GuestLayout>
 
-        <div :style="restaurant.image ? { backgroundImage: 'url(/storage/public/restaurant_images/' + restaurant.image + ')' } : { backgroundColor: '#FFA500' }"
+        <div :style="restaurant.image ? { backgroundImage: 'url(/storage/' + restaurant.image + ')' } : { backgroundColor: '#FFA500' }"
             class="imgBackground flex flex-col justify-center pt-8 sm:p-0 h-64">
             <h2 class="text-center text-white capitalize">{{ restaurant.name }}</h2>
             <p class="text-center text-white">{{ restaurant.description }}</p>
@@ -28,7 +28,7 @@
                             <div class=" h-auto w-full flex justify-between sm:flex sm:flex-col sm:text-center">
                                 <div class="flex gap-2 w-4/5 sm:flex sm:flex-col sm:w-full">
                                     <img class="h-20 w-20 sm:h-40 sm:w-60 object-cover rounded-s-lg sm:rounded-t-lg sm:rounded-b-none"
-                                        :src="'/storage/' + dish.image" alt="Dish Image" v-if="dish.image">
+                                        :src="'/storage/'+ dish.image" alt="Dish Image" v-if="dish.image">
 
                                     <div class="flex flex-col overflow-hidden">
                                         <h3 class="capitalize font-bold pt-1">{{ dish.name }}</h3>
