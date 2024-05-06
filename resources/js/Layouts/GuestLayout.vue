@@ -29,22 +29,22 @@ const footerMenu = [
     <header id="color" class="flex justify-start items-center pt-0 fixed top-0 w-full z-10">
         <div class="sm:mx-auto lg:w-10/12 flex items-center gap-10">
             <Link href="/">
-                <img id="logo-header" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
+            <img id="logo-header" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
             </Link>
 
             <Link href="/" class="text-white hover:text-black font-bold hidden sm:block">Home</Link>
         </div>
     </header>
-    <main >
+    <main>
         <slot />
     </main>
 
-    <footer class="w-full text-white">
-        <div class="w-10/12 mx-auto py-4 md:py-10">
-            <div class="md:flex-column flex flex-wrap md:gap-10 justify-between">
+    <footer class="w-full text-white  sm:flex-row">
+        <div class="w-10/12 mx-auto py-4 md:py-10 ">
+            <div class="flex-col flex sm:flex-row md:gap-10 sm:justify-between p-10">
                 <figure>
                     <Link href="/" class="flex items-center">
-                        <img id="logo-footer" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
+                    <img id="logo-footer" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
                     </Link>
                 </figure>
                 <div class="w-1/2 px-2 mb-6 md:mb-0 md:px-0" v-for="(item) in 3">

@@ -100,21 +100,21 @@ const handleImageChange = (event) => {
                         <InputLabel for="restaurantName" value="Nome del ristorante*"/>
                         <TextInput id="restaurantName" type="text" name="name" class="mt-1 block w-full"
                             v-model="registrationForm.restaurant_name" required/>
-                        <div v-if="errors.name"><span class="text-red-500">{{ errors.name }}</span></div>
+                        <div v-if="errors.name"><span class="text-red-500">Questo campo è obbligatorio</span></div>
                     </div>
     
                     <div class="mt-4">
                         <InputLabel or="restaurantAddress" value="Indirizzo*"/>
                         <TextInput id="restaurantAddress" type="text" name="address" class="mt-1 block w-full"
                             v-model="registrationForm.address" required/>
-                        <div v-if="errors.address"><span class="text-red-500">{{ errors.address }}</span></div>
+                        <div v-if="errors.address"><span class="text-red-500">Questo campo è obbligatorio</span></div>
                     </div>
     
                     <div class="mt-4">
                         <InputLabel for="restaurantPIVA" value="Partita IVA*"/>
                         <TextInput id="restaurantPIVA" type="text" name="p_iva" class="mt-1 block w-full"
                             v-model="registrationForm.p_iva" required/>
-                        <div v-if="errors.p_iva"><span class="text-red-500">{{ errors.p_iva }}</span></div>
+                        <div v-if="errors.p_iva"><span class="text-red-500">Questo campo è obbligatorio</span></div>
                     </div>
                     <!-- Validazione client partita IVA -->
                     <div v-if="registrationForm.p_iva && registrationForm.p_iva.length !== 11"
@@ -126,14 +126,13 @@ const handleImageChange = (event) => {
                         <InputLabel for="restaurantImage" value="Immagine copertina*"/>
                         <input id="restaurantImage" type="file" name="image" accept="image/*" class="mt-1 block w-full border rounded-e-lg text-gray-400"
                             @change="handleImageChange">
-                        <div v-if="errors.image"><span class="text-red-500">{{ errors.image }}</span></div>
+                        <div v-if="errors.image"><span class="text-red-500">Questo campo è obbligatorio</span></div>
                     </div>
     
                     <div class="mt-4">
                         <InputLabel for="restaurantDescription" value="Descrizione"/>
                         <textarea id="restaurantDescription" name="description" cols="30"
                             rows="3" v-model="registrationForm.description" class="mt-1 block w-full border border-gray-300 rounded-lg focus:border-[#FFA500] focus:ring-[#FFA500]"></textarea>
-                        <div v-if="errors.description"><span class="text-red-500">{{ errors.description }}</span></div>
                     </div>
     
                     <div class="mt-4 w-full">
@@ -144,8 +143,7 @@ const handleImageChange = (event) => {
                             <option v-for="typology in typologies" :value="typology.id">{{ typology.typology_name }}
                             </option>
                         </select>
-                        <div v-if="errors.selectedTypologies"><span class="text-red-500">{{ errors.selectedTypologies
-                                }}</span>
+                        <div v-if="errors.selectedTypologies"><span class="text-red-500">Questo campo è obbligatorio</span>
                         </div>
                     </div>
                 </div>

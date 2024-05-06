@@ -6,6 +6,7 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\DelivebooController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DishController;
+use App\Http\Controllers\OrderController;
 use App\Models\Restaurant;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -64,5 +65,9 @@ Route::get('/restaurant/{restaurant}/dishes/{dish}/edit', [DishController::class
 Route::put('/restaurant/{restaurant}/dishes/{dish}', [DishController::class, 'update']);
 
 Route::delete('dishes/{dish}', [DishController::class, 'destroy']);
+
+
+//orders route
+Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 
 require __DIR__ . '/auth.php';

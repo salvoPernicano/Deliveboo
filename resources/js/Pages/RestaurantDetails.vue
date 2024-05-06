@@ -133,7 +133,8 @@
 
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import { Head } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
 import axios from 'axios';
 import { ref } from 'vue';

@@ -46,7 +46,7 @@ const showingNavigationDropdown = ref(false);
                         <div class="font-bold text-white flex flex-col sm:gap-2 ">
 
                             <div class="sm:flex gap-2 justify-start sm:flex-col hidden">
-                                <Link :href="route('dashboard')" class="flex items-center link-hover ">
+                                <Link :href="route('orders')" class="flex items-center link-hover ">
                                 <img src="../../../public/img/receipt.svg" class="h-10 w-10">
                                 Ordini Ricevuti
                                 </Link>
@@ -61,7 +61,7 @@ const showingNavigationDropdown = ref(false);
                                 <img src="../../../public/img/stats.svg" class="h-10 w-10">
                                 Statistiche
                                 </Link>
-
+                                <!--
                                 <div class="flex p-1">
                                     <Link :href="`/restaurant/${$page.props.auth.user.id}/dishes/create`"
                                         class="py-5 px-1 rounded-lg bg-white text-[#F98F00] capitalize flex text-sm/[8px] h-8 gap-2 items-center">
@@ -69,7 +69,7 @@ const showingNavigationDropdown = ref(false);
                                     <img class="h-3 w-3" src="../../../public/img/PiuArancio.svg" width="30"
                                         alt="Icona" />
                                     </Link>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
