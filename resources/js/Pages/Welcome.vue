@@ -26,7 +26,7 @@ const props = defineProps({
 });
 
 let filterByType = ref([]);
-let editableProps = ref(props.restaurants);
+let editableProps = ref(props.restaurants.data);
 
 
 const fetchRestaurants = async () => {
@@ -153,6 +153,20 @@ const searchByCategory = async () => {
                         v-if="editableProps.length < 1">
                         <h3>Nessun ristorante trovato, prova ancora!</h3>
                     </div>
+                </div>
+
+                <div class="mt-6">
+                    <template v-for="link in props.restaurants.links">
+                        <Link
+                        v-if="link.url"
+                        :href="link.url + '/#search'"
+                        v-html="link.label"
+                        class="px-3 hover:text-[#FF6900]"
+                        :class="{ 'text-[#FF6900]' : link.active }"
+                        />
+
+                        <span v-else v-html="link.label" class="text-gray-300"></span>
+                    </template>
                 </div>
 
             </section>

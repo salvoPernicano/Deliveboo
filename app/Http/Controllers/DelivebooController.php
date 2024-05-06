@@ -14,7 +14,7 @@ class DelivebooController extends Controller
     public function index(Request $request)
     {
         // Ottieni 5 ristoranti casuali dal database
-        $restaurants = Restaurant::inRandomOrder()->with('typology')->get();
+        $restaurants = Restaurant::with('typology')->paginate(5);
 
         // Ritorna la vista utilizzando Inertia
         return Inertia::render('Welcome', [
