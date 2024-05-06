@@ -6,6 +6,7 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\DelivebooController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DishController;
+use App\Http\Controllers\OrderStaticController;
 use App\Http\Controllers\OrderController;
 use App\Models\Restaurant;
 use Illuminate\Foundation\Application;
@@ -66,7 +67,7 @@ Route::get('/restaurant/{restaurant}/dishes/{dish}/edit', [DishController::class
 Route::put('/restaurant/{restaurant}/dishes/{dish}', [DishController::class, 'update']);
 
 Route::delete('dishes/{dish}', [DishController::class, 'destroy']);
-
+Route::get('/order-static', [OrderStaticController::class, 'index'])->name('order-static');
 
 //orders route
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
