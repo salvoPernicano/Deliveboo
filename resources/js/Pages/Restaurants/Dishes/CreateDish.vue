@@ -18,16 +18,14 @@
                             <label for="" class="font-bold">Immagine</label>
                             <input type="file" name="image" accept="image/*" @change="handleImageChange"
                                 class="border rounded-e-lg text-gray-400 ">
-                            <div v-if="errors.name"><span class="text-white bg-red-400 rounded-lg p-1">{{ errors.image
-                                    }}</span></div>
+                            <div v-if="errors.name"><span class="text-red-500 rounded-lg p-1">Compila questo campo</span></div>
                         </div>
 
                         <div class="flex flex-col gap-1">
                             <label for="" class="font-bold">Inserisci Nome del Piatto</label>
                             <input class=" border rounded-lg border-gray-200" type="text" name="name"
                                 v-model="newPlate.name" placeholder="Lasagna">
-                            <div v-if="errors.name"><span class="text-white bg-red-400 rounded-lg p-1">{{ errors.name
-                                    }}</span></div>
+                            <div v-if="errors.name"><span class="text-red-500 rounded-lg p-1">Compila questo campo</span></div>
                         </div>
 
                         <div class="flex flex-col gap-1">
@@ -42,16 +40,14 @@
                                 v-model="newPlate.category">
                                 <option v-for="category in categories" :value="category">{{ category }}</option>
                             </select>
-                            <div v-if="errors.name"><span class="text-white bg-red-400 rounded-lg p-1">{{
-                                errors.category }}</span></div>
+                            <div v-if="errors.name"><span class="text-red-500 rounded-lg p-1">Compila questo campo</span></div>
                         </div>
 
                         <div class="flex flex-col gap-1">
                             <label for="" class="font-bold">Prezzo</label>
                             <input class="text-black rounded-lg  border-gray-200 " type="number" step="0.01"
                                 name="price" v-model="newPlate.price">
-                            <div v-if="errors.name"><span class="text-white bg-red-400 rounded-lg p-1">{{ errors.price
-                                    }}</span></div>
+                            <div v-if="errors.name"><span class="text-red-500 rounded-lg p-1">Compila questo campo</span></div>
                         </div>
 
                         <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
