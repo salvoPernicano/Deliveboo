@@ -11,20 +11,12 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
-    public function cartView() {
-       $cart = session()->get('cart');
-        return Inertia::render('Cart', [
-            'cartList' => $cart,
-        ]);
-    }
-
     public function addToCart($product_id) {
         $product = Dish::findOrFail($product_id);
     
         $cart = session()->get('cart');
     
         if (!$cart) {
-            // Se il carrello è vuoto, aggiungi il primo prodotto con quantità 1
             $cart = [
                 $product->id => [
                     'id' => $product->id,
@@ -36,15 +28,9 @@ class CartController extends Controller
             ];
             session()->put('cart', $cart);
         } else {
-            // Se il prodotto è già nel carrello, aumenta la quantità
             if (isset($cart[$product->id])) {
-                if (isset($cart[$product->id]['quantity'])) {
-                    $cart[$product->id]['quantity']++;
-                } else {
-                    $cart[$product->id]['quantity'] = 1;
-                }
+                $cart[$product->id]['quantity']++;
             } else {
-                // Altrimenti, aggiungi il prodotto con quantità 1
                 $cart[$product->id] = [
                     'id' => $product->id,
                     'name' => $product->name,
@@ -56,8 +42,8 @@ class CartController extends Controller
             
             session()->put('cart', $cart);
         }
-    
-        return redirect()->route('cartView');
+        
+        return response()->json(['cart' => $cart]);
     }
 
     public function removeFromCart($product_id) {
@@ -65,22 +51,29 @@ class CartController extends Controller
         if(isset($cart[$product_id])) {
             unset($cart[$product_id]);
             session()->put('cart', $cart);
-            return redirect()->route('cartView');
+            // Restituisci i dati del carrello aggiornati sotto forma di JSON
+            return response()->json(['cart' => $cart]);
         }
+        // Restituisci una risposta vuota se l'elemento non è stato trovato nel carrello
+        return response()->json([]);
     }
 
     public function changeQuantity(Request $request){
-        $cart = Session::get('cart');
-        // Ottieni l'ID del prodotto dalla richiesta invece di $request->product_id
-        $productId = $request->input('product_id');
-        // Verifica se l'ID del prodotto è presente nell'array del carrello
-        if(isset($cart[$productId])) {
-            // Aggiorna la quantità del prodotto con il valore fornito nella richiesta
-            $cart[$productId]['quantity'] = $request->input('quantity');
-            // Aggiorna la sessione del carrello con il nuovo array
-            session()->put('cart', $cart);
-        }
+        // dd($request);
+        $localCartList = $request->all();
+    
+        // Aggiorna la sessione del carrello con i nuovi dati
+        session()->put('cart', $localCartList);
+        
         // Reindirizza alla vista del carrello
         return redirect()->route('cartView');
+    }
+
+    public function cartView() {
+        // Ottieni il contenuto del carrello dalla sessione
+        $cart = session('cart');
+    
+        // Restituisci la vista del carrello passando i dati del carrello come prop
+        return Inertia::render('Cart', ['cartList' => $cart]);
     }
 }

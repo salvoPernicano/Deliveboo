@@ -27,12 +27,14 @@ class DelivebooController extends Controller
 
     public function show(Restaurant $restaurant)
     {
-        // Carica il ristorante con le sue tipologie e il menu
+        // Carica il ristor
+        $cart = session()->get('cart');
         $restaurant = $restaurant->load('typology', 'dishes');
 
         // Ritorna la vista dei dettagli del ristorante e del menu
         return Inertia::render('RestaurantDetails', [
             'restaurant' => $restaurant,
+            'cartList' => $cart,
 
         ]);
     }
