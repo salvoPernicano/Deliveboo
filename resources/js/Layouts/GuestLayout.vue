@@ -39,9 +39,9 @@ const footerMenu = [
         <slot />
     </main>
 
-    <footer class="w-full text-white">
-        <div class="w-10/12 mx-auto py-4 md:py-10">
-            <div class="md:flex-column flex flex-wrap md:gap-10 justify-between">
+    <footer class="w-full text-white  sm:flex-row">
+        <div class="w-10/12 mx-auto py-4 md:py-10 ">
+            <div class="flex-col flex sm:flex-row md:gap-10 sm:justify-between p-10">
                 <figure>
                     <Link href="/" class="flex items-center">
                         <img id="logo-footer" src="../../../public/img/logo-deliveBoo.svg" alt="logo deliveBoo">
