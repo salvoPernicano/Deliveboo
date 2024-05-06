@@ -46,7 +46,7 @@ const submit = () => {
 
                     <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus
                         autocomplete="username" />
-
+                        <!-- <div v-if="form.errors.email"><span class="text-red-500 rounded-lg p-1">Email non corretta</span></div> -->
                     <InputError class="mt-2" :message="form.errors.email" />
                 </div>
 
@@ -55,8 +55,10 @@ const submit = () => {
 
                     <TextInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required
                         autocomplete="current-password" />
+                        <div v-if="form.errors.password"><span class="text-red-500 rounded-lg p-1">Password non corretta</span></div>
 
-                    <InputError class="mt-2" :message="form.errors.password" />
+
+                    <!-- <InputError class="mt-2" :message="form.errors.password" /> -->
                 </div>
 
                 <div class="block mt-4">
