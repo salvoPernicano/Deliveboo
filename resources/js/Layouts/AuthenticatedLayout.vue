@@ -57,7 +57,7 @@ const showingNavigationDropdown = ref(false);
                                 I tuoi piatti
                                 </Link>
 
-                                <Link :href="route('dashboard')" class="flex items-center link-hover p-1 sm:p-0">
+                                <Link :href="route('order-static')"  class="flex items-center link-hover p-1 sm:p-0">
                                 <img src="../../../public/img/stats.svg" class="h-10 w-10">
                                 Statistiche
                                 </Link>

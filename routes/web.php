@@ -6,7 +6,7 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\DelivebooController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DishController;
-use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderStaticController;
 use App\Models\Restaurant;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -30,16 +30,16 @@ Route::get('/restaurant/{restaurant:slug}', [DelivebooController::class, 'show']
 
 
 Route::get('/restaurants', [RestaurantController::class, 'getAll']);
-
+//rotta menu
 Route::get('/cart', [CartController::class, 'cartView'])->name('cartView');
 Route::get('/add-to-cart/{product}', [CartController::class, 'addToCart'])->name('addToCart');
 Route::get('/remove-from-cart/{product}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
 Route::post('/change-cart-quantity', [CartController::class, 'changeQuantity'])->name('changeQuantity');
 Route::post('/clear-cart', [CartController::class, 'clearCart'])->name('clearCart');
 
-
+//rotta pagamenti
 Route::get('/checkout/success', [CheckoutController::class, 'index'])->name('checkout.success');
-
+//rotti ristoranti
 Route::get('/dashboard',  [RestaurantController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -55,7 +55,7 @@ Route::get('/restaurant/{restaurant}/edit', [RestaurantController::class, 'edit'
 Route::put('/restaurant/{restaurant}', [RestaurantController::class, 'update']);
 Route::delete('/restaurant/{restaurant}', [RestaurantController::class, 'destroy']);
 
-
+//Rotte piatti
 
 Route::get('/dishes', [DishController::class, 'index'])->name('dishes.index');
 Route::get('/restaurant/{restaurant}/dishes/create', [DishController::class, 'create'])->name('dishes.create');
@@ -67,8 +67,7 @@ Route::put('/restaurant/{restaurant}/dishes/{dish}', [DishController::class, 'up
 
 Route::delete('dishes/{dish}', [DishController::class, 'destroy']);
 
+Route::get('/order-static', [OrderStaticController::class, 'index'])->name('order-static');
 
-//orders route
-Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 
 require __DIR__ . '/auth.php';
