@@ -30,7 +30,7 @@
                                     <img class="h-20 w-20 sm:h-40 sm:w-60 object-cover rounded-s-lg sm:rounded-t-lg sm:rounded-b-none"
                                         :src="'/storage/'+ dish.image" alt="Dish Image" v-if="dish.image">
 
-                                    <div class="flex flex-col overflow-hidden">
+                                    <div class="flex flex-col overflow-hidden h-24">
                                         <h3 class="capitalize font-bold pt-1">{{ dish.name }}</h3>
                                         <div class="overflow-hidden text-ellipsis w-full sm:w-5/6 sm:mx-auto">
                                             <p class="capitalize pt-1 text-xs">{{ dish.description }}</p>

@@ -5,7 +5,74 @@ import { Head } from '@inertiajs/inertia-vue3';
 import { Link } from '@inertiajs/vue3';
 import { Inertia } from '@inertiajs/inertia';
 import { defineProps } from 'vue';
+import Chart from 'chart.js/auto';
+import { onMounted } from 'vue';
 
+onMounted(() => {
+    (async function() {
+  const data = [
+    { month: 'Gennaio', count: 10 },
+    { month:' Febbraio', count: 20 },
+    { month: 'Marzo', count: 15 },
+    { month: 'Aprile', count: 25 },
+    { month: 'Maggio', count: 22 },
+    { month: 'Giugno', count: 0 },
+    { month: 'Luglio', count: 0 },
+    { month: 'Agosto', count: 0 },
+    { month: 'Settembre', count: 0 },
+    { month:' Ottobre', count: 0 },
+    { month: 'Novembre', count: 0 },
+    { month: 'Dicembre', count: 0 },
+  ];
+
+      const mayOrders = props.orders.filter(order => {
+      const orderDate = new Date(order.created_at);
+      return orderDate.getMonth() === 4;
+    });
+
+    console.log(mayOrders);
+
+
+    const mayIndex = data.findIndex(monthData => monthData.month === 'Maggio');
+
+
+    if (mayIndex !== -1) {
+      data[mayIndex].count = mayOrders.length;
+    }
+
+    console.log(data);
+
+  new Chart(
+    document.getElementById('acquisitions'),
+    {
+      type: 'bar',
+      options: {
+        animation: true,
+        plugins: {
+          legend: {
+            display: true,
+          },
+          tooltip: {
+            enabled: true,
+          }
+        }
+      },
+      data: {
+        labels: data.map(row => row.month),
+        datasets: [
+          {
+            label: 'Totali ordini di questo mese:',
+            backgroundColor: '#F98F00',
+            data: data.map(row => row.count)
+          }
+        ]
+      }
+    }
+  );
+})();
+
+
+});
 const props = defineProps({
     restaurants: Object,
     orders: Array
@@ -39,7 +106,7 @@ const props = defineProps({
             </div>
             <!-- order -->
             <div class="p-3">
-                <div class="p-3 rounded-lg  shadow max-h-2/3 overflow-scroll">
+                <div class="p-3 rounded-lg  shadow max-h-2/3 overflow-scroll bg-white">
                     <h4 class="font-bold pb-3">Ordini</h4>
                     <!-- table lapTop orders -->
                     <div class="flex ">
@@ -52,7 +119,7 @@ const props = defineProps({
                                     <th class="flex-1 text-[14px] text-start">Campanello</th>
                                     <th class="flex-1 text-[14px] text-start">Mail</th>
                                     <th class="flex-1 text-[14px] text-end">Telefono</th>
-                                  
+
                                 </tr>
 
 
@@ -76,14 +143,14 @@ const props = defineProps({
 
             <!-- best selling dishes -->
 
-            <div class="p-3 flex sm:gap-3 w-full rounded-lg">
-                <div class="p-3 rounded-lg shadow w-full bg-white">
+            <div class="p-3 flex sm:gap-3 w-full rounded-lg ">
+                <div class="p-3 rounded-lg shadow w-full bg-white ">
                     <div>
                         <h4 class="font-bold capitalize">i piatti più venduti</h4>
                         <span class="capitalize">questo mese</span>
                     </div>
-                    <div class="flex">
-                        <table class="flex flex-col w-96 mt-5">
+                    <div class="flex w-full">
+                        <table class="flex flex-col w-full mt-5">
                             <thead class="w-full">
                                 <tr class="flex justify-between px-1">
                                     <th class="capitalize w-1/3 flex">piatti</th>
@@ -109,11 +176,47 @@ const props = defineProps({
                                     <td class="w-1/3">15</td>
                                     <td class="w-1/3">$150</td>
                                 </tr>
+                                <div class=" bg-gray-100 rounded-lg px-1">
+                                    <tr class="flex justify-between">
+                                        <td class="capitalize w-1/3">sushi</td>
+                                        <td class="w-1/3">20</td>
+                                        <td class="w-1/3">$200</td>
+                                    </tr>
+                                </div>
+                                <tr class="flex justify-between px-1">
+                                    <td class="capitalize w-1/3">pizza</td>
+                                    <td class="w-1/3">15</td>
+                                    <td class="w-1/3">$150</td>
+                                </tr>
+                                <div class=" bg-gray-100 rounded-lg px-1">
+                                    <tr class="flex justify-between">
+                                        <td class="capitalize w-1/3">sushi</td>
+                                        <td class="w-1/3">20</td>
+                                        <td class="w-1/3">$200</td>
+                                    </tr>
+                                </div>
+                                <tr class="flex justify-between px-1">
+                                    <td class="capitalize w-1/3">pizza</td>
+                                    <td class="w-1/3">15</td>
+                                    <td class="w-1/3">$150</td>
+                                </tr>
+                                <div class=" bg-gray-100 rounded-lg px-1">
+                                    <tr class="flex justify-between">
+                                        <td class="capitalize w-1/3">sushi</td>
+                                        <td class="w-1/3">20</td>
+                                        <td class="w-1/3">$200</td>
+                                    </tr>
+                                </div>
+                                <tr class="flex justify-between px-1">
+                                    <td class="capitalize w-1/3">pizza</td>
+                                    <td class="w-1/3">15</td>
+                                    <td class="w-1/3">$150</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                     <Link :href="`/restaurant/${$page.props.restaurants[0].slug}/dishes/create`"
-                        class="w-fit py-5 px-2 rounded-lg text-white bg-[#F98F00] capitalize font-semibold flex text-sm/[8px] h-8 gap-2 items-center">
+                        class="w-fit py-5 px-2 mt-10 rounded-lg text-white bg-[#F98F00] capitalize font-semibold flex text-sm/[8px] h-8 gap-2 items-center ">
                     Crea nuovo piatto
                     <img class="h-3 w-3" src="../../../public/img/PiuBianco.svg" width="30" alt="Icona" />
                     </Link>
@@ -121,46 +224,46 @@ const props = defineProps({
 
                 </div>
                 <!-- statistics 2 -->
-                <div class=" hidden sm:flex w-full bg-white">
-                    <div class="p-3 rounded-lg shadow w-full">
+                <div class=" hidden sm:flex sm:flex-col w-full bg-gray-100 ">
+                    <div class="p-3 rounded-lg shadow w-full bg-white ">
                         <div class="pb-3">
-                            <h4 class="font-bold capitalize">Statistics</h4>
+                            <h4 class="font-bold capitalize">Statistiche</h4>
                         </div>
                         <div class="flex gap-2">
                             <div class=" flex flex-col border-gray-300 border-2 rounded-lg w-full">
-                                <h6 class="p-2">This month</h6>
+                                <h6 class="p-2">Questo mese</h6>
                                 <div class=" flex flex-col items-center">
                                     <span class="text-orange-500 text-xl font-bold">
                                         1422
                                     </span>
-                                    <span>Order</span>
+                                    <span>Ordini</span>
                                     <span class="text-orange-500 mt-4 text-xl font-bold">
                                         32.347$
                                     </span>
-                                    <span>Enter</span>
+                                    <span>Entrate</span>
 
                                 </div>
 
                             </div>
                             <div class=" flex flex-col  border-gray-300 border-2 rounded-lg w-full">
-                                <h6 class="p-2">This year</h6>
+                                <h6 class="p-2">Quest'anno</h6>
                                 <div class=" flex flex-col items-center">
                                     <span class="text-orange-500 text-xl font-bold">
                                         31.620
                                     </span>
-                                    <span>Order</span>
+                                    <span>Ordini</span>
                                     <span class="text-orange-500 mt-4 text-xl font-bold">
                                         432.347$
                                     </span>
-                                    <span>Enter</span>
-
+                                    <span>Entrate</span>
                                 </div>
-
                             </div>
 
                         </div>
-
+                        <div class="mt-10 bg-white" style="width: 100%; height: 250px;"><canvas id="acquisitions"></canvas></div>
                     </div>
+
+
                 </div>
             </div>
 
@@ -168,34 +271,34 @@ const props = defineProps({
             <div class="p-3 sm:hidden">
                 <div class="p-3 bg-white rounded-lg shadow sm:w-2/4">
                     <div class="pb-3">
-                        <h4 class="font-bold capitalize">Statistics</h4>
+                        <h4 class="font-bold capitalize">Statistiche</h4>
                     </div>
                     <div class=" flex flex-col  rounded-lg shadow">
-                        <h6 class="p-2">This month</h6>
+                        <h6 class="p-2">Questo mese</h6>
                         <div class=" flex flex-col items-center">
                             <span class="text-orange-500 text-xl font-bold">
                                 1422
                             </span>
-                            <span>Order</span>
+                            <span>Ordini</span>
                             <span class="text-orange-500 mt-4 text-xl font-bold">
                                 32.347$
                             </span>
-                            <span>Enter</span>
+                            <span>Entrate</span>
 
                         </div>
 
                     </div>
                     <div class=" flex flex-col mt-3 rounded-lg shadow">
-                        <h6 class="p-2">This year</h6>
+                        <h6 class="p-2">Quest'annp</h6>
                         <div class=" flex flex-col items-center">
                             <span class="text-orange-500 text-xl font-bold">
                                 31.620
                             </span>
-                            <span>Order</span>
+                            <span>Ordini</span>
                             <span class="text-orange-500 mt-4 text-xl font-bold">
                                 432.347$
                             </span>
-                            <span>Enter</span>
+                            <span>Entrate</span>
 
                         </div>
 
@@ -206,3 +309,10 @@ const props = defineProps({
 
     </AuthenticatedLayout>
 </template>
+<style>
+#acquisitions {
+    width: 100% !important;
+}
+</style>
+
+
