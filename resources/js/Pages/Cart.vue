@@ -43,6 +43,7 @@
                     </div>
                 </div>
 
+
             </div>
             <div class="shadow border rounded-lg w-4/5 mx-auto text-center p-4 mt-6" id="dropin-wrapper">
                 <div class="flex justify-center p-2 gap-2 font-bold text-xl">
@@ -92,7 +93,7 @@
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 // import { defineProps, toRaw, onMounted } from 'vue';
 import { Link } from '@inertiajs/vue3';
-import { Inertia } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia';
 import * as DropIn from 'braintree-web-drop-in';
 import { ref } from 'vue';
 import { defineProps, toRaw, onMounted, resolveComponent } from 'vue';

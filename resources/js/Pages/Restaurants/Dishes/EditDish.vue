@@ -31,7 +31,7 @@ function submit(dishId) {
         name: editPlate.name,
         description: editPlate.description,
         price: editPlate.price,
-        visible: editPlate.visible,
+        visible: true,
         category: editPlate.category,
         image: editPlate.image
     };
@@ -47,8 +47,8 @@ function handleImageChange(event) {
 
 function handleSubmit(restaurantId) {
 
-newPlate.visible = newPlate.visible === true;
-router.post(`/restaurant/${restaurantId}/dishes`, newPlate);
+editPlate.visible = editPlate.visible === true;
+router.put(`/restaurant/${restaurantId}/dishes`, editPlate);
 
 }
 
@@ -126,38 +126,9 @@ router.post(`/restaurant/${restaurantId}/dishes`, newPlate);
                             <div v-if="errors.name"><span class="text-white bg-red-400 rounded-lg p-1">{{ errors.price
                                     }}</span></div>
                         </div>
-
-                        <!-- <div class="flex flex-col sm:flex-row gap-3 items-center">
-                            <label for="" class="font-bold">Visibilità</label>
-
-                            <div class="flex gap-2 items-center">
-                                <div class="flex ">
-                                    <input type="radio" name="visible" id="visibility" value="true"
-                                        v-model="newPlate.visible" class="border border-orange-500">
-                                </div>
-
-                                <div class="flex gap-2 rounded-lg border border-orange-500 shadow p-4">
-                                    <img src="../../../../../public/img/visibile.svg" alt="">
-                                    <span>= visibile dai clienti </span>
-                                </div>
-                            </div>
-                            <div class="flex gap-2 items-center">
-                                <div class="flex ">
-                                    <input type="radio" name="visible" id="notVisible" class="" value="false"
-                                        v-model="newPlate.visible">
-                                </div>
-
-                                <div class="flex gap-2 rounded-lg border shadow p-4">
-                                    <img src="../../../../../public/img/nonVisibile.svg" alt="">
-                                    <span>= Non visibile dai clienti </span>
-                                </div>
-                            </div>
-
-                        </div> -->
-
                         <h3 class="font-bold text-center text-xl">{{ restaurant.name }}</h3>
                         <div class="flex justify-center gap-3">
-                            <button @click.prevent="handleSubmit(props.restaurant.id)"
+                            <button @click.prevent="submit(props.dish.id)"
                                 class="bg-orange-500 text-white font-bold py-1 px-3 rounded-lg">Salva
                                 piatto
                             </button>
