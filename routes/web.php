@@ -35,6 +35,7 @@ Route::get('/cart', [CartController::class, 'cartView'])->name('cartView');
 Route::get('/add-to-cart/{product}', [CartController::class, 'addToCart'])->name('addToCart');
 Route::get('/remove-from-cart/{product}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
 Route::post('/change-cart-quantity', [CartController::class, 'changeQuantity'])->name('changeQuantity');
+Route::post('/clear-cart', [CartController::class, 'clearCart'])->name('clearCart');
 
 
 Route::get('/checkout/success', [CheckoutController::class, 'index'])->name('checkout.success');

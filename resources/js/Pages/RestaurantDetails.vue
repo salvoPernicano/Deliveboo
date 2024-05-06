@@ -18,6 +18,7 @@
 
             <!-- card piatto resposive -->
             <div class="h-screen w-full sm:w-2/3 xl:w-2/3 sm:overflow-y-scroll">
+                <div class="h-50 w-80 bg-white text-red-500 text-3xl mx-auto text-center font-bold" v-if="cartError">Non puoi aggiungere al carrello piatti di ristoranti diversi, svuota il carrello per continuare</div>
                 <h4 class="mb-6">Menu</h4>
                 <ul class="flex justify-start flex-wrap gap-4 w-full sm:gap-3 ps-2">
 
@@ -44,10 +45,9 @@
                             </div>
 
                             <div class="bottom-0 absolute left-[82%] sm:translate-x-[50%] sm:left-[33%] sm:bottom-[-8%]">
-                                <Link :href="`/add-to-cart/${dish.id}`"
-                                    class="bg-orange-dark rounded-full w-10 p-3 flex justify-center">
-                                <img src="../../../public/img/add_cart.svg" alt="add to cart icon">
-                                </Link>
+                                <button @click="addToCart(dish.id)" class="rounded-lg bg-green-500">
+    Add to Cart
+</button>
                             </div>
 
                         </div>
@@ -86,39 +86,36 @@
             </div> -->
 
             <!-- Cart -->
-            <div id="cart" class="w-full xl:w-1/3 sm:w-96 mt-5 sm:mt-0">
-                <h4 class="mb-6">Carrello</h4>
-                <div class="shadow border rounded-lg w-full">
-                    <ul class="w-full flex flex-col items-center py-6">
-                        <li class="flex w-full ">
-                            <button class="mx-3">
+            <div id="cart" class=" w-full xl:w-1/3 sm:w-96 mt-5 sm:mt-0">
+                <h4 class="mb-6 text-center">Carrello</h4>
+                <div class="shadow border rounded-lg  mx-auto text-center py-2">
+                    <button @click="clearCart" class="btn btn-red bg-red-600 text-white px-4 py-2 rounded-md mt-4">
+      Svuota carrello
+    </button>
+                    <ul class="w-full flex flex-col items-center justify-center py-2">
+                        <li v-for="item in localCartList" :key="item.id" class="p-4 flex items-center justify-center w-full">
+                            <button @click="removeFromCart(item.id)" class="rounded-lg bg-green-500">
+    Remove
+</button>
+                            <button @click="decreaseQuantity(item.id)" class="mx-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                                     <path d="M200-440v-80h560v80H200Z" />
                                 </svg>
                             </button>
-                            <div class="flex flex-wrap items-center w-full justify-between">
+                            <div class="flex items-center w-full">
+                                <p class="w-3/5">{{ item.name }}</p>
                                 <div>
-                                    <p class="w-3/5">Lasagna</p>
+                                    <span class="w-1/5">€{{ item.price }}</span>
+                                    <input  type="number" :name="`quantity-${item.id}`" :id="`quantity-${item.id}`"
+                                        :value="item.quantity" @input="updateQuantity(item.id, $event.target.value)" class="text-black w-20">
                                 </div>
-                                <div>
-                                    <span class="w-1/5">13.50€</span>
-                                </div>
-                                <div class="flex">
-                                    <p>Qty:
-                                        <span>1</span>
-                                    </p>
-                                </div>
-
                             </div>
-                            <button class="mx-3">
+                            <button @click="increaseQuantity(item.id)" class="mx-4 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                                     <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
                                 </svg>
                             </button>
                         </li>
-                        <div class="pe-4 ps-4 w-full">
-                            <hr class="p-2 mt-3">
-                        </div>
                     </ul>
 
                     <div class="flex flex-col p-4">
@@ -128,7 +125,8 @@
                         </div>
 
                         <div class="flex justify-center mt-5">
-                            <button class="bg-orange-dark text-white p-2 rounded-lg">Procedi con l'ordine</button>
+                            <button @click="proceedToCart(localCartList)" class="bg-orange-dark text-white p-2 rounded-lg">Procedi con l'ordine</button>
+
                         </div>
                     </div>
                 </div>
@@ -142,15 +140,84 @@ import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 import { Link } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
+import axios from 'axios';
+import { ref } from 'vue';
+import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/vue3';
 
 
 const props = defineProps({
     restaurant: {
         type: Object,
         required: true
+    },
+    cartList : {
+        type: Object,
+        required: false
+    },
+    isValidForCart: {
+        type: Boolean,
     }
 });
 
+let cartError = ref(false);
+const localCartList = ref(props.cartList);
+
+const clearCart = () => {
+  // Effettua una richiesta al backend per svuotare il carrello
+  Inertia.post('/clear-cart').then(() => {
+    // Aggiorna la visualizzazione del carrello dopo aver svuotato la sessione
+    // Ad esempio, potresti ricaricare la pagina o eseguire un'altra azione necessaria
+  }).catch(error => {
+    console.error('Errore durante lo svuotamento del carrello:', error);
+  });
+};
+
+// Definisci la funzione `addToCart` per aggiungere un elemento al carrello
+const addToCart = (productId) => {
+    if(props.isValidForCart){
+        axios.get("/add-to-cart/"+productId)
+             .then(response => {
+                 // Aggiorna dinamicamente il carrello sulla pagina con i nuovi dati
+                 localCartList.value = response.data.cart;
+             })
+             .catch(error => {
+                 console.error('Errore durante l\'aggiunta al carrello:', error);
+             });     
+    } else {
+        cartError.value = true
+    }
+}
+
+const removeFromCart = (productId) => {
+    axios.get("/remove-from-cart/"+productId)
+         .then(response => {
+             // Aggiorna dinamicamente il carrello sulla pagina con i nuovi dati
+             localCartList.value = response.data.cart;
+         })
+         .catch(error => {
+             console.error('Errore durante l\'aggiunta al carrello:', error);
+         });
+}
+
+const decreaseQuantity = (productId) => {
+    const item = localCartList.value[productId];
+    if (item && item.quantity > 1) {
+        item.quantity--;
+    }
+}
+
+// increaseQuantity function
+const increaseQuantity = (productId) => {
+    const item = localCartList.value[productId];
+    if (item) {
+        item.quantity++;
+    }
+}
+
+function proceedToCart(cartList) { 
+    router.post("/change-cart-quantity", localCartList.value);
+}
 
 </script>
 

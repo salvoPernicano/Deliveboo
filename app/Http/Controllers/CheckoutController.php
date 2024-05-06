@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
@@ -19,12 +20,13 @@ class CheckoutController extends Controller
             'orderDetails.address' => 'required|string|max:255',
             'orderDetails.name_doorbell' => 'required|string|max:255',
         ]);
-        // Retrieve cart from session
-        $cart = session('cart');
+       
+        $cart = $request->orderDetails['cartList'];
+    Session::put('cart', $cart);
         // dd($request,$cart);
         $nonceFromTheClient = $request->paymentMethodNonce;
 
-        // Initialize Braintree with your credentials
+      
         $gateway = new Gateway([
             'environment' => 'sandbox',
             'merchantId' => '44sxcnc6mrqrspwc',
@@ -32,7 +34,7 @@ class CheckoutController extends Controller
             'privateKey' => 'e52023be41c415883ea845ebc2a29005'
         ]);
 
-        // Create a sale transaction with Braintree
+
         $result = $gateway->transaction()->sale([
             'amount' => $request->amount,
             'paymentMethodNonce' => $nonceFromTheClient,
@@ -66,10 +68,11 @@ class CheckoutController extends Controller
     }
 
     public function index(Request $request) {
+        
         $orderDetails = $request->orderDetails;
         $orderTotal = $request->total;
         $cart = $request->cart;
-
+        Session::forget('cart');
 
         return Inertia::render('Checkout', ['orderDetails' => $orderDetails,'cart' => $cart, 'orderTotal' => $orderTotal]);
     }
