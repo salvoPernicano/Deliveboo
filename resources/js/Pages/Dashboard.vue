@@ -52,7 +52,7 @@ const props = defineProps({
                                     <th class="flex-1 text-[14px] text-start">Campanello</th>
                                     <th class="flex-1 text-[14px] text-start">Mail</th>
                                     <th class="flex-1 text-[14px] text-end">Telefono</th>
-                                  
+
                                 </tr>
 
 
