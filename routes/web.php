@@ -67,7 +67,10 @@ Route::get('/restaurant/{restaurant}/dishes/{dish}/edit', [DishController::class
 Route::put('/restaurant/{restaurant}/dishes/{dish}', [DishController::class, 'update']);
 
 Route::delete('dishes/{dish}', [DishController::class, 'destroy']);
+
 Route::get('/order-static', [OrderStaticController::class, 'index'])->name('order-static');
+
+
 
 //orders route
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
