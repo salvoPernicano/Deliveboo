@@ -39,7 +39,7 @@ const props = defineProps({
             </div>
             <!-- order -->
             <div class="p-3">
-                <div class="p-3 rounded-lg  shadow max-h-2/3 overflow-scroll">
+                <div class="p-3 rounded-lg bg-white shadow max-h-2/3 overflow-scroll">
                     <h4 class="font-bold pb-3">Ordini</h4>
                     <!-- table lapTop orders -->
                     <div class="flex ">
