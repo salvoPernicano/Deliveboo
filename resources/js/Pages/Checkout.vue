@@ -6,10 +6,10 @@
                 <h1>{{ props.orderDetails.name }}</h1>
                 <h4>{{props.orderDetails.email  }}</h4>
                 <h4>{{ props.orderDetails.phone }}</h4>
+                <span>Totale ordine €{{ props.orderTotal }}</span>
                 <ul>
                     <li v-for="item in cart">
-                        <h3>{{ item.name }}</h3>
-                        <span>Totale ordine €{{ props.orderTotal }}</span>
+                        <h3>{{ item.name }} x {{ item.quantity }}</h3>
                     </li>
                 </ul>
             </div>
@@ -34,7 +34,7 @@ const props = defineProps({
     },
     orderTotal: {
         type: String
-    }
+    },
 });
 </script>
 
