@@ -260,10 +260,8 @@ const props = defineProps({
                             </div>
 
                         </div>
-                        <div class="mt-10 bg-white" style="width: 100%; height: 250px;"><canvas id="acquisitions"></canvas></div>
+                        <div class="mt-10 bg-white flex justify-center" style=" height: 290px;"><canvas id="acquisitions"></canvas></div>
                     </div>
-
-
                 </div>
             </div>
 
@@ -311,7 +309,7 @@ const props = defineProps({
 </template>
 <style>
 #acquisitions {
-    width: 100% !important;
+    width: 85% !important;
 }
 </style>
 
