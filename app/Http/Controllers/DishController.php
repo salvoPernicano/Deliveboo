@@ -100,8 +100,8 @@ class DishController extends Controller
     {
 
         $validatedData = $request->validated();
-
-        $validatedData['visible'] = $validatedData['visible'] === 'true' ? 1 : 0;
+        
+        // $validatedData['visible'] = $validatedData['visible'] === true ? 1 : 0;
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('restaurant_images', 'public');
