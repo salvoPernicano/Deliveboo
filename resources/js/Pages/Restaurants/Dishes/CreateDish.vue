@@ -55,7 +55,7 @@
 
                             <div class="flex gap-2 items-center w-72 ">
                                 <div class="flex ">
-                                    <input type="radio" name="visible" id="visibility" value="true" v-model="newPlate.visible" class="" @click="colorFull=!colorFull">
+                                    <input type="radio" name="visible" id="visibility" value="true"  v-model="newPlate.visible" class="" @click="colorFull=!colorFull">
                                 </div>
 
                                 <div class="flex gap-2 rounded-lg border shadow p-4 " :class="{ 'border-orange-500': !colorFull, 'border-gray-400': colorFull}">
@@ -78,7 +78,7 @@
 
                         
                         <div class="flex justify-center gap-5 mt-10">
-                            <button @click.prevent="handleSubmit(props.restaurant.id)" class="bg-orange-500 text-white font-bold py-1 px-3 rounded-lg">Salva
+                            <button type="submit" class="bg-orange-500 text-white font-bold py-1 px-3 rounded-lg">Salva
                                 piatto
                             </button>
                             <button
@@ -121,6 +121,12 @@ const newPlate = useForm({
 const categories = ['Giapponese', 'Italiana', 'Cinese', 'Messicano', 'Indiana'];
 
 function submit(restaurantId) {
+
+    if(newPlate.visible === 'true'){
+        newPlate.visible = true
+    } else {
+        newPlate.visible = false
+    };
     console.log(newPlate);
     router.post(`/restaurant/${restaurantId}/dishes`, newPlate);
 }
@@ -132,12 +138,7 @@ function handleImageChange(event) {
     newPlate.image = file;
 }
 
-function handleSubmit(restaurantId) {
 
-    newPlate.visible = newPlate.visible === true;
-    router.post(`/restaurant/${restaurantId}/dishes`, newPlate);
-
-}
 
 
 
