@@ -1,10 +1,13 @@
 <template>
     <GuestLayout>
-        <div class="bg-[#FFA500] flex justify-center gap-4 pt-20 pb-10">
-            <h2 class="text-center text-white">Carrello</h2>
+        <div v-for="item in restaurantDetails">
+        <div :style="item.image ? { backgroundImage: 'url(/storage/' + item.image + ')' } : { backgroundColor: '#FFA500' }"
+            class="imgBackground flex flex-col justify-center pt-8 sm:p-0 h-64">
+            <h2 class="text-center text-white capitalize">Da {{ item.name }}</h2>
         </div>
+    </div>
+       
         <section class="p-2 mt-3 sm:pt-4 pb-32 lg:w-10/12 lg:mx-auto sm:p-5">
-
             <h4 class="mb-6">Carrello</h4>
             <div class="flex flex-col sm:flex-row sm:gap-5 w-full">
 
@@ -12,53 +15,41 @@
                     
                     <ul class="w-full flex flex-col items-center justify-center py-6">
                         <li v-for="item in localCartList" :key="item.id"
-                            class="p-4 flex flex-col items-center justify-center w-full">
-                            <div class="flex">
-                                <button @click="decreaseQuantity(item.id)" class="mx-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
-                                        width="24">
-                                        <path d="M200-440v-80h560v80H200Z" />
-                                    </svg>
-                                </button>
+                            class="p-4 flex flex-col font-semibold items-center justify-center w-full ">
+                            <div class="flex   w-4/6">
                                 <div class="flex justify-start items-center gap-5">
-                                    <img :src="'storage/' + item.image" alt="product_image" class="h-20">
-                                    <div class="flex flex-col items-start">
-                                        <p>{{ item.name }}</p>
-                                        <span>€{{ item.price }}</span>
+                                    <img :src="'/storage/' + item.image" alt="product_image" class="h-20">
+                                    <div class="flex gap-2 items-center ">
+                                        <div class="w-20 text-left">
+                                            <p>{{ item.name }}</p>
+                                            <span>€{{ item.price }}</span>
+                                        </div>
+                                        <button @click="decreaseQuantity(item.id)" class="mx-4">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+                                                width="24">
+                                                <path d="M200-440v-80h560v80H200Z" />
+                                            </svg>
+                                        </button>
                                         <input type="number" :name="`quantity-${item.id}`" :id="`quantity-${item.id}`"
                                             :value="item.quantity"
                                             class="text-black border-0 bg-transparent text-center w-20">
                                         <!-- @input="updateQuantity(item.id, $event.target.value)" -->
+                                        <button @click="increaseQuantity(item.id)" class="mx-1 ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+                                                width="24">
+                                                <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+                                            </svg>
+                                        </button>
                                     </div>
                                 </div>
-                                <button @click="increaseQuantity(item.id)" class="mx-4 ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
-                                        width="24">
-                                        <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-                                    </svg>
-                                </button>
                             </div>
                             <button @click="removeFromCart(item.id)" class=" text-red-500 p-2">
                                 Rimuovi piatto
                             </button>
-                            <!-- <div class="flex items-center w-full">
-                                <p class="w-3/5 font-bold">{{ item.name }}</p>
-
-                                <span class="w-1/5 mx-2">€{{ item.price }}</span>
-                                <input type="number" :name="`quantity-${item.id}`" :id="`quantity-${item.id}`"
-                                    :value="item.quantity" @input="updateQuantity(item.id, $event.target.value)"
-                                    class="text-black w-20">
-
-                            </div> -->
-                            <!-- <button @click="increaseQuantity(item.id)" class="mx-4 ">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                                    <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-                                </svg>
-                            </button> -->
                         </li>
                     </ul>
 
-                    <div class="flex justify-between mx-16 font-bold text-xl">
+                    <div class="flex justify-center gap-3 mx-16 font-bold text-xl">
                         <span>Totale:</span>
                         <span>€{{ total }}</span>
                     </div>
@@ -70,7 +61,7 @@
                         obbligatori</p>
                     <div>
                         <div class="mb-4">
-                            <input type="text" id="name" v-model="order.name" placeholder="Name*"
+                            <input type="text" id="name" v-model="order.name" placeholder="Nome*"
                                 class="w-full border-gray-300 focus:border-[#FFA500] focus:ring-[#FFA500] rounded-md shadow-sm"
                                 required>
                         </div>
@@ -123,6 +114,9 @@ const props = defineProps({
         type: Object,
     },
     errors: {
+        type: Object,
+    },
+    restaurantDetails:{
         type: Object,
     }
 });
@@ -181,7 +175,8 @@ let instance = null;
 onMounted(() => {
     DropIn.create({
         authorization: 'sandbox_x6qjzvjf_44sxcnc6mrqrspwc',
-        container: '#dropin-container'
+        container: '#dropin-container',
+        locale: 'it_IT'
     }, (createErr, dropinInstance) => {
         if (createErr) {
             console.error('Error creating Drop-in instance:', createErr);

@@ -1,20 +1,41 @@
 <template>
     <GuestLayout>
-        <div class="bg-[#FFA500] h-screen gap-4 pt-20 pb-10">
-            <h1 class="text-center text-green-500">Ordine effettuato con successo!</h1>
-            <div class="shadow w-80 mx-auto text-center p-5 mt-5 text-black bg-white rounded-lg">
-                <h3>Riepilogo ordine: </h3>
-                <h3 class="text-lg">{{ props.orderDetails.name }}</h3>
-                <h3>{{props.orderDetails.email  }}</h3>
-                <h3 class="text-lg">{{ props.orderDetails.phone }}</h3>
-                <span class="text-xl font-semibold">Totale ordine €{{ props.orderTotal }}</span>
-                <ul>
+        <div class="bg-[#FFA500] flex justify-center gap-4 pt-20 pb-10">
+            <h2 class="text-center text-white">Ristorante Tempura House</h2>
+        </div>
+        <div id="riepilogo" class="flex flex-col justify-center shadow max-w-screen-md mx-auto text-center p-5  text-black  rounded-lg">
+                <h4 class="text-2xl text-center text-[#FFA500]">Ordine effettuato con successo!</h4>
+                <h3 class="my-2">Riepilogo ordine: </h3>
+                <div class="flex justify-around">
+                    <div>
+                        <ul>
+                            <li>Nome</li>
+                            <li>Email</li>
+                            <li>Telefono</li>
+                            <li>Indirizzo</li>
+                            <li>Citofono</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>{{ props.orderDetails.name }}</li>
+                            <li>{{props.orderDetails.email  }}</li>
+                            <li>{{ props.orderDetails.phone }}</li>
+                            <li>{{ props.orderDetails.address }}</li>
+                            <li>{{ props.orderDetails.name_doorbell }}</li>
+                        </ul>
+                        
+                    </div>
+                    
+                </div>
+                <ul class="mt-5">
                     <li v-for="item in cart">
                         <h3 class="text-lg font-semibold">{{ item.name }} x {{ item.quantity }}</h3>
                     </li>
                 </ul>
+                <span class="text-xl font-semibold">Totale ordine €{{ props.orderTotal }}</span>
             </div>
-        </div>
+        
     </GuestLayout>
 </template>
 
@@ -40,5 +61,8 @@ const props = defineProps({
 </script>
 
 <style  scoped>
-
+#riepilogo{
+    height: 400px;
+    margin-block: 100px;
+}
 </style>

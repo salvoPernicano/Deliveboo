@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use App\Models\Restaurant;
+
 
 class CartController extends Controller
 {
@@ -79,8 +81,26 @@ class CartController extends Controller
     public function cartView() {
         // Ottieni il contenuto del carrello dalla sessione
         $cart = session('cart');
+        
+        // Inizializza un array per memorizzare i dettagli del ristorante per ciascun elemento nel carrello
+        $restaurantDetails = [];
     
-        // Restituisci la vista del carrello passando i dati del carrello come prop
-        return Inertia::render('Cart', ['cartList' => $cart]);
+        // Cicla attraverso ogni elemento nel carrello
+        foreach ($cart as $item) {
+            // Ottieni l'ID del ristorante dall'elemento del carrello
+            $restaurantId = $item['restaurantId'];
+            
+            // Recupera i dettagli del ristorante utilizzando l'ID
+            // Assicurati che i dettagli del ristorante siano disponibili
+            $restaurant = Restaurant::find($restaurantId);
+    
+            // Aggiungi i dettagli del ristorante all'array solo se sono stati trovati
+            if ($restaurant) {
+                $restaurantDetails[$restaurantId] = $restaurant;
+            }
+        }
+    
+        // Restituisci la vista del carrello passando i dati del carrello e i dettagli del ristorante come prop
+        return Inertia::render('Cart', ['cartList' => $cart, 'restaurantDetails' => $restaurantDetails]);
     }
 }
