@@ -4,12 +4,12 @@
             <h2 class="text-center text-white">Carrello</h2>
         </div>
         <section
-            class="p-2 mt-3 flex flex-wrap sm:pt-4 pb-32 lg:w-10/12 lg:mx-auto sm:p-5 sm:flex sm:flex-nowrap sm:gap-5 sm:justify-center sm:h-screen">
+            class="p-2 mt-3 sm:pt-4 pb-32 lg:w-10/12 lg:mx-auto sm:p-5">
 
-            <div class="flex flex-col w-full">
-                <h4 class="mb-6">Carrello</h4>
+            <h4 class="mb-6">Carrello</h4>
+            <div class="flex flex-col sm:flex-row sm:gap-5 w-full">
 
-                <div id="cart" class="shadow w-full border rounded-lg text-center py-4">
+                <div id="cart" class="shadow w-full border rounded-lg text-center py-4 h-fit">
                     <ul class="w-full flex flex-col items-center justify-center py-6">
                         <li v-for="item in cartList" :key="item.id"
                             class="p-4 flex flex-col items-center justify-center w-full">
@@ -57,7 +57,7 @@
                         <span>€{{ total }}</span>
                     </div>
                 </div>
-                <div class="shadow border rounded-lg w-full text-center p-4 mt-6 bg-white" id="dropin-wrapper">
+                <div class="shadow border rounded-lg w-full text-center p-4 mt-6 sm:mt-0 bg-white" id="dropin-wrapper">
                     <p class="italic text-center text-xs text-red-500 pb-4">I campi contrassegnati con * sono
                         obbligatori</p>
                     <div>
