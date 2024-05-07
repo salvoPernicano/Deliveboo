@@ -26,13 +26,18 @@ const editPlate = useForm({
 const categories = ['Giapponese', 'Italiana', 'Cinese', 'Messicano', 'Indiana'];
 
 function submit(dishId) {
+    if(editPlate.visible === 'true'){
+        editPlate.visible = true
+    } else {
+        editPlate.visible = false
+    };
     const formData = {
         _method: 'put', // Utilizza form method spoofing per indicare al server di gestire la richiesta come PUT
         name: editPlate.name,
         description: editPlate.description,
         price: editPlate.price,
-        visible: true,
         category: editPlate.category,
+        visible: editPlate.visible,
         image: editPlate.image
     };
 
@@ -45,12 +50,7 @@ function handleImageChange(event) {
 
 }
 
-function handleSubmit(restaurantId) {
 
-editPlate.visible = editPlate.visible === true;
-router.put(`/restaurant/${restaurantId}/dishes`, editPlate);
-
-}
 
 
 </script>
@@ -126,9 +126,34 @@ router.put(`/restaurant/${restaurantId}/dishes`, editPlate);
                             <div v-if="errors.name"><span class="text-white bg-red-400 rounded-lg p-1">{{ errors.price
                                     }}</span></div>
                         </div>
+                        <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
+                            <label for="" class="font-bold">Visibilità</label>
+
+                            <div class="flex gap-2 items-center w-72 ">
+                                <div class="flex ">
+                                    <input type="radio" name="visible" id="visibility" value="true"  v-model="editPlate.visible" class="" @click="colorFull=!colorFull">
+                                </div>
+
+                                <div class="flex gap-2 rounded-lg border shadow p-4 " :class="{ 'border-orange-500': !colorFull, 'border-gray-400': colorFull}">
+                                    <img src="../../../../../public/img/visibile.svg" alt="">
+                                    <span class="text-[18px]" >= Visibile dai clienti </span>
+                                </div>
+                            </div>
+                            <div class="flex gap-2 items-center w-72 ">
+                                <div class="flex ">
+                                    <input type="radio" name="visible" id="notVisible" class="" value="false" v-model="editPlate.visible" @click="colorFull">
+                                </div>
+
+                                <div class="flex gap-2 rounded-lg border shadow p-4 " :class="{ 'border-orange-500': colorFull, 'border-gray-400': !colorFull}">
+                                    <img src="../../../../../public/img/nonVisibile.svg" alt="">
+                                    <span class="text-[14px]">= Non visibile dai clienti</span>
+                                </div>
+                            </div>
+
+                        </div>
                         <h3 class="font-bold text-center text-xl">{{ restaurant.name }}</h3>
                         <div class="flex justify-center gap-3">
-                            <button @click.prevent="submit(props.dish.id)"
+                            <button type="submit"
                                 class="bg-orange-500 text-white font-bold py-1 px-3 rounded-lg">Salva
                                 piatto
                             </button>
