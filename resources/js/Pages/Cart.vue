@@ -15,31 +15,33 @@
                     
                     <ul class="w-full flex flex-col items-center justify-center py-6">
                         <li v-for="item in localCartList" :key="item.id"
-                            class="p-4 flex flex-col font-semibold items-center justify-center w-full ">
-                            <div class="flex   w-4/6">
-                                <div class="flex justify-start items-center gap-5">
+                            class="p-4 flex flex-col font-semibold sm:items-center justify-center w-full ">
+                            <div class="flex w-full">
+                                <div class="flex items-center gap-5 w-full">
                                     <img :src="'/storage/' + item.image" alt="product_image" class="h-20">
-                                    <div class="flex gap-2 items-center ">
-                                        <div class="w-20 text-left">
+                                    <div class="flex w-full gap-2 items-center justify-between">
+                                        <div class="w-14 sm:w-2/3 text-left">
                                             <p>{{ item.name }}</p>
                                             <span>€{{ item.price }}</span>
                                         </div>
-                                        <button @click="decreaseQuantity(item.id)" class="mx-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
-                                                width="24">
-                                                <path d="M200-440v-80h560v80H200Z" />
-                                            </svg>
-                                        </button>
-                                        <input type="number" :name="`quantity-${item.id}`" :id="`quantity-${item.id}`"
-                                            :value="item.quantity"
-                                            class="text-black border-0 bg-transparent text-center w-20">
-                                        <!-- @input="updateQuantity(item.id, $event.target.value)" -->
-                                        <button @click="increaseQuantity(item.id)" class="mx-1 ">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
-                                                width="24">
-                                                <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-                                            </svg>
-                                        </button>
+                                        <div class="flex items-center justify-between sm:w-1/3">
+                                            <button @click="decreaseQuantity(item.id)" class="mx-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+                                                    width="24">
+                                                    <path d="M200-440v-80h560v80H200Z" />
+                                                </svg>
+                                            </button>
+                                            <input type="number" :name="`quantity-${item.id}`" :id="`quantity-${item.id}`"
+                                                :value="item.quantity"
+                                                class="text-black border-0 bg-transparent text-center w-14">
+                                            <!-- @input="updateQuantity(item.id, $event.target.value)" -->
+                                            <button @click="increaseQuantity(item.id)" class="mx-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+                                                    width="24">
+                                                    <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+                                                </svg>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

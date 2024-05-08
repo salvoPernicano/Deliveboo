@@ -61,7 +61,7 @@ onMounted(() => {
                     labels: data.map(row => row.month),
                     datasets: [
                         {
-                            label: 'Totali ordini di questo mese:',
+                            label: 'Totali ordini:',
                             backgroundColor: '#F98F00',
                             data: data.map(row => row.count)
                         }
@@ -91,7 +91,7 @@ const props = defineProps({
 
             <div class="px-3 py-4 flex justify-between ">
                 <div>
-                    <h4>Bentornato {{ restaurants[0].name }}, </h4>
+                    <h4>Bentornato, {{ restaurants[0].name }} </h4>
                 </div>
 
                 <div class="gap-3 flex w-80 justify-end ">
@@ -311,7 +311,7 @@ const props = defineProps({
                         <h6 class="p-2">Questo mese</h6>
                         <div class=" flex flex-col items-center">
                             <span class="text-orange-500 text-xl font-bold">
-                                1422€
+                                1422
                             </span>
                             <span>Ordini</span>
                             <span class="text-orange-500 mt-4 text-xl font-bold">
@@ -326,7 +326,7 @@ const props = defineProps({
                         <h6 class="p-2">Quest'annp</h6>
                         <div class=" flex flex-col items-center">
                             <span class="text-orange-500 text-xl font-bold">
-                                31.620€
+                                31.620
                             </span>
                             <span>Ordini</span>
                             <span class="text-orange-500 mt-4 text-xl font-bold">

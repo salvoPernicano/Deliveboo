@@ -26,11 +26,11 @@
 
                     <li v-for="dish in restaurant.dishes" :key="dish.id" class="w-full sm:w-60">
 
-                        <div class="bg-white rounded-lg shadow relative sm:pe-0 sm:mb-4">
+                        <div class="bg-white rounded-lg shadow relative sm:pe-0 sm:mb-8">
 
                             <div class=" h-auto w-full flex justify-between sm:flex sm:flex-col sm:text-center">
                                 <div class="flex gap-2 w-4/5 sm:flex sm:flex-col sm:w-full">
-                                    <img class="h-20 w-20 sm:h-40 sm:w-60 object-cover rounded-s-lg sm:rounded-t-lg sm:rounded-b-none"
+                                    <img class="h-20 w-20 sm:h-40 sm:w-60 object-cover rounded-tl-lg sm:rounded-t-lg sm:rounded-b-none"
                                         :src="'/storage/' + dish.image" alt="Dish Image" v-if="dish.image">
 
                                     <div class="flex flex-col overflow-hidden h-24">
@@ -41,12 +41,19 @@
                                     </div>
 
                                 </div>
-                                <div class="flex flex-col gap-2 relative w-1/5 sm:w-full">
+                                <div class="flex flex-col gap-2 relative w-1/5 sm:w-full sm:mb-5">
                                     <p class="capitalize font-bold">{{ dish.price }}€</p>
                                 </div>
                             </div>
 
-                            <div class="text-center">
+                            <div class="bottom-3 absolute left-[82%] sm:translate-x-[50%] sm:left-[33%] sm:bottom-[-8%]">
+                                <button @click="addToCart(dish.id)"
+                                    class="bg-orange-dark rounded-full w-10 p-3 flex justify-center">
+                                <img src="../../../public/img/add_cart.svg" alt="add to cart icon">
+                                </button>
+                            </div>
+
+                            <!-- <div class="text-center">
                                 <button @click="addToCart(dish.id)"
                                     class="rounded-md  p-2 m-2 text-white font-semibold">
                                     <div
@@ -56,7 +63,7 @@
                                         </figure>
                                     </div>
                                 </button>
-                            </div>
+                            </div> -->
 
                         </div>
                     </li>
@@ -67,33 +74,35 @@
             <div id="cart" class="sm:w-3/6 w-full flex-col   h-fit">
                 <h4 class="mb-6">Carrello</h4>
                 <div class="shadow border rounded-lg  mx-auto text-center py-2">
-                    <ul class="w-full flex flex-col items-center justify-center py-2">
+                    <ul class="w-full flex flex-col items-center justify-center py-6">
                         <li v-for="item in localCartList" :key="item.id"
                             class="p-4 flex flex-col font-semibold items-center justify-center w-full ">
-                            <div class="flex  w-4/6">
-                                <div class="flex justify-start items-center gap-5">
-                                    <img :src="'/storage/' + item.image" alt="product_image" class="h-20 w-20 sm:h-20 sm:w-20 object-cover rounded-s-lg sm:rounded-t-lg sm:rounded-b-none">
-                                    <div class="flex gap-2 items-center ">
-                                        <div class="w-20 text-left">
+                            <div class="flex  w-full">
+                                <div class="flex items-center gap-5 w-full">
+                                    <img :src="'/storage/' + item.image" alt="product_image" class="h-20">
+                                    <div class="flex w-full gap-2 items-center justify-between">
+                                        <div class="w-14 sm:w-2/3 text-left">
                                             <p>{{ item.name }}</p>
                                             <span>€{{ item.price }}</span>
                                         </div>
-                                        <button @click="decreaseQuantity(item.id)" class="mx-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
-                                                width="24">
-                                                <path d="M200-440v-80h560v80H200Z" />
-                                            </svg>
-                                        </button>
-                                        <input type="number" :name="`quantity-${item.id}`" :id="`quantity-${item.id}`"
-                                            :value="item.quantity"
-                                            class="text-black border-0 bg-transparent text-center w-20">
-                                        <!-- @input="updateQuantity(item.id, $event.target.value)" -->
-                                        <button @click="increaseQuantity(item.id)" class="mx-1 ">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
-                                                width="24">
-                                                <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-                                            </svg>
-                                        </button>
+                                        <div class="flex items-center justify-between sm:w-1/3">
+                                            <button @click="decreaseQuantity(item.id)" class="mx-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+                                                    width="24">
+                                                    <path d="M200-440v-80h560v80H200Z" />
+                                                </svg>
+                                            </button>
+                                            <input type="number" :name="`quantity-${item.id}`" :id="`quantity-${item.id}`"
+                                                :value="item.quantity"
+                                                class="text-black border-0 bg-transparent text-center w-14">
+                                            <!-- @input="updateQuantity(item.id, $event.target.value)" -->
+                                            <button @click="increaseQuantity(item.id)" class="mx-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960"
+                                                    width="24">
+                                                    <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+                                                </svg>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
