@@ -1,7 +1,7 @@
 <template>
     <GuestLayout>
         <div class="bg-[#FFA500] flex justify-center gap-4 pt-20 pb-10">
-            <h2 class="text-center text-white">Ristorante Tempura House</h2>
+            <h2 class="text-center text-white">Ristorante Trattoria Paradiso</h2>
         </div>
         <div id="riepilogo" class="flex flex-col justify-center shadow max-w-screen-md mx-auto text-center p-5  text-black  rounded-lg">
                 <h4 class="text-2xl text-center text-[#FFA500]">Ordine effettuato con successo!</h4>
