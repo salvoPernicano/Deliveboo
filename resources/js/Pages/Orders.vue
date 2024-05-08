@@ -61,7 +61,7 @@ const props = defineProps({
             </div>
 
             <!-- orders resposive -->
-            <div v-for="order in props.orders" class="  p-3 rounded-lg shadow bg-white sm:hidden ">
+            <div v-for="order in props.orders" class="mt-3  p-3 rounded-lg shadow bg-white sm:hidden ">
 
                 <div class="flex justify-between">
                     <div class="flex items-center">
