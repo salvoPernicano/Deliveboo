@@ -101,12 +101,11 @@
 
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-// import { defineProps, toRaw, onMounted } from 'vue';
-import { Link } from '@inertiajs/vue3';
-import { Inertia } from '@inertiajs/inertia';
+// import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/vue3';
 import * as DropIn from 'braintree-web-drop-in';
 import { ref } from 'vue';
-import { defineProps, toRaw, onMounted, resolveComponent } from 'vue';
+import { defineProps, toRaw, onMounted } from 'vue';
 import { computed } from 'vue';
 
 const props = defineProps({
@@ -207,7 +206,7 @@ const submitPayment = () => {
 
         let amount = total.value;
 
-        Inertia.post('/process_payment', { 'paymentMethodNonce': payload.nonce, 'amount': amount, 'orderDetails': updatedOrderDetails })
+        router.post('/process_payment', { 'paymentMethodNonce': payload.nonce, 'amount': amount, 'orderDetails': updatedOrderDetails })
     });
 };
 </script>
