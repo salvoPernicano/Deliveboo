@@ -18,7 +18,7 @@
                             class="p-4 flex flex-col font-semibold sm:items-center justify-center w-full ">
                             <div class="flex w-full">
                                 <div class="flex items-center gap-5 w-full">
-                                    <img :src="'/storage/' + item.image" alt="product_image" class="h-20">
+                                    <img :src="'/storage/' + item.image" alt="product_image" class="h-20 object-cover w-20 sm:h-32 sm:w-40">
                                     <div class="flex w-full gap-2 items-center justify-between">
                                         <div class="w-14 sm:w-2/3 text-left">
                                             <p>{{ item.name }}</p>
