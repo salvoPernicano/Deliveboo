@@ -122,7 +122,7 @@ const categories = ['Giapponese', 'Italiana', 'Cinese', 'Messicano', 'Indiana'];
 
 function submit(restaurantId) {
 
-    if(newPlate.visible === 'true'){
+    if(newPlate.visible === 'true' || newPlate.visible === true){
         newPlate.visible = true
     } else {
         newPlate.visible = false

@@ -26,7 +26,7 @@ const editPlate = useForm({
 const categories = ['Giapponese', 'Italiana', 'Cinese', 'Messicano', 'Indiana'];
 
 function submit(dishId) {
-    if(editPlate.visible === 'true' || editPlate.visible){
+    if(editPlate.visible === 'true' || editPlate.visible === true){
         editPlate.visible = true
     } else {
         editPlate.visible = false
