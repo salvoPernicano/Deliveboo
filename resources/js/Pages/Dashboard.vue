@@ -114,7 +114,7 @@ const props = defineProps({
                             <thead>
                                 <tr class="flex px-1">
                                     <th class="flex-1 text-[14px] text-start">Numero Ordine</th>
-                                    <th class="flex-1 text-[14px] text-start">Nome clinte</th>
+                                    <th class="flex-1 text-[14px] text-start">Nome cliente</th>
                                     <th class="flex-1 text-[14px] text-start">Indirizzo</th>
                                     <th class="flex-1 text-[14px] text-start">Campanello</th>
                                     <th class="flex-1 text-[14px] text-start">Mail</th>
@@ -162,55 +162,55 @@ const props = defineProps({
                                 <tr class="flex justify-between px-1">
                                     <td class="capitalize w-1/3">lasagne</td>
                                     <td class="w-1/3">10</td>
-                                    <td class="w-1/3">$100</td>
+                                    <td class="w-1/3">100€</td>
                                 </tr>
                                 <div class=" bg-gray-100 rounded-lg px-1">
                                     <tr class="flex justify-between">
                                         <td class="capitalize w-1/3">sushi</td>
                                         <td class="w-1/3">20</td>
-                                        <td class="w-1/3">$200</td>
+                                        <td class="w-1/3">200€</td>
                                     </tr>
                                 </div>
                                 <tr class="flex justify-between px-1">
                                     <td class="capitalize w-1/3">pizza</td>
                                     <td class="w-1/3">15</td>
-                                    <td class="w-1/3">$150</td>
+                                    <td class="w-1/3">150€</td>
                                 </tr>
                                 <div class=" bg-gray-100 rounded-lg px-1">
                                     <tr class="flex justify-between">
-                                        <td class="capitalize w-1/3">sushi</td>
-                                        <td class="w-1/3">20</td>
-                                        <td class="w-1/3">$200</td>
+                                        <td class="capitalize w-1/3">Spezzatino</td>
+                                        <td class="w-1/3">11</td>
+                                        <td class="w-1/3">245€</td>
                                     </tr>
                                 </div>
                                 <tr class="flex justify-between px-1">
-                                    <td class="capitalize w-1/3">pizza</td>
-                                    <td class="w-1/3">15</td>
-                                    <td class="w-1/3">$150</td>
+                                    <td class="capitalize w-1/3">Pollo al Curry</td>
+                                    <td class="w-1/3">36</td>
+                                    <td class="w-1/3">160€</td>
                                 </tr>
                                 <div class=" bg-gray-100 rounded-lg px-1">
                                     <tr class="flex justify-between">
-                                        <td class="capitalize w-1/3">sushi</td>
-                                        <td class="w-1/3">20</td>
-                                        <td class="w-1/3">$200</td>
+                                        <td class="capitalize w-1/3">Cotoletta impanata</td>
+                                        <td class="w-1/3">45</td>
+                                        <td class="w-1/3">50€</td>
                                     </tr>
                                 </div>
                                 <tr class="flex justify-between px-1">
-                                    <td class="capitalize w-1/3">pizza</td>
+                                    <td class="capitalize w-1/3">Carbonara</td>
                                     <td class="w-1/3">15</td>
-                                    <td class="w-1/3">$150</td>
+                                    <td class="w-1/3">150€</td>
                                 </tr>
                                 <div class=" bg-gray-100 rounded-lg px-1">
                                     <tr class="flex justify-between">
-                                        <td class="capitalize w-1/3">sushi</td>
-                                        <td class="w-1/3">20</td>
-                                        <td class="w-1/3">$200</td>
+                                        <td class="capitalize w-1/3">Nighiri</td>
+                                        <td class="w-1/3">25</td>
+                                        <td class="w-1/3">175€</td>
                                     </tr>
                                 </div>
                                 <tr class="flex justify-between px-1">
-                                    <td class="capitalize w-1/3">pizza</td>
-                                    <td class="w-1/3">15</td>
-                                    <td class="w-1/3">$150</td>
+                                    <td class="capitalize w-1/3">Tiger Roll</td>
+                                    <td class="w-1/3">11</td>
+                                    <td class="w-1/3">150€</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -234,11 +234,11 @@ const props = defineProps({
                                 <h6 class="p-2">Questo mese</h6>
                                 <div class=" flex flex-col items-center">
                                     <span class="text-orange-500 text-xl font-bold">
-                                        1422
+                                        1422€
                                     </span>
                                     <span>Ordini</span>
                                     <span class="text-orange-500 mt-4 text-xl font-bold">
-                                        32.347$
+                                        32.347€
                                     </span>
                                     <span>Entrate</span>
 
@@ -249,11 +249,11 @@ const props = defineProps({
                                 <h6 class="p-2">Quest'anno</h6>
                                 <div class=" flex flex-col items-center">
                                     <span class="text-orange-500 text-xl font-bold">
-                                        31.620
+                                        31.620€
                                     </span>
                                     <span>Ordini</span>
                                     <span class="text-orange-500 mt-4 text-xl font-bold">
-                                        432.347$
+                                        432.347€
                                     </span>
                                     <span>Entrate</span>
                                 </div>
@@ -275,11 +275,11 @@ const props = defineProps({
                         <h6 class="p-2">Questo mese</h6>
                         <div class=" flex flex-col items-center">
                             <span class="text-orange-500 text-xl font-bold">
-                                1422
+                                1422€
                             </span>
                             <span>Ordini</span>
                             <span class="text-orange-500 mt-4 text-xl font-bold">
-                                32.347$
+                                32.347€
                             </span>
                             <span>Entrate</span>
 
@@ -290,11 +290,11 @@ const props = defineProps({
                         <h6 class="p-2">Quest'annp</h6>
                         <div class=" flex flex-col items-center">
                             <span class="text-orange-500 text-xl font-bold">
-                                31.620
+                                31.620€
                             </span>
                             <span>Ordini</span>
                             <span class="text-orange-500 mt-4 text-xl font-bold">
-                                432.347$
+                                432.347€
                             </span>
                             <span>Entrate</span>
 
