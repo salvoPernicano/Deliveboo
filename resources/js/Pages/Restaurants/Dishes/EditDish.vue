@@ -5,6 +5,7 @@ import { useForm } from '@inertiajs/vue3';
 import { router } from '@inertiajs/vue3';
 import { Head } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia';
+import { Link } from '@inertiajs/inertia-vue3';
 
 let props = defineProps({
     restaurant: Object,
@@ -157,9 +158,12 @@ function handleImageChange(event) {
                                 class="bg-orange-500 text-white font-bold py-1 px-3 rounded-lg">Salva
                                 piatto
                             </button>
-                            <button
+                            <Link
+                            :href="route('dishes.index')"
+                            method="get"
+                                    as="button"
                                 class="bg-white border-orange-500 border text-orange-500 font-bold py-1 px-3 rounded-lg ">Annulla
-                            </button>
+                            </Link>
                         </div>
                     </form>
 
