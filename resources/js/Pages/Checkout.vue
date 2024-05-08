@@ -41,10 +41,9 @@
 
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import { Link } from '@inertiajs/vue3';
-import { Inertia } from '@inertiajs/inertia';
+
 import { defineProps } from 'vue';
-import { router } from '@inertiajs/vue3';
+
 
 
 const props = defineProps({
