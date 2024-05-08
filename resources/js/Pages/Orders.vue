@@ -22,7 +22,7 @@ const props = defineProps({
         <div class="p-5 h-screen bg-gray-100">
             <h1 class="text-xl mb-2">I tuoi Ordini</h1>
 
-            <div class="overflow-auto rounded-lg shadow hidden md:block ">
+            <div class="overflow-auto rounded-lg shadow hidden sm:block ">
                 <table class="w-full">
                     <thead class="bg-white">
                         <tr>

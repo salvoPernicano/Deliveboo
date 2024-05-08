@@ -3,12 +3,8 @@
 
         <Head title="Menu" />
         <div class=" text-black p-5">
-            <div class="flex justify-between">
-                <div>
-                    <h1>{{ restaurant.name }}</h1>
-                </div>
-
-                <div class="hidden sm:flex  ">
+            <div class="flex justify-end">
+                <div class="hidden sm:flex">
                     <div>
                         <Link class="bg-[#F98F00] p-3 text-white font-bold border rounded-lg flex items-center gap-2"
                             :href="route('dishes.create', { restaurant: props.restaurant.slug })">

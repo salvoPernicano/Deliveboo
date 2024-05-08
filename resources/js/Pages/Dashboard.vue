@@ -91,7 +91,7 @@ const props = defineProps({
 
             <div class="px-3 py-4 flex justify-between ">
                 <div>
-                    <h4 class="">Bentornato {{ restaurants[0].name }}, </h4>
+                    <h4>Bentornato {{ restaurants[0].name }}, </h4>
                 </div>
 
                 <div class="gap-3 flex w-80 justify-end ">

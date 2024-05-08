@@ -60,7 +60,7 @@ const searchByCategory = async () => {
     <Head title="Home" />
     <GuestLayout>
         <main class="w-full">
-            <div v-if="canLogin" class="fixed top-0 right-0 p-6 text-end z-50">
+            <div v-if="canLogin" class="fixed top-1 right-0 p-6 text-end z-50">
                 <Link v-if="$page.props.auth.user" :href="route('dashboard')"
                     class="font-semibold text-white hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
                 Dashboard</Link>
