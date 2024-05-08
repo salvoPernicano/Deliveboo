@@ -90,7 +90,7 @@ const showingNavigationDropdown = ref(false);
                 <!-- Responsive Settings Options -->
                 <div class="pb-3">
                     <div class="mt-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" class="flex items-center link-hover text-white">
+                        <ResponsiveNavLink :href="route('orders')" class="flex items-center link-hover text-white">
                             <img src="../../../public/img/receipt.svg" class="h-10 w-10">
                             Ordini Ricevuti
                         </ResponsiveNavLink>
@@ -101,7 +101,7 @@ const showingNavigationDropdown = ref(false);
                             I tuoi piatti
                         </ResponsiveNavLink>
 
-                        <ResponsiveNavLink :href="route('dashboard')" class="flex items-center link-hover text-white">
+                        <ResponsiveNavLink :href="route('order-static')" class="flex items-center link-hover text-white">
                             <img src="../../../public/img/stats.svg" class="h-10 w-10">
                             Statistiche
                         </ResponsiveNavLink>

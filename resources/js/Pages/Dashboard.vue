@@ -9,67 +9,67 @@ import Chart from 'chart.js/auto';
 import { onMounted } from 'vue';
 
 onMounted(() => {
-    (async function() {
-  const data = [
-    { month: 'Gennaio', count: 10 },
-    { month:' Febbraio', count: 20 },
-    { month: 'Marzo', count: 15 },
-    { month: 'Aprile', count: 25 },
-    { month: 'Maggio', count: 22 },
-    { month: 'Giugno', count: 0 },
-    { month: 'Luglio', count: 0 },
-    { month: 'Agosto', count: 0 },
-    { month: 'Settembre', count: 0 },
-    { month:' Ottobre', count: 0 },
-    { month: 'Novembre', count: 0 },
-    { month: 'Dicembre', count: 0 },
-  ];
+    (async function () {
+        const data = [
+            { month: 'Gennaio', count: 10 },
+            { month: ' Febbraio', count: 20 },
+            { month: 'Marzo', count: 15 },
+            { month: 'Aprile', count: 25 },
+            { month: 'Maggio', count: 22 },
+            { month: 'Giugno', count: 0 },
+            { month: 'Luglio', count: 0 },
+            { month: 'Agosto', count: 0 },
+            { month: 'Settembre', count: 0 },
+            { month: ' Ottobre', count: 0 },
+            { month: 'Novembre', count: 0 },
+            { month: 'Dicembre', count: 0 },
+        ];
 
-      const mayOrders = props.orders.filter(order => {
-      const orderDate = new Date(order.created_at);
-      return orderDate.getMonth() === 4;
-    });
+        const mayOrders = props.orders.filter(order => {
+            const orderDate = new Date(order.created_at);
+            return orderDate.getMonth() === 4;
+        });
 
-    console.log(mayOrders);
-
-
-    const mayIndex = data.findIndex(monthData => monthData.month === 'Maggio');
+        console.log(mayOrders);
 
 
-    if (mayIndex !== -1) {
-      data[mayIndex].count = mayOrders.length;
-    }
+        const mayIndex = data.findIndex(monthData => monthData.month === 'Maggio');
 
-    console.log(data);
 
-  new Chart(
-    document.getElementById('acquisitions'),
-    {
-      type: 'bar',
-      options: {
-        animation: true,
-        plugins: {
-          legend: {
-            display: true,
-          },
-          tooltip: {
-            enabled: true,
-          }
+        if (mayIndex !== -1) {
+            data[mayIndex].count = mayOrders.length;
         }
-      },
-      data: {
-        labels: data.map(row => row.month),
-        datasets: [
-          {
-            label: 'Totali ordini di questo mese:',
-            backgroundColor: '#F98F00',
-            data: data.map(row => row.count)
-          }
-        ]
-      }
-    }
-  );
-})();
+
+        console.log(data);
+
+        new Chart(
+            document.getElementById('acquisitions'),
+            {
+                type: 'bar',
+                options: {
+                    animation: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                        },
+                        tooltip: {
+                            enabled: true,
+                        }
+                    }
+                },
+                data: {
+                    labels: data.map(row => row.month),
+                    datasets: [
+                        {
+                            label: 'Totali ordini di questo mese:',
+                            backgroundColor: '#F98F00',
+                            data: data.map(row => row.count)
+                        }
+                    ]
+                }
+            }
+        );
+    })();
 
 
 });
@@ -87,7 +87,7 @@ const props = defineProps({
 
     <AuthenticatedLayout :auth="authData">
         <!-- main dashboard  -->
-        <div class="overflow-hidden w-full">
+        <div class="overflow-hidden w-full p-3">
 
             <div class="px-3 py-4 flex justify-between ">
                 <div>
@@ -105,8 +105,8 @@ const props = defineProps({
                 </div>
             </div>
             <!-- order -->
-            <div class="p-3">
-                <div class="p-3 rounded-lg  shadow max-h-2/3 overflow-scroll bg-white">
+            <div class="sm:mb-3">
+                <div class="p-3 rounded-lg  shadow max-h-2/3 overflow-scroll bg-white hidden sm:block">
                     <h4 class="font-bold pb-3">Ordini</h4>
                     <!-- table lapTop orders -->
                     <div class="flex ">
@@ -119,15 +119,12 @@ const props = defineProps({
                                     <th class="flex-1 text-[14px] text-start">Campanello</th>
                                     <th class="flex-1 text-[14px] text-start">Mail</th>
                                     <th class="flex-1 text-[14px] text-end">Telefono</th>
-
                                 </tr>
-
-
                             </thead>
                             <tbody>
                                 <tr v-for="order in props.orders" class="bg-gray-100 rounded-lg flex mt-2 px-1">
                                     <td class="flex flex-1 gap-2 text-[12px] text-start relative">
-                                        {{ order.id }}
+                                        # {{ order.id }}
                                     </td>
                                     <td class="flex-1 text-[14px] text-start">{{ order.name }}</td>
                                     <td class="flex-1 text-[14px] text-start">{{ order.address }}</td>
@@ -141,9 +138,47 @@ const props = defineProps({
                 </div>
             </div>
 
+            <!-- resposive orders -->
+            <div v-for="order in props.orders"  class="  p-3 rounded-lg shadow bg-white sm:hidden ">
+
+                <div class="flex justify-between">
+                    <div class="flex items-center">
+                        <span class="flex-1 text-[18px] text-start font-bold"># {{ order.id }}</span>
+                    </div>
+                    <div>
+                        <h6 class="font-extrabold text-black text-start"> {{ order.name }}</h6>
+                    </div>
+                </div>
+
+                <div class="mt-4 flex justify-between ">
+
+                    <div class="flex flex-col gap-2 justify-end">
+                        <span class="flex-1 text-[14px] text-start">{{ order.address }}</span>
+                        <span class="text-black">{{ order.phone }}</span>
+                        <span class="text-black">{{ order.email }}</span>
+                    </div>
+
+                </div>
+
+                <div class="flex justify-start gap-3  mt-2">
+                    <div class="flex flex-col w-full ">
+                        <div class="flex">
+                            <div class="flex flex-col w-full">
+
+                                <div class="flex">
+
+                                    <span class="">{{ order.name_doorbell }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
             <!-- best selling dishes -->
 
-            <div class="p-3 flex sm:gap-3 w-full rounded-lg ">
+            <div class=" mt-3 sm:mt-0 flex sm:gap-3 w-full rounded-lg ">
                 <div class="p-3 rounded-lg shadow w-full bg-white ">
                     <div>
                         <h4 class="font-bold capitalize">i piatti più venduti</h4>
@@ -260,13 +295,14 @@ const props = defineProps({
                             </div>
 
                         </div>
-                        <div class="mt-10 bg-white flex justify-center" style=" height: 290px;"><canvas id="acquisitions"></canvas></div>
+                        <div class="mt-10 bg-white flex justify-center" style=" height: 290px;"><canvas
+                                id="acquisitions"></canvas></div>
                     </div>
                 </div>
             </div>
 
             <!-- statistics  -->
-            <div class="p-3 sm:hidden">
+            <div class="mt-3 sm:mt-0 sm:hidden">
                 <div class="p-3 bg-white rounded-lg shadow sm:w-2/4">
                     <div class="pb-3">
                         <h4 class="font-bold capitalize">Statistiche</h4>
@@ -312,5 +348,3 @@ const props = defineProps({
     width: 85% !important;
 }
 </style>
-
-

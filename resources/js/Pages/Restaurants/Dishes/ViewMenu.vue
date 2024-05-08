@@ -22,8 +22,7 @@
             </div>
 
 
-            <div
-                class="w-full bg-white container mx-auto flex flex-col  gap-5  text-white rounded-lg m-5 p-4 shadow ">
+            <div class="w-full bg-white container mx-auto flex flex-col  gap-5  text-white rounded-lg m-5 p-4 shadow ">
                 <div class="sm:text-start sm:flex sm:justify-between sm:items-center flex flex-col mb-9 sm:flex-row">
                     <div class=" sm:flex sm:justify-between ">
                         <div class="flex flex-col ">
@@ -44,10 +43,14 @@
                             <img class="h-7 w-7" src="../../../../../public/img/nonVisibile.svg" alt="">
                             <span class="text-black">= non visibile ai clienti</span>
                         </div>
-                        <div class="w-full sm:hidden">
-                            <Link class="bg-[#F98F00] py-2 px-1 text-white font-bold border rounded-lg "
-                                :href="route('dishes.create', { restaurant: props.restaurant.id })">
-                            Crea nuovo Piatto
+                        <div class="w-full sm:hidden ">
+                            <Link
+                                class="bg-[#F98F00] p-3 text-white font-bold border rounded-lg flex items-center gap-2 w-48"
+                                :href="route('dishes.create', { restaurant: props.restaurant.slug })">
+                            Crea Nuovo Piatto
+                            <div>
+                                <img src="../../../../../public/img/PiuBianco.svg" alt="">
+                            </div>
                             </Link>
                         </div>
                     </div>
@@ -55,7 +58,7 @@
 
                 <!-- Your Dishes cards -->
 
-                <div v-for="dish in dishes" :key="dish.id" class="  p-3 rounded-lg shadow  sm:hidden ">
+                <div v-for="dish in dishes" :key="dish.id" class="  p-3 rounded-lg shadow  sm:hidden mt-5 sm:m-0">
 
                     <div class="flex justify-between">
                         <div class="flex items-center">
