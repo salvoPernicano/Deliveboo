@@ -24,9 +24,9 @@
                 <h4 class="mb-6">Menu</h4>
                 <ul class="flex justify-start flex-wrap gap-4 w-full sm:gap-3 ps-2">
 
-                    <li v-for="dish in restaurant.dishes" :key="dish.id" class="w-full sm:w-60">
+                    <li v-for="dish in restaurant.dishes" :key="dish.id"  class="w-full sm:w-60">
 
-                        <div class="bg-white rounded-lg shadow relative sm:pe-0 sm:mb-8">
+                        <div v-if="dish.visible" class="bg-white rounded-lg shadow relative sm:pe-0 sm:mb-8">
 
                             <div class=" h-auto w-full flex justify-between sm:flex sm:flex-col sm:text-center">
                                 <div class="flex gap-2 w-4/5 sm:flex sm:flex-col sm:w-full">
@@ -75,7 +75,7 @@
                 <h4 class="mb-6">Carrello</h4>
                 <div class="shadow border rounded-lg  mx-auto text-center py-2">
                     <ul class="w-full flex flex-col items-center justify-center py-6">
-                        <li v-for="item in localCartList" :key="item.id"
+                        <li  v-for="item in localCartList" :key="item.id"
                             class="p-4 flex flex-col font-semibold items-center justify-center w-full ">
                             <div class="flex  w-full">
                                 <div class="flex items-center gap-5 w-full">
